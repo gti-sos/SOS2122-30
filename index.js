@@ -82,7 +82,7 @@ app.get(BASE_API_URL + "/stsatellites-stats/:name", (req, res)=>{
 //POST
 
 app.post(BASE_API_URL + "/stsatellites-stats", (req, res)=>{
-    contacts.push(req.body);
+    satellites.push(req.body);
     res.sendStatus(201, "CREATED");
 });
 
