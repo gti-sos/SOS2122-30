@@ -3,7 +3,6 @@ const express = require("express");
 
 //Para parsear el json
 const bodyParser = require("body-parser");
-app.use(bodyParser.json());
 
 
 const app = express();
@@ -11,7 +10,7 @@ const port = process.env.PORT || 8080;
 
 const BASE_API_URL= "/api/v1";
 
-
+app.use(bodyParser.json());
 //Parte de Javier
 var satellites = [
     { 
