@@ -59,7 +59,7 @@ var satellites = [
 
 //Conjunto
 app.get(BASE_API_URL + "/stsatellites-stats", (req, res)=>{
-    res.send(JSON.stringify(contacts,null,2));
+    res.send(JSON.stringify(satellites,null,2));
 });
 
 //Elemento
