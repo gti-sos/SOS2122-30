@@ -64,9 +64,9 @@ app.get(BASE_API_URL + "/stsatellites-stats", (req, res)=>{
 
 //Elemento
 app.get(BASE_API_URL + "/stsatellites-stats/:name", (req, res)=>{
-    var satName = req.params.name;
+    var satYear = req.params.year;
     filteredSat = satellites.filter((satellite)=>{
-        return (satellite.name == satName);
+        return (satellite.year == satYear);
     });
 
     if(filteredSat == 0){
