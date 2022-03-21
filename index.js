@@ -54,12 +54,63 @@ var satellites = [
         "st-destroyed": 145
     }
 ];
+//Parte de Jaime
+var technology_devices_stats = [
+    {
+        country: "EEUU",
+        year: 2019,
+        tdwasted: 6918,
+        mpdisuse: 220,
+        mpreused: 74
+    },
+    {
+        country: "Spain",
+        year: 2019,
+        tdwasted: 1450,
+        mpdisuse: 45.4,
+        mpreused: 89
+    },
+    {
+        country: "UK",
+        year: 2019,
+        tdwasted: 2695,
+        mpdisuse: 83.1,
+        mpreused: 83
+    },
+    {
+        country: "Germany",
+        year: 2019,
+        tdwasted: 2549,
+        mpdisuse: 84.7,
+        mpreused: 84
+    },
+    {
+        country: "France",
+        year: 2019,
+        tdwasted: 2129,
+        mpdisuse: 66.4,
+        mpreused: 76
+    },
+    {
+        country: "Canada",
+        year: 2019,
+        tdwasted: 739,
+        mpdisuse: 22.5,
+        mpreused: 70
+    }
+
+];
 
 //GET 
 
 //Conjunto
 app.get(BASE_API_URL + "/stsatellites-stats", (req, res)=>{
     res.send(JSON.stringify(satellites,null,2));
+});
+
+app.get(BASE_API_URL +"/technology_devices_stats",(req,res)=>{
+    res.send(JSON.stringify(technology_devices_stats,null,2));
+
 });
 
 //Elemento
@@ -84,6 +135,13 @@ app.get(BASE_API_URL + "/stsatellites-stats/:name", (req, res)=>{
 app.post(BASE_API_URL + "/stsatellites-stats", (req, res)=>{
     satellites.push(req.body);
     res.sendStatus(201, "CREATED");
+});
+
+app.post(BASE_API_URL +"/technology_devices_stats",(req,res)=>{
+    technology_devices_stats.push(req.body);
+
+    res.sendStatus(201, "CREATED");
+
 });
 
 //DELETE
