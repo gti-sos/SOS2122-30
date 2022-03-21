@@ -10,4 +10,4 @@
 -  **APIs**:
     - [https://sos2122-30.herokuapp.com/api/v1/my-awesome-resource-1/docs](https://sos2122-30.herokuapp.com/api/v1/my-awesome-resource-1/docs) (developed by [Sergio Velázquez García](https://github.com/Servelgar))
     - [https://sos2122-30.herokuapp.com/api/v1/stsatellites-stats](https://sos2122-30.herokuapp.com/api/v1/stsatellites-stats) (developed by [Javier	Alonso	Yáñez](https://github.com/alonyanez))
-    - [https://sos2122-30.herokuapp.com/api/v1/my-awesome-resource-3/docs](https://sos2122-30.herokuapp.com/api/v1/my-awesome-resource-3/docs) (developed by [Jaime	Quintero	Sicre](https://github.com/Jaiquisic23))
+    - [https://sos2122-30.herokuapp.com/api/v1/technology_devices_stats](https://sos2122-30.herokuapp.com/api/v1/technology_devices_stats) (developed by [Jaime	Quintero	Sicre](https://github.com/Jaiquisic23))
