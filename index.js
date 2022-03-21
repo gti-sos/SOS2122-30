@@ -101,6 +101,54 @@ var technology_devices_stats = [
 
 ];
 
+// Parte de Sergio
+var cryptocoin_stats = [
+    {
+        "country": "EEUU",
+        "year": 2021,
+        "ccelectr": 3894.83,
+        "ccdemand": 14.92,
+        "ccmining": 35.40
+    },
+    {
+        "country": "EEUU",
+        "year": 2020,
+        "ccelectr": 3843.8,
+        "ccdemand": 8.68,
+        "ccmining": 10.41
+    },
+    {
+        "country": "RUSSIA",
+        "year": 2021,
+        "ccelectr": 943.075,
+        "ccdemand": 14.92,
+        "ccmining": 11.23
+    },
+    {
+        "country": "RUSSIA",
+        "year": 2020,
+        "ccelectr": 943.1,
+        "ccdemand": 8.68,
+        "ccmining": 7.16
+    },
+    {
+        "country": "CHINA",
+        "year": 2021,
+        "ccelectr": 6875.09,
+        "ccdemand": 14.92,
+        "ccmining": 43.98
+    },
+    {
+        "country": "CHINA",
+        "year": 2020,
+        "ccelectr": 6875.1,
+        "ccdemand": 8.68,
+        "ccmining": 53.27
+    }
+
+];
+
+
 //GET 
 
 //Conjunto
@@ -113,11 +161,32 @@ app.get(BASE_API_URL +"/technology_devices_stats",(req,res)=>{
 
 });
 
+app.get(BASE_API_URL +"/cryptocoin_stats",(req,res)=>{
+    res.send(JSON.stringify(cryptocoin_stats,null,2));
+
+});
+
 //Elemento
 app.get(BASE_API_URL + "/stsatellites-stats/:name", (req, res)=>{
     var satYear = req.params.year;
     filteredSat = satellites.filter((satellite)=>{
         return (satellite.year == satYear);
+    });
+
+    if(filteredSat == 0){
+        res.sendStatus(404, "NOT FOUND");
+    }else{
+        res.send(JSON.stringify(filteredSat[0],null,2)); 
+        //Por si acaso hay mas de 1 elemento (no debería)
+        //se escoge el primero
+    }
+
+});
+
+app.get(BASE_API_URL + "/cryptocoin_stats/:name", (req, res)=>{
+    var satYear = req.params.year;
+    filteredSat = cryptocoin_stats.filter((cryptocoin_stats)=>{
+        return (cryptocoin_stats.year == satYear);
     });
 
     if(filteredSat == 0){
@@ -144,6 +213,13 @@ app.post(BASE_API_URL +"/technology_devices_stats",(req,res)=>{
 
 });
 
+app.post(BASE_API_URL +"/cryptocoin_stats",(req,res)=>{
+    cryptocoin_stats.push(req.body);
+
+    res.sendStatus(201, "CREATED");
+
+});
+
 //DELETE
 
 //Conjunto
@@ -152,11 +228,24 @@ app.delete(BASE_API_URL + "/stsatellites-stats", (req, res)=>{
     res.sendStatus(200, "OK");
 });
 
+app.delete(BASE_API_URL + "/cryptocoin_stats", (req, res)=>{
+    cryptocoin_stats = [];
+    res.sendStatus(200, "OK");
+});
+
 //Elemento
 app.delete(BASE_API_URL + "/stsatellites-stats/:name", (req, res)=>{
     var satName = req.params.name;
     satellites = satellites.filter((satellite)=>{
         return (satellite.name != satName);
+    });
+    res.sendStatus(200, "OK");
+});
+
+app.delete(BASE_API_URL + "/cryptocoin_stats/:name", (req, res)=>{
+    var satName = req.params.name;
+    cryptocoin_stats = cryptocoin_stats.filter((cryptocoin_stats)=>{
+        return (cryptocoin_stats.name != satName);
     });
     res.sendStatus(200, "OK");
 });
