@@ -201,7 +201,11 @@ var cryptocoin_stats = [
 app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
     var Sat = satellites.length;
     if(Sat == 0){
-        res.send(JSON.stringify(satellites_2,null,2));
+        res.send(
+            app.get(BASE_API_URL + s, (req, res)=>{
+                res.send(JSON.stringify(satellites_2,null,2));
+            })
+        );
     }else{
         res.sendStatus(409, "Conflict");
     }
