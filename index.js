@@ -59,7 +59,7 @@ var satellites = [
     }
 ];
 
-var satellites_2 = satellites.copyWithin;
+var satellites_2 = satellites;
   
 
 //Parte de Jaime
