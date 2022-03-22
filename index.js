@@ -161,7 +161,7 @@ var cryptocoin_stats = [
 app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
     var Sat = satellites.length;
     if(Sat == 0){
-        res.send(JSON.stringify(satellites_2,null,2));
+        res.redirect(BASE_API_URL + s);
     }else{
         res.sendStatus(409, "Conflict");
     }
@@ -173,7 +173,14 @@ app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
 
 //Conjunto
 app.get(BASE_API_URL + s, (req, res)=>{
-    res.send(JSON.stringify(satellites,null,2));
+    var Sat = satellites.length;
+    if(Sat == 0){
+        res.send(JSON.stringify(satellites_2,null,2));
+    }else if(Sat > 0){
+        res.send(JSON.stringify(satellites,null,2));
+    }else{
+        res.sendStatus(409, "Conflict");
+    }
 });
 
 app.get(BASE_API_URL +"/technology_devices_stats",(req,res)=>{
