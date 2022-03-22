@@ -256,10 +256,10 @@ app.delete(BASE_API_URL + "/cryptocoin_stats", (req, res)=>{
 });
 
 //Elemento
-app.delete(BASE_API_URL + s + "/:name", (req, res)=>{
-    var satName = req.params.name;
+app.delete(BASE_API_URL + s + "/:year", (req, res)=>{
+    var satYear = req.params.year;
     satellites = satellites.filter((satellite)=>{
-        return (satellite.name != satName);
+        return (satellite.name != satYear);
     });
     res.sendStatus(200, "OK");
 });
