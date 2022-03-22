@@ -194,7 +194,7 @@ app.get(BASE_API_URL + s + "/:name", (req, res)=>{
     filteredSat = satellites.filter((satellite)=>{
         return (satellite.year == satYear);
     });
-
+    
     if(filteredSat == 0){
         res.sendStatus(404, "NOT FOUND");
     }else{
@@ -206,15 +206,17 @@ app.get(BASE_API_URL + s + "/:name", (req, res)=>{
 });
 
 app.get(BASE_API_URL + "/cryptocoin_stats/:name", (req, res)=>{
-    var cryYear = req.params.year;
-    filteredCry = cryptocoin_stats.filter((cryptocoin_stats)=>{
-        return (cryptocoin_stats.year == cryYear);
+    var satYear = req.params.year;
+    filteredSat = cryptocoin_stats.filter((cryptocoin_stats)=>{
+        return (cryptocoin_stats.year == satYear);
     });
 
-    if(filteredCry == 0){
+    if(filteredSat == 0){
         res.sendStatus(404, "NOT FOUND");
     }else{
-        res.send(JSON.stringify(filteredCry[0],null,2)); 
+        res.send(JSON.stringify(filteredSat[0],null,2)); 
+        //Por si acaso hay mas de 1 elemento (no debería)
+        //se escoge el primero
     }
 
 });
