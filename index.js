@@ -199,7 +199,7 @@ var cryptocoin_stats = [
 //--------------------------------------------------------------
 //Load inicial
 app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
-    var Sat = req.params.satellites.length;
+    var Sat = satellites.length;
     if(Sat == 0){
         res.send(JSON.stringify(satellites_2,null,2));
     }else{
