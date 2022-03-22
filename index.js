@@ -10,7 +10,11 @@ const port = process.env.PORT || 8080;
 
 const BASE_API_URL= "/api/v1";
 
+//URL Javier
+const s = "/stsatellites-stats";
+
 app.use(bodyParser.json());
+
 //Parte de Javier
 var satellites = [
     { 
@@ -54,6 +58,50 @@ var satellites = [
         "st-destroyed": 145
     }
 ];
+
+var satellites_2 = [
+    { 
+        "country": "eeuu", 
+        "year": 2020 ,
+        "quarter": "second", 
+        "st-launched": 529, 
+        "st-orbit": 362, 
+        "st-destroyed": 8 
+    },
+    {
+        "country": "eeuu", 
+        "year": 2020 ,
+        "quarter": "third", 
+        "st-launched": 664, 
+        "st-orbit": 441, 
+        "st-destroyed": 14
+    },
+    {
+        "country": "eeuu", 
+        "year": 2021 ,
+        "quarter": "first", 
+        "st-launched": 880, 
+        "st-orbit": 652, 
+        "st-destroyed": 58
+    },
+    {
+        "country": "eeuu", 
+        "year": 2021 ,
+        "quarter": "second", 
+        "st-launched": 1610, 
+        "st-orbit": 973, 
+        "st-destroyed": 67
+    },
+    {
+        "country": "eeuu", 
+        "year": 2021 ,
+        "quarter": "third", 
+        "st-launched": 1929, 
+        "st-orbit": 1503, 
+        "st-destroyed": 145
+    }
+];
+
 //Parte de Jaime
 var technology_devices_stats = [
     {
@@ -148,11 +196,24 @@ var cryptocoin_stats = [
 
 ];
 
+//--------------------------------------------------------------
+//Load inicial
+app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
+    var Sat = req.params.satellites.length;
+    if(Sat == 0){
+        res.send(JSON.stringify(satellites_2,null,2));
+    }else{
+        res.sendStatus(409, "Conflict");
+    }
+});
+
+
+//--------------------------------------------------------------
 
 //GET 
 
 //Conjunto
-app.get(BASE_API_URL + "/stsatellites-stats", (req, res)=>{
+app.get(BASE_API_URL + s, (req, res)=>{
     res.send(JSON.stringify(satellites,null,2));
 });
 
@@ -167,7 +228,7 @@ app.get(BASE_API_URL +"/cryptocoin_stats",(req,res)=>{
 });
 
 //Elemento
-app.get(BASE_API_URL + "/stsatellites-stats/:name", (req, res)=>{
+app.get(BASE_API_URL + s + "/:name", (req, res)=>{
     var satYear = req.params.year;
     filteredSat = satellites.filter((satellite)=>{
         return (satellite.year == satYear);
@@ -184,24 +245,22 @@ app.get(BASE_API_URL + "/stsatellites-stats/:name", (req, res)=>{
 });
 
 app.get(BASE_API_URL + "/cryptocoin_stats/:name", (req, res)=>{
-    var satYear = req.params.year;
-    filteredSat = cryptocoin_stats.filter((cryptocoin_stats)=>{
-        return (cryptocoin_stats.year == satYear);
+    var cryYear = req.params.year;
+    filteredCry = cryptocoin_stats.filter((cryptocoin_stats)=>{
+        return (cryptocoin_stats.year == cryYear);
     });
 
-    if(filteredSat == 0){
+    if(filteredCry == 0){
         res.sendStatus(404, "NOT FOUND");
     }else{
-        res.send(JSON.stringify(filteredSat[0],null,2)); 
-        //Por si acaso hay mas de 1 elemento (no debería)
-        //se escoge el primero
+        res.send(JSON.stringify(filteredCry[0],null,2)); 
     }
 
 });
 
 //POST
 
-app.post(BASE_API_URL + "/stsatellites-stats", (req, res)=>{
+app.post(BASE_API_URL + s, (req, res)=>{
     satellites.push(req.body);
     res.sendStatus(201, "CREATED");
 });
@@ -223,7 +282,7 @@ app.post(BASE_API_URL +"/cryptocoin_stats",(req,res)=>{
 //DELETE
 
 //Conjunto
-app.delete(BASE_API_URL + "/stsatellites-stats", (req, res)=>{
+app.delete(BASE_API_URL + s, (req, res)=>{
     satellites = [];
     res.sendStatus(200, "OK");
 });
@@ -234,7 +293,7 @@ app.delete(BASE_API_URL + "/cryptocoin_stats", (req, res)=>{
 });
 
 //Elemento
-app.delete(BASE_API_URL + "/stsatellites-stats/:name", (req, res)=>{
+app.delete(BASE_API_URL + s + "/:name", (req, res)=>{
     var satName = req.params.name;
     satellites = satellites.filter((satellite)=>{
         return (satellite.name != satName);
