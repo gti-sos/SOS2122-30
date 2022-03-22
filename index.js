@@ -59,48 +59,8 @@ var satellites = [
     }
 ];
 
-var satellites_2 = [
-    { 
-        "country": "eeuu", 
-        "year": 2020 ,
-        "quarter": "second", 
-        "st-launched": 529, 
-        "st-orbit": 362, 
-        "st-destroyed": 8 
-    },
-    {
-        "country": "eeuu", 
-        "year": 2020 ,
-        "quarter": "third", 
-        "st-launched": 664, 
-        "st-orbit": 441, 
-        "st-destroyed": 14
-    },
-    {
-        "country": "eeuu", 
-        "year": 2021 ,
-        "quarter": "first", 
-        "st-launched": 880, 
-        "st-orbit": 652, 
-        "st-destroyed": 58
-    },
-    {
-        "country": "eeuu", 
-        "year": 2021 ,
-        "quarter": "second", 
-        "st-launched": 1610, 
-        "st-orbit": 973, 
-        "st-destroyed": 67
-    },
-    {
-        "country": "eeuu", 
-        "year": 2021 ,
-        "quarter": "third", 
-        "st-launched": 1929, 
-        "st-orbit": 1503, 
-        "st-destroyed": 145
-    }
-];
+var satellites_2 = satellites.copyWithin;
+  
 
 //Parte de Jaime
 var technology_devices_stats = [
@@ -197,20 +157,15 @@ var cryptocoin_stats = [
 ];
 
 //--------------------------------------------------------------
-//Load inicial
+//Load inicial - Javier
 app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
     var Sat = satellites.length;
     if(Sat == 0){
-        res.send(
-            app.get(BASE_API_URL + s, (req, res)=>{
-                res.send(JSON.stringify(satellites_2,null,2));
-            })
-        );
+        res.send(JSON.stringify(satellites_2,null,2));
     }else{
         res.sendStatus(409, "Conflict");
     }
 });
-
 
 //--------------------------------------------------------------
 
