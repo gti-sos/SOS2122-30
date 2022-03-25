@@ -173,6 +173,8 @@ app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
     }
 });
 
+
+
 //--------------------------------------------------------------
 // PARTE SERGIO
 
@@ -189,20 +191,23 @@ app.get(BASE_API_URL + url_sergio + "/loadInitialData", (req,res)=> {
 
 // GET - CONJUNTO
 app.get(BASE_API_URL +"/cryptocoin_stats",(req,res)=>{
+    res.status(200);
     res.send(JSON.stringify(cryptocoin_stats,null,2));
 
 });
 
 // GET - ELEMENTO
-app.get(BASE_API_URL + "/cryptocoin_stats/:name", (req, res)=>{
-    var ccYear = req.params.year;
+app.get(BASE_API_URL + "/cryptocoin_stats/:country/:year", (req, res)=>{
+    var req_data = req.params;
+
     filteredCrypto = cryptocoin_stats.filter((cryptocoin_stats)=>{
-        return (cryptocoin_stats.year == ccYear);
+        return (cryptocoin_stats.year == req_data.year && cryptocoin_stats.country == req_data.country);
     });
 
     if(filteredCrypto == 0){
-        res.sendStatus(404, "NOT FOUND");
+        res.sendStatus(404, "Not");
     }else{
+        res.status(200);
         res.send(JSON.stringify(filteredCrypto[0],null,2)); 
         //Por si acaso hay mas de 1 elemento (no debería)
         //se escoge el primero
@@ -212,6 +217,7 @@ app.get(BASE_API_URL + "/cryptocoin_stats/:name", (req, res)=>{
 
 // POST - CONJUNTO
 app.post(BASE_API_URL +"/cryptocoin_stats",(req,res)=>{
+    new_data = req.params;
     cryptocoin_stats.push(req.body);
 
     res.sendStatus(201, "CREATED");
@@ -219,8 +225,8 @@ app.post(BASE_API_URL +"/cryptocoin_stats",(req,res)=>{
 });
 
 // POST - ELEMENTO 
-app.post(BASE_API_URL + "/cryptocoin_stats/:name",(req,res)=>{
-    res.sendStatus(409, "Conflict");
+app.post(BASE_API_URL + "/cryptocoin_stats/:country",(req,res)=>{
+    res.sendStatus(405, "Unable to POST a element");
 });
 
 
@@ -232,7 +238,7 @@ app.delete(BASE_API_URL + "/cryptocoin_stats", (req, res)=>{
 
 
 // DELETE - ELEMENTO
-app.delete(BASE_API_URL + "/cryptocoin_stats/:name", (req, res)=>{
+app.delete(BASE_API_URL + "/cryptocoin_stats/:country", (req, res)=>{
     var ccName = req.params.name;
     cryptocoin_stats = cryptocoin_stats.filter((cryptocoin_stats)=>{
         return (cryptocoin_stats.name != ccName);
@@ -242,16 +248,37 @@ app.delete(BASE_API_URL + "/cryptocoin_stats/:name", (req, res)=>{
 
 // PUT - CONJUNTO
 app.put(BASE_API_URL + "/cryptocoin_stats", (req,res)=>{
-    res.sendStatus(409,"Conflict");
+    res.sendStatus(405,"Unabe to PUT a resource list");
 });
 
 // PUT - ELEMENTO
-app.put(BASE_API_URL + "/cryptocoin_stats/:name", (req,res)=>{
-    var ccName = req.params.name;
-    cryptocoin_stats = cryptocoin_stats.update((cryptocoin_stats)=>{
+app.put(BASE_API_URL + "/cryptocoin_stats/:country/:year", (req,res)=>{
+    var cc_params = req.params;         // variable a actualizar
+    var cc_body = req.body;             // recurso actualizado
+
+    if(!cc_body.country || !cc_body.year || !cc_body.ccelectr || !cc_body.ccmining || !cc_body.ccdemand){
+        console.log("Data is missing or incorrect");
+        return res.sendStatus(400);
+    } else {
+        cryptocoin_stats = cryptocoin_stats.update({"country":cc_params.country, "year":parseInt(cc_params.year)}, cc_body, (err, dataInDB) => {
+            if (err) {
+                console.error("ERROR accesing DB in GET");
+                res.sendStatus(500);
+            } else {
+                if (dataInDB == 0){
+                    console.error("No data found");
+                    res.sendStatus(404);
+                } else {
+                    console.log("Successful PUT");
+                    res.sendStatus(200);
+                }
+            }
+
+        });
+    }
         
-    })
-})
+  });
+
 
 //--------------------------------------------------------------
 
