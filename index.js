@@ -13,6 +13,9 @@ const BASE_API_URL= "/api/v1";
 //URL Javier
 const s = "/stsatellites-stats";
 
+//URL Sergio
+const url_sergio = "/cryptocoin-stats";
+
 app.use(bodyParser.json());
 
 //Parte de Javier
@@ -156,6 +159,8 @@ var cryptocoin_stats = [
 
 ];
 
+const cryptocoin_stats2 = cryptocoin_stats;
+
 //--------------------------------------------------------------
 //Load inicial - Javier
 app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
@@ -169,6 +174,87 @@ app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
 });
 
 //--------------------------------------------------------------
+// PARTE SERGIO
+
+//Load inicial - Sergio
+app.get(BASE_API_URL + url_sergio + "/loadInitialData", (req,res)=> {
+    var crypto = cryptocoin_stats.length;
+    if (crypto == 0){
+        cryptocoin_stats = cryptocoin_stats2;
+        res.redirect(BASE_API_URL + url_sergio);
+    } else {
+        res.sendStatus(409, "Conflict");
+    }
+})
+
+// GET - CONJUNTO
+app.get(BASE_API_URL +"/cryptocoin_stats",(req,res)=>{
+    res.send(JSON.stringify(cryptocoin_stats,null,2));
+
+});
+
+// GET - ELEMENTO
+app.get(BASE_API_URL + "/cryptocoin_stats/:name", (req, res)=>{
+    var ccYear = req.params.year;
+    filteredCrypto = cryptocoin_stats.filter((cryptocoin_stats)=>{
+        return (cryptocoin_stats.year == ccYear);
+    });
+
+    if(filteredCrypto == 0){
+        res.sendStatus(404, "NOT FOUND");
+    }else{
+        res.send(JSON.stringify(filteredCrypto[0],null,2)); 
+        //Por si acaso hay mas de 1 elemento (no debería)
+        //se escoge el primero
+    }
+
+});
+
+// POST - CONJUNTO
+app.post(BASE_API_URL +"/cryptocoin_stats",(req,res)=>{
+    cryptocoin_stats.push(req.body);
+
+    res.sendStatus(201, "CREATED");
+
+});
+
+// POST - ELEMENTO 
+app.post(BASE_API_URL + "/cryptocoin_stats/:name",(req,res)=>{
+    res.sendStatus(409, "Conflict");
+});
+
+
+// DELETE - CONJUNTO
+app.delete(BASE_API_URL + "/cryptocoin_stats", (req, res)=>{
+    cryptocoin_stats = [];
+    res.sendStatus(200, "OK");
+});
+
+
+// DELETE - ELEMENTO
+app.delete(BASE_API_URL + "/cryptocoin_stats/:name", (req, res)=>{
+    var ccName = req.params.name;
+    cryptocoin_stats = cryptocoin_stats.filter((cryptocoin_stats)=>{
+        return (cryptocoin_stats.name != ccName);
+    });
+    res.sendStatus(200, "OK");
+});
+
+// PUT - CONJUNTO
+app.put(BASE_API_URL + "/cryptocoin_stats", (req,res)=>{
+    res.sendStatus(409,"Conflict");
+});
+
+// PUT - ELEMENTO
+app.put(BASE_API_URL + "/cryptocoin_stats/:name", (req,res)=>{
+    var ccName = req.params.name;
+    cryptocoin_stats = cryptocoin_stats.update((cryptocoin_stats)=>{
+        
+    })
+})
+
+//--------------------------------------------------------------
+
 
 //GET 
 
@@ -183,10 +269,7 @@ app.get(BASE_API_URL +"/technology_devices_stats",(req,res)=>{
 
 });
 
-app.get(BASE_API_URL +"/cryptocoin_stats",(req,res)=>{
-    res.send(JSON.stringify(cryptocoin_stats,null,2));
 
-});
 
 //Elemento
 app.get(BASE_API_URL + s + "/:name", (req, res)=>{
@@ -205,21 +288,6 @@ app.get(BASE_API_URL + s + "/:name", (req, res)=>{
 
 });
 
-app.get(BASE_API_URL + "/cryptocoin_stats/:name", (req, res)=>{
-    var satYear = req.params.year;
-    filteredSat = cryptocoin_stats.filter((cryptocoin_stats)=>{
-        return (cryptocoin_stats.year == satYear);
-    });
-
-    if(filteredSat == 0){
-        res.sendStatus(404, "NOT FOUND");
-    }else{
-        res.send(JSON.stringify(filteredSat[0],null,2)); 
-        //Por si acaso hay mas de 1 elemento (no debería)
-        //se escoge el primero
-    }
-
-});
 
 //POST
 
@@ -235,12 +303,7 @@ app.post(BASE_API_URL +"/technology_devices_stats",(req,res)=>{
 
 });
 
-app.post(BASE_API_URL +"/cryptocoin_stats",(req,res)=>{
-    cryptocoin_stats.push(req.body);
 
-    res.sendStatus(201, "CREATED");
-
-});
 
 //DELETE
 
@@ -250,10 +313,6 @@ app.delete(BASE_API_URL + s, (req, res)=>{
     res.sendStatus(200, "OK");
 });
 
-app.delete(BASE_API_URL + "/cryptocoin_stats", (req, res)=>{
-    cryptocoin_stats = [];
-    res.sendStatus(200, "OK");
-});
 
 //Elemento
 app.delete(BASE_API_URL + s + "/:year", (req, res)=>{
@@ -264,13 +323,7 @@ app.delete(BASE_API_URL + s + "/:year", (req, res)=>{
     res.sendStatus(200, "OK");
 });
 
-app.delete(BASE_API_URL + "/cryptocoin_stats/:name", (req, res)=>{
-    var satName = req.params.name;
-    cryptocoin_stats = cryptocoin_stats.filter((cryptocoin_stats)=>{
-        return (cryptocoin_stats.name != satName);
-    });
-    res.sendStatus(200, "OK");
-});
+
 
 //PUT
 
