@@ -248,10 +248,13 @@ app.get(BASE_API_URL + url_sergio,(req,res)=>{
 
 });
 
+
 // GET - ELEMENTO
 app.get(BASE_API_URL + url_sergio + "/:country/:year", (req, res)=>{
     var ccCountry = req.params.country;
     var ccYear = req.params.year;
+    var cc_body = req.body; 
+
 
     filteredCrypto = cryptocoinstats.filter((cryptocoinstats)=>{
         return (cryptocoinstats.country == ccCountry && cryptocoinstats.year == ccYear );
@@ -308,10 +311,20 @@ app.delete(BASE_API_URL + url_sergio, (req, res)=>{
 app.delete(BASE_API_URL + url_sergio+ "/:country/:year", (req, res)=>{
     var ccCountry = req.params.country;
     var ccYear = req.params.year;
+    var cc_body = req.body;
+    var antiguo_array = cryptocoinstats;
+
     cryptocoinstats = cryptocoinstats.filter((cryptocoinstats)=>{
-        return (cryptocoinstats.country != ccCountry && cryptocoinstats.year != ccYear);
+        return (cryptocoinstats.country != ccCountry || cryptocoinstats.year != ccYear);
     });
-    res.sendStatus(200, "OK");
+
+    if(cryptocoinstats.length == antiguo_array.length){
+        res.sendStatus(404);
+    } else {
+        res.sendStatus(200, "OK");
+    }
+    
+    
 });
 
 // PUT - CONJUNTO
