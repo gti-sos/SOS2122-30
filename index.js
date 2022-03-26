@@ -16,6 +16,8 @@ const s = "/stsatellites-stats";
 //URL Sergio
 const url_sergio = "/cryptocoin-stats";
 
+// https://documenter.getpostman.com/view/19481690/UVyn1ycR
+
 app.use(bodyParser.json());
 
 //Parte de Javier
@@ -113,7 +115,7 @@ var technology_devices_stats = [
 ];
 
 // Parte de Sergio
-var cryptocoin_stats = [
+var cryptocoinstats = [
     {
         "country": "EEUU",
         "year": 2021,
@@ -159,7 +161,7 @@ var cryptocoin_stats = [
 
 ];
 
-const cryptocoin_stats2 = cryptocoin_stats;
+const cryptocoinstats2 = cryptocoinstats;
 
 //--------------------------------------------------------------
 //Load inicial - Javier
@@ -178,11 +180,17 @@ app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
 //--------------------------------------------------------------
 // PARTE SERGIO
 
+const API_DOC_CC = "https://documenter.getpostman.com/view/19481690/UVyn1ycR";
+
+app.get(BASE_API_URL + url_sergio +"/docs", (req,res) => {
+    res.redirect(API_DOC_CC);
+});
+
 //Load inicial - Sergio
 app.get(BASE_API_URL + url_sergio + "/loadInitialData", (req,res)=> {
-    var crypto = cryptocoin_stats.length;
+    var crypto = cryptocoinstats.length;
     if (crypto == 0){
-        cryptocoin_stats = cryptocoin_stats2;
+        cryptocoinstats = cryptocoinstats2;
         res.redirect(BASE_API_URL + url_sergio);
     } else {
         res.sendStatus(409, "Conflict");
@@ -190,22 +198,23 @@ app.get(BASE_API_URL + url_sergio + "/loadInitialData", (req,res)=> {
 })
 
 // GET - CONJUNTO
-app.get(BASE_API_URL +"/cryptocoin_stats",(req,res)=>{
+app.get(BASE_API_URL + url_sergio,(req,res)=>{
     res.status(200);
-    res.send(JSON.stringify(cryptocoin_stats,null,2));
+    res.send(JSON.stringify(cryptocoinstats,null,2));
 
 });
 
 // GET - ELEMENTO
-app.get(BASE_API_URL + "/cryptocoin_stats/:country/:year", (req, res)=>{
-    var req_data = req.params;
+app.get(BASE_API_URL + url_sergio + "/:country/:year", (req, res)=>{
+    var ccCountry = req.params.country;
+    var ccYear = req.params.year;
 
-    filteredCrypto = cryptocoin_stats.filter((cryptocoin_stats)=>{
-        return (cryptocoin_stats.year == req_data.year && cryptocoin_stats.country == req_data.country);
+    filteredCrypto = cryptocoinstats.filter((cryptocoinstats)=>{
+        return (cryptocoinstats.country == ccCountry && cryptocoinstats.year == ccYear );
     });
 
     if(filteredCrypto == 0){
-        res.sendStatus(404, "Not");
+        res.sendStatus(404, "NOT FOUND");
     }else{
         res.status(200);
         res.send(JSON.stringify(filteredCrypto[0],null,2)); 
@@ -216,68 +225,80 @@ app.get(BASE_API_URL + "/cryptocoin_stats/:country/:year", (req, res)=>{
 });
 
 // POST - CONJUNTO
-app.post(BASE_API_URL +"/cryptocoin_stats",(req,res)=>{
-    new_data = req.params;
-    cryptocoin_stats.push(req.body);
+app.post(BASE_API_URL + url_sergio,(req,res)=>{
+    cc_body = req.body;
+    cc_country = req.body.country;
+    cc_year = req.body.year;
 
-    res.sendStatus(201, "CREATED");
+    if(!cc_body.country || !cc_body.year || !cc_body.ccelectr || !cc_body.ccmining || !cc_body.ccdemand){
+        console.log("Data is missing or incorrect");
+        return res.sendStatus(400);
+        // Un dato pasado con un POST debe contener el mismo id del recurso al que se especifica en la URL; en caso contrario se debe devolver el código 400.
 
+    } else {
+        for(var i = 0; i < cryptocoinstats.length; i++){
+            if(cryptocoinstats[i].country == cc_country && cryptocoinstats[i].year == cc_year){
+                return res.sendStatus(409);
+            }
+        }
+        cryptocoinstats.push(req.body);
+        res.sendStatus(201, "CREATED");
+
+    }
 });
 
 // POST - ELEMENTO 
-app.post(BASE_API_URL + "/cryptocoin_stats/:country",(req,res)=>{
+app.post(BASE_API_URL + url_sergio + "/:country/:year",(req,res)=>{
     res.sendStatus(405, "Unable to POST a element");
 });
 
 
 // DELETE - CONJUNTO
-app.delete(BASE_API_URL + "/cryptocoin_stats", (req, res)=>{
-    cryptocoin_stats = [];
+app.delete(BASE_API_URL + url_sergio, (req, res)=>{
+    cryptocoinstats = [];
     res.sendStatus(200, "OK");
 });
 
 
 // DELETE - ELEMENTO
-app.delete(BASE_API_URL + "/cryptocoin_stats/:country", (req, res)=>{
-    var ccName = req.params.name;
-    cryptocoin_stats = cryptocoin_stats.filter((cryptocoin_stats)=>{
-        return (cryptocoin_stats.name != ccName);
+app.delete(BASE_API_URL + url_sergio+ "/:country/:year", (req, res)=>{
+    var ccCountry = req.params.country;
+    var ccYear = req.params.year;
+    cryptocoinstats = cryptocoinstats.filter((cryptocoinstats)=>{
+        return (cryptocoinstats.country != ccCountry && cryptocoinstats.year != ccYear);
     });
     res.sendStatus(200, "OK");
 });
 
 // PUT - CONJUNTO
-app.put(BASE_API_URL + "/cryptocoin_stats", (req,res)=>{
+app.put(BASE_API_URL + url_sergio, (req,res)=>{
     res.sendStatus(405,"Unabe to PUT a resource list");
 });
 
 // PUT - ELEMENTO
-app.put(BASE_API_URL + "/cryptocoin_stats/:country/:year", (req,res)=>{
+app.put(BASE_API_URL + url_sergio + "/:country/:year", (req,res)=>{
     var cc_params = req.params;         // variable a actualizar
     var cc_body = req.body;             // recurso actualizado
+
+    var ccCountry = req.params.country;
+    var ccYear = req.params.year;
 
     if(!cc_body.country || !cc_body.year || !cc_body.ccelectr || !cc_body.ccmining || !cc_body.ccdemand){
         console.log("Data is missing or incorrect");
         return res.sendStatus(400);
-    } else {
-        cryptocoin_stats = cryptocoin_stats.update({"country":cc_params.country, "year":parseInt(cc_params.year)}, cc_body, (err, dataInDB) => {
-            if (err) {
-                console.error("ERROR accesing DB in GET");
-                res.sendStatus(500);
-            } else {
-                if (dataInDB == 0){
-                    console.error("No data found");
-                    res.sendStatus(404);
-                } else {
-                    console.log("Successful PUT");
-                    res.sendStatus(200);
-                }
-            }
+        // Un dato pasado con un PUT debe contener el mismo id del recurso al que se especifica en la URL; en caso contrario se debe devolver el código 400.
 
-        });
+    } else {
+        for(var i = 0; i < cryptocoinstats.length; i++){
+            if(cryptocoinstats[i].country == ccCountry && cryptocoinstats[i].year == ccYear){
+                cryptocoinstats[i] = cc_body;
+                console.log(cryptocoinstats[i].body);
+                break;
+            }
+        }
+        res.sendStatus(200, "OK");
     }
-        
-  });
+});
 
 
 //--------------------------------------------------------------
