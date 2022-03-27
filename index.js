@@ -221,7 +221,7 @@ app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
 
 //  ---- /DOCS ------
 
-const javier_doc = "https://documenter.getpostman.com/view/19481690/UVyn1ycR";
+const javier_doc = "https://documenter.getpostman.com/view/20110246/UVyn2yXJ";
 
 app.get(BASE_API_URL + s +"/docs", (req,res) => {
     res.redirect(javier_doc);
