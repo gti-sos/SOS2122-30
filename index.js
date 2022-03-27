@@ -219,6 +219,139 @@ app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
     }
 });
 
+//  ---- /DOCS ------
+
+const javier_doc = "https://documenter.getpostman.com/view/19481690/UVyn1ycR";
+
+app.get(BASE_API_URL + s +"/docs", (req,res) => {
+    res.redirect(javier_doc);
+});
+
+
+//GET 
+
+//Conjunto
+app.get(BASE_API_URL + s, (req, res)=>{
+    var Sat = satellites.length;
+    res.send(JSON.stringify(satellites,null,2));
+});
+
+
+
+
+//Elemento
+app.get(BASE_API_URL + s + "/:country/:year", (req, res)=>{
+    var satYear = req.params.year;
+    var satCoun = req.params.country;
+
+    filteredSat = satellites.filter((satellite)=>{
+        return (satellite.year == satYear);
+    });
+    
+    if(filteredSat == 0){
+        res.sendStatus(404, "NOT FOUND");
+    }else{
+        res.send(JSON.stringify(filteredSat[0],null,2)); 
+        //Por si acaso hay mas de 1 elemento (no debería)
+        //se escoge el primero
+    }
+
+});
+
+
+
+//POST
+
+//Conjunto
+app.post(BASE_API_URL + s, (req, res)=>{
+    satellites.push(req.body);
+    res.sendStatus(201, "CREATED");
+});
+
+//Elemento
+app.post(BASE_API_URL + s + "/:country/:year",(req,res)=>{
+    res.sendStatus(405, "Method not allowed");
+});
+
+
+
+//DELETE
+
+//Conjunto
+app.delete(BASE_API_URL + s, (req, res)=>{
+    satellites = [];
+    res.sendStatus(200, "OK");
+});
+
+
+//Elemento
+app.delete(BASE_API_URL + s + "/:country/:year", (req, res)=>{
+    var satYear = req.params.year;
+    var satCoun = req.params.country;
+    satellites = satellites.filter((satellite)=>{
+        return (satellite.name != satYear || satellite.country != satCoun);
+    });
+
+    if(satellites_2.length == satellites){
+        res.sendStatus(404, "Not Found");
+    }else{
+        res.sendStatus(200, "OK");
+    }
+});
+
+
+app.delete(BASE_API_URL + url_sergio+ "/:country/:year", (req, res)=>{
+    var ccCountry = req.params.country;
+    var ccYear = req.params.year;
+    var cc_body = req.body;
+    var antiguo_array = cryptocoinstats;
+
+    cryptocoinstats = cryptocoinstats.filter((cryptocoinstats)=>{
+        return (cryptocoinstats.country != ccCountry || cryptocoinstats.year != ccYear);
+    });
+
+    if(cryptocoinstats.length == antiguo_array.length){
+        res.sendStatus(404);
+    } else {
+        res.sendStatus(200, "OK");
+    }
+    
+    
+});
+
+
+
+//PUT
+
+//Elemento
+
+app.put(BASE_API_URL + s + "/:country/:year", (req,res)=>{
+    var cc_params = req.params;         // variable a actualizar
+    var cc_body = req.body;             // recurso actualizado
+
+    var ccCountry = req.params.country;
+    var ccYear = req.params.year;
+
+    if(!cc_body.country || !cc_body.year || !cc_body.quarter || !cc_body.st-launched || !cc_body.st-orbit || !cc_body.st-destroyed){
+        return res.sendStatus(400, "Bad Request");
+        // Un dato pasado con un PUT debe contener el mismo id del recurso al que se especifica en la URL; en caso contrario se debe devolver el código 400.
+
+    } else {
+        for(var i = 0; i < satellites.length; i++){
+            if(satellites[i].country == ccCountry && satellites[i].year == ccYear){
+                satellites[i] = cc_body;
+                break;
+            }
+        }
+        res.sendStatus(200, "OK");
+    }
+});
+
+//Conjuto
+
+app.put(BASE_API_URL + s, (req,res)=>{
+    res.sendStatus(405,"Unabe to PUT a resource list");
+});
 
 
 //--------------------------------------------------------------
@@ -364,10 +497,7 @@ app.put(BASE_API_URL + url_sergio + "/:country/:year", (req,res)=>{
 //GET 
 
 //Conjunto
-app.get(BASE_API_URL + s, (req, res)=>{
-    var Sat = satellites.length;
-    res.send(JSON.stringify(satellites,null,2));
-});
+
 
 app.get(BASE_API_URL +"/technology_devices_stats",(req,res)=>{
     res.send(JSON.stringify(technology_devices_stats,null,2));
@@ -377,29 +507,11 @@ app.get(BASE_API_URL +"/technology_devices_stats",(req,res)=>{
 
 
 //Elemento
-app.get(BASE_API_URL + s + "/:name", (req, res)=>{
-    var satYear = req.params.year;
-    filteredSat = satellites.filter((satellite)=>{
-        return (satellite.year == satYear);
-    });
-    
-    if(filteredSat == 0){
-        res.sendStatus(404, "NOT FOUND");
-    }else{
-        res.send(JSON.stringify(filteredSat[0],null,2)); 
-        //Por si acaso hay mas de 1 elemento (no debería)
-        //se escoge el primero
-    }
 
-});
 
 
 //POST
 
-app.post(BASE_API_URL + s, (req, res)=>{
-    satellites.push(req.body);
-    res.sendStatus(201, "CREATED");
-});
 
 app.post(BASE_API_URL +"/technology_devices_stats",(req,res)=>{
     technology_devices_stats.push(req.body);
@@ -413,20 +525,10 @@ app.post(BASE_API_URL +"/technology_devices_stats",(req,res)=>{
 //DELETE
 
 //Conjunto
-app.delete(BASE_API_URL + s, (req, res)=>{
-    satellites = [];
-    res.sendStatus(200, "OK");
-});
+
 
 
 //Elemento
-app.delete(BASE_API_URL + s + "/:year", (req, res)=>{
-    var satYear = req.params.year;
-    satellites = satellites.filter((satellite)=>{
-        return (satellite.name != satYear);
-    });
-    res.sendStatus(200, "OK");
-});
 
 
 
