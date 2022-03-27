@@ -265,9 +265,30 @@ app.get(BASE_API_URL + s + "/:country/:year/:quarter", (req, res)=>{
 
 //Conjunto
 app.post(BASE_API_URL + s, (req, res)=>{
-    satellites.push(req.body);
-    res.sendStatus(201, "CREATED");
+    satBody = req.body;
+    satCountry = req.body.country;
+    satYear = req.body.year;
+    satQ = req.body.quarter;
+
+    if(!satBody.country || !satBody.year || !satBody.quarter || !satBody.st-launched || !satBody.st-orbit || !satBody.st-destroyed){
+        console.log("Data is missing or incorrect");
+        return res.sendStatus(400);
+        // Un dato pasado con un POST debe contener el mismo id del recurso al que se especifica en la URL; en caso contrario se debe devolver el código 400.
+
+    } else {
+        for(var i = 0; i < satellites.length; i++){
+            if(satellites[i].country == satCountry && satellites[i].year == satYear && satellites[i].quarter == satQ){
+                return res.sendStatus(409, "Conflict");
+            }
+        }
+        satellites.push(req.body);
+        res.sendStatus(201, "CREATED");
+
+    }
+
 });
+
+
 
 //Elemento
 app.post(BASE_API_URL + s + "/:country/:year/:quarter",(req,res)=>{
@@ -308,13 +329,13 @@ app.delete(BASE_API_URL + s + "/:country/:year/:quarter", (req, res)=>{
 
 app.put(BASE_API_URL + s + "/:country/:year/:quarter", (req,res)=>{
     var cc_params = req.params;         // variable a actualizar
-    var cc_body = req.body;             // recurso actualizado
+    var satBody = req.body;             // recurso actualizado
 
     var satQ = req.params.quarter;
     var satCountry = req.params.country;
     var satYear = req.params.year;
 
-    if(!cc_body.country || !cc_body.year || !cc_body.quarter || !cc_body.st-launched || !cc_body.st-orbit || !cc_body.st-destroyed){
+    if(!satBody.country || !satBody.year || !satBody.quarter || !satBody.st-launched || !satBody.st-orbit || !satBody.st-destroyed){
         return res.sendStatus(400, "Bad Request");
         // Un dato pasado con un PUT debe contener el mismo id del recurso al que se especifica en la URL; en caso contrario se debe devolver el código 400.
 
