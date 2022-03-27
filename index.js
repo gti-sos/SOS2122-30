@@ -240,12 +240,13 @@ app.get(BASE_API_URL + s, (req, res)=>{
 
 
 //Elemento
-app.get(BASE_API_URL + s + "/:country/:year", (req, res)=>{
+app.get(BASE_API_URL + s + "/:country/:year/:quarter", (req, res)=>{
     var satYear = req.params.year;
     var satCoun = req.params.country;
+    var satQ = req.params.quarter;
 
     filteredSat = satellites.filter((satellite)=>{
-        return (satellite.year == satYear);
+        return (satellite.year == satYear && satCoun == satellite.country && satQ == satellite.quarter);
     });
     
     if(filteredSat == 0){
@@ -269,7 +270,7 @@ app.post(BASE_API_URL + s, (req, res)=>{
 });
 
 //Elemento
-app.post(BASE_API_URL + s + "/:country/:year",(req,res)=>{
+app.post(BASE_API_URL + s + "/:country/:year/:quarter",(req,res)=>{
     res.sendStatus(405, "Method not allowed");
 });
 
@@ -285,11 +286,13 @@ app.delete(BASE_API_URL + s, (req, res)=>{
 
 
 //Elemento
-app.delete(BASE_API_URL + s + "/:country/:year", (req, res)=>{
+app.delete(BASE_API_URL + s + "/:country/:year/:quarter", (req, res)=>{
     var satYear = req.params.year;
     var satCoun = req.params.country;
+    var satQ = req.params.quarter;
+
     satellites = satellites.filter((satellite)=>{
-        return (satellite.name != satYear || satellite.country != satCoun);
+        return (satellite.name != satYear || satellite.country != satCoun || satellite.quarter != satQ);
     });
 
     if(satellites_2.length == satellites){
@@ -299,38 +302,17 @@ app.delete(BASE_API_URL + s + "/:country/:year", (req, res)=>{
     }
 });
 
-
-app.delete(BASE_API_URL + url_sergio+ "/:country/:year", (req, res)=>{
-    var ccCountry = req.params.country;
-    var ccYear = req.params.year;
-    var cc_body = req.body;
-    var antiguo_array = cryptocoinstats;
-
-    cryptocoinstats = cryptocoinstats.filter((cryptocoinstats)=>{
-        return (cryptocoinstats.country != ccCountry || cryptocoinstats.year != ccYear);
-    });
-
-    if(cryptocoinstats.length == antiguo_array.length){
-        res.sendStatus(404);
-    } else {
-        res.sendStatus(200, "OK");
-    }
-    
-    
-});
-
-
-
 //PUT
 
 //Elemento
 
-app.put(BASE_API_URL + s + "/:country/:year", (req,res)=>{
+app.put(BASE_API_URL + s + "/:country/:year/:quarter", (req,res)=>{
     var cc_params = req.params;         // variable a actualizar
     var cc_body = req.body;             // recurso actualizado
 
-    var ccCountry = req.params.country;
-    var ccYear = req.params.year;
+    var satQ = req.params.quarter;
+    var satCountry = req.params.country;
+    var satYear = req.params.year;
 
     if(!cc_body.country || !cc_body.year || !cc_body.quarter || !cc_body.st-launched || !cc_body.st-orbit || !cc_body.st-destroyed){
         return res.sendStatus(400, "Bad Request");
@@ -338,7 +320,7 @@ app.put(BASE_API_URL + s + "/:country/:year", (req,res)=>{
 
     } else {
         for(var i = 0; i < satellites.length; i++){
-            if(satellites[i].country == ccCountry && satellites[i].year == ccYear){
+            if(satellites[i].country == satCountry && satellites[i].year == satYear && satellites[i].quarter ==satQ){
                 satellites[i] = cc_body;
                 break;
             }
