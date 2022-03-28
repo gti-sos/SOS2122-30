@@ -274,7 +274,7 @@ app.post(BASE_API_URL + s, (req, res)=>{
     satCountry = req.body.country;
     satYear = req.body.year;
 
-    if(!satBody.country || !satBody.year || !satBody.quarter || !satBody.st-launched || !satBody.st-orbit || !satBody.st-destroyed){
+    if(!satBody.country || !satBody.year){
         return res.sendStatus(400);
         // Un dato pasado con un POST debe contener el mismo id del recurso al que se especifica en la URL; en caso contrario se debe devolver el código 400.
 
