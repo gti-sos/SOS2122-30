@@ -273,14 +273,15 @@ app.post(BASE_API_URL + s, (req, res)=>{
     satBody = req.body;
     satCountry = req.body.country;
     satYear = req.body.year;
+    satQ = req.body.quarter;
 
-    if(!satBody.country || !satBody.year){
+    if(!satBody.country || !satBody.year || !satBody.quarter || !satBody.st-launched || !satBody.st-orbit || !satBody.st-destroyed){
         return res.sendStatus(400);
         // Un dato pasado con un POST debe contener el mismo id del recurso al que se especifica en la URL; en caso contrario se debe devolver el código 400.
 
     } else {
         for(var i = 0; i < satellites.length; i++){
-            if(satellites[i].country == satCountry && satellites[i].year == satYear){
+            if(satellites[i].country == satCountry && satellites[i].year == satYear && satellites[i].quarter == satQ){
                 return res.sendStatus(409, "Conflict");
             }
         }
