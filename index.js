@@ -273,7 +273,6 @@ app.post(BASE_API_URL + s, (req, res)=>{
     satBody = req.body;
     satCountry = req.body.country;
     satYear = req.body.year;
-    satQ = req.body.quarter;
 
     if(!satBody.country || !satBody.year || !satBody.quarter || !satBody.st-launched || !satBody.st-orbit || !satBody.st-destroyed){
         return res.sendStatus(400);
@@ -281,7 +280,7 @@ app.post(BASE_API_URL + s, (req, res)=>{
 
     } else {
         for(var i = 0; i < satellites.length; i++){
-            if(satellites[i].country == satCountry && satellites[i].year == satYear && satellites[i].quarter == satQ){
+            if(satellites[i].country == satCountry && satellites[i].year == satYear){
                 return res.sendStatus(409, "Conflict");
             }
         }
@@ -311,13 +310,12 @@ app.delete(BASE_API_URL + s, (req, res)=>{
 
 
 //Elemento
-app.delete(BASE_API_URL + s + "/:country/:year/:quarter", (req, res)=>{
+app.delete(BASE_API_URL + s + "/:country/:year", (req, res)=>{
     var satYear = req.params.year;
     var satCoun = req.params.country;
-    var satQ = req.params.quarter;
 
     satellites = satellites.filter((satellite)=>{
-        return (satellite.name != satYear || satellite.country != satCoun || satellite.quarter != satQ);
+        return (satellite.name != satYear || satellite.country != satCoun);
     });
 
     if(satellites_2.length == satellites){
