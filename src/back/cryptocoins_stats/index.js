@@ -61,42 +61,42 @@ var cryptocoinstats = [
 
 const cryptocoinstats2 = [
     {
-        "country": "EEUU",
+        "country": "eeuu",
         "year": 2021,
         "ccelectr": 3894.83,
         "ccdemand": 14.92,
         "ccmining": 35.40
     },
     {
-        "country": "EEUU",
+        "country": "eeuu",
         "year": 2020,
         "ccelectr": 3843.8,
         "ccdemand": 8.68,
         "ccmining": 10.41
     },
     {
-        "country": "RUSSIA",
+        "country": "russia",
         "year": 2021,
         "ccelectr": 943.075,
         "ccdemand": 14.92,
         "ccmining": 11.23
     },
     {
-        "country": "RUSSIA",
+        "country": "russia",
         "year": 2020,
         "ccelectr": 943.1,
         "ccdemand": 8.68,
         "ccmining": 7.16
     },
     {
-        "country": "CHINA",
+        "country": "china",
         "year": 2021,
         "ccelectr": 6875.09,
         "ccdemand": 14.92,
         "ccmining": 43.98
     },
     {
-        "country": "CHINA",
+        "country": "china",
         "year": 2020,
         "ccelectr": 6875.1,
         "ccdemand": 8.68,
