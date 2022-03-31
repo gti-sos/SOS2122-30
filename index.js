@@ -500,21 +500,21 @@ app.put(BASE_API_URL + url_sergio + "/:country/:year", (req,res)=>{
 //--------------------------------------------------------------
 //PARTE JAIME
 
+//LOAD INICIAL
+app.get(BASE_API_URL + url_jaime + "/loadInitialData", (req,res)=>{
+    var td =  technology_devices_stats.length;
+    if (td == 0){
+        technology_devices_stats = technology_devices_stats2;
+        res.redirect(BASE_API_URL + url_jaime);
+    } else{
+        res.sendStatus(409, "Conflict");
+    }
+});
+
 const jaime_URL_API = "https://documenter.getpostman.com/view/19584746/UVyoUwqe";
 
 app.get(BASE_API_URL + url_jaime +"/docs", (req,res) => {
     res.redirect(jaime_URL_API);
-});
-
-//LOAD INICIAL
-app.get(BASE_API_URL + jaime_URL_API + "/loadInitialData", (req,res)=>{
-    var td =  technology_devices_stats.length;
-    if (td == 0){
-        technology_devices_stats = technology_devices_stats2;
-        res.redirect(BASE_API_URL + jaime_URL_API);
-    } else{
-        res.sendStatus(409, "Conflict");
-    }
 });
 
 
@@ -570,7 +570,7 @@ app.post(BASE_API_URL + url_jaime, (req,res)=>{
 
 
 //Elemento
-app.post(BASE_API_URL + url_jaime + "/country/:year",(req,res)=>{
+app.post(BASE_API_URL + url_jaime + "/:country/:year",(req,res)=>{
 
     res.sendStatus(405, "Method not allowed");
 
@@ -593,12 +593,12 @@ app.delete(BASE_API_URL + url_jaime+ "/:country/:year", (req, res)=>{
     var tdYear = req.params.year;
     var original = technology_devices_stats;
 
-    technology_devices_stats = technology_devices_stats.filter((technology_devices_stats)=>{
-        return (technology_devices_stats.country != tdCountry || technology_devices_stats.year != tdYear);
+    technology_devices_stats = technology_devices_stats.filter((td)=>{
+        return (td.country != tdCountry || td.year != tdYear);
     });
 
     if(technology_devices_stats.length == original.length){
-        res.sendStatus(404);
+        res.sendStatus(404, "NOT FOUND");
     } else {
         res.sendStatus(200, "OK");
     }
@@ -618,10 +618,10 @@ app.put(BASE_API_URL + url_jaime, (req,res)=>{
 
 app.put(BASE_API_URL + url_jaime + "/:country/:year", (req,res)=>{
     var td_params = req.params;         
-    var td_body = req.body;            
+    var td_body = req.body;
 
-    var tdCountry = req.params.country;
-    var tdYear = req.params.year;
+    var tdCountry = td_params.country;
+    var tdYear = td_params.year;
 
     if(!td_body.country || !td_body.year || !td_body.tdwasted || !td_body.mpdisuse || !td_body.mpreused){
         console.log("Data is missing or incorrect");
