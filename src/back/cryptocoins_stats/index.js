@@ -302,7 +302,7 @@ module.exports = (app) => {
         var cc_body = req.body;             // resource updated
 
         var ccCountry = req.params.country;
-        var ccYear = req.params.year;
+        var ccYear = parseInt(req.params.year);
 
         if(!cc_body.country || !cc_body.year || !cc_body.ccelectr || !cc_body.ccmining || !cc_body.ccdemand){
             console.log("Data is missing or incorrect");
@@ -315,7 +315,7 @@ module.exports = (app) => {
                     console.log(err);
                     res.sendStatus(500);
                 } else {
-                    if(data.length == 0){
+                    if(data == 0){
                         console.log("Data not found");
                         res.sendStatus(404,"Data not found");
                     } else {
