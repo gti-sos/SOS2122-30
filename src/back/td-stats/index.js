@@ -88,19 +88,18 @@ app.get(BASE_API_URL + url_jaime,(req,res)=>{
 });
 
 //Elemento
-app.get(BASE_API_URL + url_jaime + "/country/:year", (req, res)=>{
+app.get(BASE_API_URL + url_jaime + "/:country", (req, res)=>{
     var tdCountry = req.params.country;
-    var tdYear = req.params.year;
     
     
     filteredTD = technology_devices_stats.filter((technology_devices_stats)=>{
-        return(technology_devices_stats.country == tdCountry && technology_devices_stats.year == tdYear);
+        return(technology_devices_stats.country == tdCountry);
     });
     if(filteredTD == 0){
         res.sendStatus(404, "NOT FOUND");
     }else{
         res.status(200);
-        res.send(JSON.stringify(filteredTD[0],null,2)); 
+        res.send(JSON.stringify(filteredTD,null,2)); 
     }
 });
 
