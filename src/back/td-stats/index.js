@@ -2,7 +2,7 @@ const req = require("express/lib/request");
 
 module.exports = (app) => {
 
-//Para parsear el json
+
 const bodyParser = require("body-parser");
 
 

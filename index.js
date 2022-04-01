@@ -4,6 +4,7 @@ const express = require("express");
 //Para parsear el json
 const bodyParser = require("body-parser");
 const backend_crypto = require("./src/back/cryptocoins_stats/index");
+const backend_td = require("./src/back/td-stats/index")
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -219,6 +220,14 @@ app.put(BASE_API_URL + s, (req,res)=>{
 app.use("/", express.static('public'));
 
 backend_crypto(app) // FALTA POR IMPLEMENTAR LA BASE DE DATOS
+
+
+
+
+backend_td(app)
+
+
+
 
 app.get("/cool",(req,res)=>{
     console.log("Requested /cool route");
