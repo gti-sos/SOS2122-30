@@ -7,6 +7,8 @@ const backend_crypto = require("./src/back/cryptocoins_stats/index");
 const backend_td = require("./src/back/td-stats/index");
 const backend_satellites = require("./src/back/stsatellites-stats/index");
 
+const app = express();
+const port = process.env.PORT || 8080;
 
 const BASE_API_URL= "/api/v1";
     

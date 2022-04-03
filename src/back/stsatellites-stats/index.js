@@ -66,7 +66,6 @@ module.exports = (app) => {
 
 
     db.insert(satellites); //database initialized 
-    res.send(JSON.stringify(satellites,null,2));
 
 
     //POSTMAN
