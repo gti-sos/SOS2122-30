@@ -5,7 +5,7 @@ var db = new DataStore();
 
 //URLs
 const BASE_API_URL= "/api/v1";
-const s = "/stsatellites-stats";
+const url_javier = "/stsatellites-stats";
 const javier_doc = "https://documenter.getpostman.com/view/20110246/UVyn2yXJ";
 
 
@@ -17,9 +17,8 @@ module.exports = (app) => {
 
     app.use(bodyParser.json());
 
-
     //Resource
-    var satellites = [
+    var satellitesIns = [
         { 
             "country": "eeuu", 
             "year": 2020 ,
@@ -61,33 +60,70 @@ module.exports = (app) => {
             "stdestroyed": 145
         }
     ];
-    
-    var satellites_2 = satellites;
 
-
-    db.insert(satellites); //database initialized 
+    db.insert(satellitesIns); //database initialized 
 
 
     //POSTMAN
-    app.get(BASE_API_URL + s +"/docs", (req,res) => {
+    app.get(BASE_API_URL + url_javier +"/docs", (req,res) => {
         res.redirect(javier_doc);
     });
 
     //Load inicial
-    app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
-    var Sat = satellites.length;
-    if(Sat == 0){
-        satellites = satellites_2;
-        res.redirect(BASE_API_URL + s);
-    }else{
-        res.sendStatus(409, "Conflict");
-    }
+    app.get(BASE_API_URL + url_javier + "/loadInitialData", (req, res)=>{
+        db.remove({},{multi:true},function(err,data){
+        });
+        var satellitesIni = [
+            { 
+                "country": "eeuu", 
+                "year": 2020 ,
+                "quarter": "second", 
+                "stlaunched": 529, 
+                "storbit": 362, 
+                "stdestroyed": 8 
+            },
+            {
+                "country": "eeuu", 
+                "year": 2020 ,
+                "quarter": "third", 
+                "stlaunched": 664, 
+                "storbit": 441, 
+                "stdestroyed": 14
+            },
+            {
+                "country": "eeuu", 
+                "year": 2021 ,
+                "quarter": "first", 
+                "stlaunched": 880, 
+                "storbit": 652, 
+                "stdestroyed": 58
+            },
+            {
+                "country": "eeuu", 
+                "year": 2021 ,
+                "quarter": "second", 
+                "stlaunched": 1610, 
+                "storbit": 973, 
+                "stdestroyed": 67
+            },
+            {
+                "country": "eeuu", 
+                "year": 2021 ,
+                "quarter": "third", 
+                "stlaunched": 1929, 
+                "storbit": 1503, 
+                "stdestroyed": 145
+            }
+        ];
+
+        db.insert(satellitesIni);
+        res.send(JSON.stringify(satellitesIni,null,2));
 
 
     //GET 
 
     //Conjunto
-    app.get(BASE_API_URL + s, (req, res)=>{
+    app.get(BASE_API_URL + url_javier, (req, res)=>{
         db.find({}, function(err,docs){
             res.send(JSON.stringify(docs.map((s)=>{
                 return {country : s.country, year : s.year, quarter : s.quarter, stlaunched : s.stlaunched, storbit : s.storbit, stdestroyed : s.stdestroyed};
@@ -98,7 +134,7 @@ module.exports = (app) => {
     });
 
     //Elemento
-    app.get(BASE_API_URL + s + "/:country/:year/:quarter", (req, res)=>{
+    app.get(BASE_API_URL + url_javier + "/:country/:year/:quarter", (req, res)=>{
         var satYear = parseInt(req.params.year);
         var satCountry = req.params.country;
         var satQ = req.params.quarter;
@@ -125,7 +161,7 @@ module.exports = (app) => {
     //POST
 
     //Conjunto
-    app.post(BASE_API_URL + s, (req, res)=>{
+    app.post(BASE_API_URL + url_javier, (req, res)=>{
         satBody = req.body;
         satCountry = req.body.country;
         satYear = parseInt(req.body.year);
@@ -154,7 +190,7 @@ module.exports = (app) => {
     });
     
     //Elemento
-    app.post(BASE_API_URL + s + "/:country/:year/:quarter",(req,res)=>{
+    app.post(BASE_API_URL + url_javier + "/:country/:year/:quarter",(req,res)=>{
         res.sendStatus(405, "Method not allowed");
     });
 
@@ -162,10 +198,10 @@ module.exports = (app) => {
 
 
 
+}
 
 
-
-
+/*
 //DELETE
 
 //Conjunto
@@ -225,3 +261,15 @@ app.put(BASE_API_URL + s, (req,res)=>{
     res.sendStatus(405,"Unabe to PUT a resource list");
 });
 }
+
+
+//Load inicial
+    app.get(BASE_API_URL + s + "/loadInitialData", (req, res)=>{
+    var Sat = satellites.length;
+    if(Sat == 0){
+        satellites = satellites_2;
+        res.redirect(BASE_API_URL + s);
+    }else{
+        res.sendStatus(409, "Conflict");
+    }
+*/
