@@ -160,14 +160,15 @@ module.exports = (app) => {
     //POST
 
     //Conjunto
-    app.post(BASE_API_URL + url_javier, (req, res)=>{
+    app.post(BASE_API_URL + url_javier,(req, res)=>{
         satBody = req.body;
         satCountry = req.body.country;
         satYear = parseInt(req.body.year);
         satQ = req.body.quarter;
 
         db.find({country : satCountry, year: satYear, quarter: satQ}, function(err,data){
-            if(err,data){
+            console.log("1");
+            if(err){
                 console.error("ERROR POST: "+err);
                 res.sendStatus(500);
             }else{
