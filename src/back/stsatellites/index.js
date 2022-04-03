@@ -256,7 +256,8 @@ module.exports = (app) => {
                     res.sendStatus(500, "Internal Server Error");
                 }else{
                     if(data==0){
-                        res.status(404,"Not Found");
+                        res.status(404);
+                        res.send("Data not found");
                     }else{  
                         res.sendStatus(200, "OK");
                     }
