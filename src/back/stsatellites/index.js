@@ -70,53 +70,64 @@ module.exports = (app) => {
 
     //Load inicial
     app.get(BASE_API_URL + url_javier + "/loadInitialData", (req, res)=>{
-        db.remove({},{multi:true},function(err,data){
-        });
-        var satellitesIni = [
-            { 
-                "country": "eeuu", 
-                "year": 2020 ,
-                "quarter": "second", 
-                "stlaunched": 529, 
-                "storbit": 362, 
-                "stdestroyed": 8 
-            },
-            {
-                "country": "eeuu", 
-                "year": 2020 ,
-                "quarter": "third", 
-                "stlaunched": 664, 
-                "storbit": 441, 
-                "stdestroyed": 14
-            },
-            {
-                "country": "eeuu", 
-                "year": 2021 ,
-                "quarter": "first", 
-                "stlaunched": 880, 
-                "storbit": 652, 
-                "stdestroyed": 58
-            },
-            {
-                "country": "eeuu", 
-                "year": 2021 ,
-                "quarter": "second", 
-                "stlaunched": 1610, 
-                "storbit": 973, 
-                "stdestroyed": 67
-            },
-            {
-                "country": "eeuu", 
-                "year": 2021 ,
-                "quarter": "third", 
-                "stlaunched": 1929, 
-                "storbit": 1503, 
-                "stdestroyed": 145
+        db.find({country : satCountry, year: satYear, quarter: satQ}, function(err,data){
+            if(err){
+                console.error("ERROR GET: "+ err);
+                res.sendStatus(500, "Internal Server Error");
+            } else {
+                if(data.length == 0){
+                    var satellitesIni = [
+                        { 
+                            "country": "eeuu", 
+                            "year": 2020 ,
+                            "quarter": "second", 
+                            "stlaunched": 529, 
+                            "storbit": 362, 
+                            "stdestroyed": 8 
+                        },
+                        {
+                            "country": "eeuu", 
+                            "year": 2020 ,
+                            "quarter": "third", 
+                            "stlaunched": 664, 
+                            "storbit": 441, 
+                            "stdestroyed": 14
+                        },
+                        {
+                            "country": "eeuu", 
+                            "year": 2021 ,
+                            "quarter": "first", 
+                            "stlaunched": 880, 
+                            "storbit": 652, 
+                            "stdestroyed": 58
+                        },
+                        {
+                            "country": "eeuu", 
+                            "year": 2021 ,
+                            "quarter": "second", 
+                            "stlaunched": 1610, 
+                            "storbit": 973, 
+                            "stdestroyed": 67
+                        },
+                        {
+                            "country": "eeuu", 
+                            "year": 2021 ,
+                            "quarter": "third", 
+                            "stlaunched": 1929, 
+                            "storbit": 1503, 
+                            "stdestroyed": 145
+                        }
+                    ];
+            
+                    db.insert(satellitesIni);
+                    res.send(JSON.stringify(satellitesIni,null,2));
+                } else{
+                    console.error("Data not found");
+                    res.status(404,"Not Found");
+                    
+                }
             }
-        ];
-
-        db.insert(satellitesIni);
-        res.send(JSON.stringify(satellitesIni,null,2));
+        });
     });
 
     //GET 
