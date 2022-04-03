@@ -24,13 +24,14 @@ app.use(bodyParser.json());
 
 app.use("/", express.static('public'));
 
-backend_crypto(app) // FALTA POR IMPLEMENTAR LA BASE DE DATOS
+backend_crypto(app); // FALTA POR IMPLEMENTAR LA BASE DE DATOS
 
 
 
 
-backend_td(app)
+backend_td(app);
 
+backend_satellites(app);
 
 
 
