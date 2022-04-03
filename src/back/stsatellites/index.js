@@ -3,6 +3,7 @@ const DataStore = require("nedb");
 const bodyParser = require("body-parser");
 var db = new DataStore();
 
+
 //URLs
 const BASE_API_URL= "/api/v1";
 const url_javier = "/stsatellites-stats";
@@ -10,10 +11,8 @@ const javier_doc = "https://documenter.getpostman.com/view/20110246/UVyn2yXJ";
 
 
 //----------------------------------------------------------------------------------------------------
-
-
 module.exports = (app) => {
-    console.log("Exporting Cryptocoin Stats API");
+    console.log("Exporting Satellites Stats API");
 
     app.use(bodyParser.json());
 
@@ -118,7 +117,7 @@ module.exports = (app) => {
 
         db.insert(satellitesIni);
         res.send(JSON.stringify(satellitesIni,null,2));
-
+    });
 
     //GET 
 
@@ -193,8 +192,6 @@ module.exports = (app) => {
     app.post(BASE_API_URL + url_javier + "/:country/:year/:quarter",(req,res)=>{
         res.sendStatus(405, "Method not allowed");
     });
-
-});
 
 
 
