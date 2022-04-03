@@ -141,15 +141,14 @@ module.exports = (app) => {
         db.find({country : satCountry, year: satYear, quarter: satQ}, {_id:0}, function(err,data){
             if(err){
                 console.error("ERROR GET: "+ err);
-                res.sendStatus(500);
+                res.sendStatus(500, "Internal Server Error");
             } else {
                 if(data.length != 0){
                     res.send(JSON.stringify(data,null,2));
-                    res.status(200);
+                    res.status(200, "Ok");
                 } else{
                     console.error("Data not found");
-                    res.status(404);
-                    res.send("Data not found");
+                    res.status(404,"Not Found");
                     
                 }
             }
@@ -170,20 +169,20 @@ module.exports = (app) => {
             console.log("1");
             if(err){
                 console.error("ERROR POST: "+err);
-                res.sendStatus(500);
+                res.sendStatus(500, "Internal Server Error");
             }else{
                 if(data.length == 0){
                     if(!satBody.country || !satBody.year || !satBody.quarter || !satBody.stlaunched || !satBody.storbit || !satBody.stdestroyed){
                         console.log("Data is missing or incorrect. Perhaps number of parameters is incorrect?");
-                        return res.sendStatus(400);
+                        return res.sendStatus(400, "Bad Request");
                     }else{
                         db.insert(satBody);
-                        return res.status(201).send(JSON.stringify(satBody,null,2));
+                        return res.status(201,"Created").send(JSON.stringify(satBody,null,2));
                         // CANT SEPARATE "status" FROM "send" IN DIFFERENT LINES. CRASHES.
                     }
                 }else{
                     console.log("Conflict");
-                    res.sendStatus(409);
+                    res.sendStatus(409,"Conflict");
                 }
             }
         });
@@ -194,9 +193,85 @@ module.exports = (app) => {
         res.sendStatus(405, "Method not allowed");
     });
 
+    //DELETE
+
+    //Conjunto
+    app.delete(BASE_API_URL + url_javier, (req, res)=>{
+        db.remove({},{multi:true}, function (err, dbRemoved){
+            if(err || dbRemoved == 0){
+                console.log("ERROR IN DELETING DB:"+err);
+                res.sendStatus(500, "Internal Server Error");
+            }else{
+                console.log("Database has been successfully removed");
+                res.sendStatus(200, "Ok");
+            }
+        });
+    });
 
 
-}
+    //Elemento
+    app.delete(BASE_API_URL + url_javier + "/:country/:year/:quarter", (req, res)=>{
+        satBody = req.body;
+        satCountry = req.body.country;
+        satYear = parseInt(req.body.year);
+        satQ = req.body.quarter;
+
+        db.remove({country : satCountry, year: satYear, quarter: satQ},
+            {multi:true}, function(err,data){
+            if(err){
+                res.sendStatus(500, "Internal Server Error");
+            }else if(data == 0){
+                res.status(404,"Not Found");
+            }else{
+                res.sendStatus(200, "Ok");
+            }
+        });
+    });
+
+    //PUT
+
+    //Elemento
+    app.put(BASE_API_URL + url_javier + "/:country/:year/:quarter", (req,res)=>{
+        var satBody = req.body;             // recurso actualizado
+
+        var satQ = req.params.quarter;
+        var satCountry = req.params.country;
+        var satYear = req.params.year;
+
+        if(!satBody.country || !satBody.year || !satBody.quarter || !satBody.stlaunched || !satBody.storbit || !satBody.stdestroyed){
+            return res.sendStatus(400, "Bad Request");
+            // Un dato pasado con un PUT debe contener el mismo id del recurso al que se especifica en la URL; en caso contrario se debe devolver el código 400.
+
+        } else {
+            db.update({$and: [{country : satCountry}, {year: satYear}, {quarter: satQ}]}, {$set:satBody},{},function(err,data){
+                if(err){
+                    res.sendStatus(500, "Internal Server Error");
+                }else{
+                    if(data==0){
+                        res.status(404,"Not Found");
+                    }else{  
+                        res.sendStatus(200, "OK");
+                    }
+                }
+            });     
+        }
+        });
+
+    //Conjuto
+    //1
+    app.put(BASE_API_URL + url_javier, (req,res)=>{
+        res.sendStatus(405,"Unabe to PUT a resource list");
+    });
+    //2
+    app.put(BASE_API_URL + url_javier + "/:country", (req,res)=>{
+        res.sendStatus(405,"Unabe to PUT a resource list");
+    });
+    //3
+    app.put(BASE_API_URL + url_javier + "/:country/:year", (req,res)=>{
+        res.sendStatus(405,"Unabe to PUT a resource list");
+    });
+};
+
 
 
 /*
