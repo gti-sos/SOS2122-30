@@ -3,10 +3,6 @@ const DataStore = require("nedb");
 const bodyParser = require("body-parser");
 var db = new DataStore();
 
-
-const app = express();
-const port = process.env.PORT || 8080;
-
 //URLs
 const BASE_API_URL= "/api/v1";
 const s = "/stsatellites-stats";
