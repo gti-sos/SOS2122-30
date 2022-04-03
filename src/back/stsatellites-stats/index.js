@@ -24,41 +24,41 @@ module.exports = (app) => {
             "country": "eeuu", 
             "year": 2020 ,
             "quarter": "second", 
-            "st-launched": 529, 
-            "st-orbit": 362, 
-            "st-destroyed": 8 
+            "stlaunched": 529, 
+            "storbit": 362, 
+            "stdestroyed": 8 
         },
         {
             "country": "eeuu", 
             "year": 2020 ,
             "quarter": "third", 
-            "st-launched": 664, 
-            "st-orbit": 441, 
-            "st-destroyed": 14
+            "stlaunched": 664, 
+            "storbit": 441, 
+            "stdestroyed": 14
         },
         {
             "country": "eeuu", 
             "year": 2021 ,
             "quarter": "first", 
-            "st-launched": 880, 
-            "st-orbit": 652, 
-            "st-destroyed": 58
+            "stlaunched": 880, 
+            "storbit": 652, 
+            "stdestroyed": 58
         },
         {
             "country": "eeuu", 
             "year": 2021 ,
             "quarter": "second", 
-            "st-launched": 1610, 
-            "st-orbit": 973, 
-            "st-destroyed": 67
+            "stlaunched": 1610, 
+            "storbit": 973, 
+            "stdestroyed": 67
         },
         {
             "country": "eeuu", 
             "year": 2021 ,
             "quarter": "third", 
-            "st-launched": 1929, 
-            "st-orbit": 1503, 
-            "st-destroyed": 145
+            "stlaunched": 1929, 
+            "storbit": 1503, 
+            "stdestroyed": 145
         }
     ];
     
@@ -90,7 +90,7 @@ module.exports = (app) => {
     app.get(BASE_API_URL + s, (req, res)=>{
         db.find({}, function(err,docs){
             res.send(JSON.stringify(docs.map((s)=>{
-                return {country : s.country, year : s.year, quarter : s.quarter, ['st-launched'] : s['st-launched'], ['st-orbit'] : s['st-orbit'], ['st-destroyed'] : s['st-destroyed']};
+                return {country : s.country, year : s.year, quarter : s.quarter, stlaunched : s.stlaunched, storbit : s.storbit, stdestroyed : s.stdestroyed};
                 // It is needed to do a map to the db so the 'id' doesn't show up
             }),null,2));
         });
@@ -137,7 +137,7 @@ module.exports = (app) => {
                 res.sendStatus(500);
             }else{
                 if(data.length == 0){
-                    if(!satBody.country || !satBody.year || !satBody.quarter || !satBody['st-launched'] || !satBody['st-orbit'] || !satBody['st-destroyed']){
+                    if(!satBody.country || !satBody.year || !satBody.quarter || !satBody.stlaunched || !satBody.storbit || !satBody.stdestroyed){
                         console.log("Data is missing or incorrect. Perhaps number of parameters is incorrect?");
                         return res.sendStatus(400);
                     }else{
