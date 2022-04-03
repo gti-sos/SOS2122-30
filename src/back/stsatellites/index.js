@@ -211,13 +211,11 @@ module.exports = (app) => {
 
     //Elemento
     app.delete(BASE_API_URL + url_javier + "/:country/:year/:quarter", (req, res)=>{
-        satBody = req.body;
-        satCountry = req.body.country;
-        satYear = parseInt(req.body.year);
-        satQ = req.body.quarter;
+        var satCountry = req.body.country;
+        var satYear = parseInt(req.body.year);
+        var satQ = req.body.quarter;
 
-        db.remove({country : satCountry, year: satYear, quarter: satQ},
-            {multi:true}, function(err,data){
+        db.remove({country : satCountry, year: satYear, quarter: satQ},{multi:true}, function(err,data){
             if(err){
                 res.sendStatus(500, "Internal Server Error");
             }else if(data == 0){
