@@ -139,17 +139,22 @@ module.exports = (app) => {
         var satQ = req.params.quarter;
 
         db.find({country : satCountry, year: satYear, quarter: satQ}, {_id:0}, function(err,data){
+            console.log("0");
             if(err){
+                console.log("1");
                 console.error("ERROR GET: "+ err);
                 res.sendStatus(500, "Internal Server Error");
-            } else {
+            }else {
+                console.log("2");
                 if(data.length != 0){
+                    console.log("3");
                     res.send(JSON.stringify(data,null,2));
-                    res.status(200, "Ok");
+                    res.status(200);
                 } else{
+                    console.log("4");
                     console.error("Data not found");
-                    res.status(404,"Not Found");
-                    
+                    res.status(404);
+                    res.send("Data not found");
                 }
             }
         });
@@ -216,12 +221,17 @@ module.exports = (app) => {
         var satQt = req.body.quarter;
 
         db.remove({country : satC, year: satY, quarter: satQt},{multi:true}, function(err,data){
+            console.log("0");
             if(err){
+                console.log("1");
                 res.sendStatus(500, "Internal Server Error");
             }else if(data == 0){
-                res.status(404,"Not Found");
+                console.log("2");
+                res.status(404);
+                res.send("Data not found");
             }else{
-                res.sendStatus(200, "Ok");
+                console.log("3");
+                res.sendStatus(200);
             }
         });
     });
@@ -253,7 +263,7 @@ module.exports = (app) => {
                 }
             });     
         }
-        });
+    });
 
     //Conjuto
     //1
