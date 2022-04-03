@@ -236,7 +236,7 @@ module.exports = (app) => {
 
         var satQ = req.params.quarter;
         var satCountry = req.params.country;
-        var satYear = req.params.year;
+        var satYear = parseInt(req.params.year);
 
         if(!satBody.country || !satBody.year || !satBody.quarter || !satBody.stlaunched || !satBody.storbit || !satBody.stdestroyed){
             return res.sendStatus(400, "Bad Request");
