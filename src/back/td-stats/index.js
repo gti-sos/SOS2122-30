@@ -138,19 +138,14 @@ module.exports = (app) => {
 
 
         db.find({country : tdCountry, year: tdYear}, {_id:0}, function(err,data){
-            console.log("0");
             if(err){
-                console.log("1");
                 console.error("ERROR GET: "+ err);
                 res.sendStatus(500, "Internal Server Error");
             }else {
-                console.log("2");
                 if(data.length != 0){
-                    console.log("3");
                     res.send(JSON.stringify(data,null,2));
                     res.status(200);
                 } else{
-                    console.log("4");
                     console.error("Data not found");
                     res.status(404);
                     res.send("Data not found");
@@ -171,7 +166,6 @@ module.exports = (app) => {
         
 
         db.find({country : tdCountry, year: tdYear}, function(err,data){
-            console.log("1");
             if(err){
                 console.error("ERROR POST: "+err);
                 res.sendStatus(500, "Internal Server Error");
@@ -182,12 +176,11 @@ module.exports = (app) => {
                         return res.sendStatus(400, "Bad Request");
                     }else{
                         db.insert(tdBody);
-                        return res.status(201,"Created").send(JSON.stringify(tdBody,null,2));
-                        
+                        return res.status(201).send(JSON.stringify(tdBody,null,2));
                     }
                 }else{
                     console.log("Conflict");
-                    res.sendStatus(409,"Conflict");
+                    res.sendStatus(409);
                 }
             }
         });
@@ -208,11 +201,11 @@ module.exports = (app) => {
     app.delete(BASE_API_URL + url_jaime, (req, res)=>{
         db.remove({},{multi:true}, function (err, dbRemoved){
             if(err || dbRemoved == 0){
-                console.log("ERROR IN DELETING DB:"+err);
+                console.log("ERROR IN DELETING DB:" + err);
                 res.sendStatus(500, "Internal Server Error");
             }else{
                 console.log("Successfully removed");
-                res.sendStatus(200, "Ok");
+                res.sendStatus(200S);
             }
         });
     });
@@ -225,16 +218,12 @@ module.exports = (app) => {
         
 
         db.remove({country : tdCountry, year: tdYear},{multi:true}, function(err,data){
-            console.log("0");
             if(err){
-                console.log("1");
                 res.sendStatus(500, "Internal Server Error");
             }else if(data == 0){
-                console.log("2");
                 res.status(404);
                 res.send("Data not found");
             }else{
-                console.log("3");
                 res.sendStatus(200);
             }
         });
