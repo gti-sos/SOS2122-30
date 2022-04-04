@@ -8,7 +8,7 @@ const url_jaime = "/technology_devices_stats";
 const jaime_URL_API = "https://documenter.getpostman.com/view/19584746/UVyoUwqe";
 
 module.exports = (app) => {
-    console.log("Exporting Technology Devices Stats")
+    console.log("Exporting Technology Devices Stats");
 
     app.use(bodyParser.json());
     
@@ -205,7 +205,7 @@ module.exports = (app) => {
                 res.sendStatus(500, "Internal Server Error");
             }else{
                 console.log("Successfully removed");
-                res.sendStatus(200S);
+                res.sendStatus(200);
             }
         });
     });
