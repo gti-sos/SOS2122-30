@@ -147,8 +147,7 @@ module.exports = (app) => {
                     res.status(200);
                 } else{
                     console.error("Data not found");
-                    res.status(404);
-                    res.send("Data not found");
+                    res.sendStatus(404, "Data not found");
                 }
             }
         });
@@ -176,7 +175,7 @@ module.exports = (app) => {
                         return res.sendStatus(400, "Bad Request");
                     }else{
                         db.insert(tdBody);
-                        return res.status(201).send(JSON.stringify(tdBody,null,2));
+                        return res.sendStatus(201).send(JSON.stringify(tdBody,null,2));
                     }
                 }else{
                     console.log("Conflict");
@@ -216,9 +215,9 @@ module.exports = (app) => {
         var tdCountry = req.body.country;
         var tdYear = parseInt(req.body.year);
         
-
         db.remove({country : tdCountry, year: tdYear},{multi:true}, function(err,data){
             if(err){
+                console.log(err);
                 res.sendStatus(500, "Internal Server Error");
             }else if(data == 0){
                 res.status(404);

@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "9d57c785-e365-45e9-8a92-495b6dc9abc3",
 		"name": "td-stats",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -24,16 +24,49 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{SERVER}}/api/v1/technology_devices_stats"
+				"url": {
+					"raw": "{{SERVER}}/api/v1/technology_devices_stats",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"technology_devices_stats"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "GET ELEMENTO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{SERVER}}/api/v1/technology_devices_stats/Spain/2019"
+				"url": {
+					"raw": "{{SERVER}}/api/v1/technology_devices_stats/Spain/2019",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"technology_devices_stats",
+						"Spain",
+						"2019"
+					]
+				}
 			},
 			"response": []
 		},
@@ -42,7 +75,19 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{SERVER}}/api/v1/technology_devices_stats/Bulgary/2019"
+				"url": {
+					"raw": "{{SERVER}}/api/v1/technology_devices_stats/Bulgary/2019",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"technology_devices_stats",
+						"Bulgary",
+						"2019"
+					]
+				}
 			},
 			"response": []
 		},
@@ -60,7 +105,17 @@
 						}
 					}
 				},
-				"url": "{{SERVER}}/api/v1/technology_devices_stats"
+				"url": {
+					"raw": "{{SERVER}}/api/v1/technology_devices_stats",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"technology_devices_stats"
+					]
+				}
 			},
 			"response": []
 		},
@@ -78,7 +133,17 @@
 						}
 					}
 				},
-				"url": "{{SERVER}}/api/v1/technology_devices_stats"
+				"url": {
+					"raw": "{{SERVER}}/api/v1/technology_devices_stats",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"technology_devices_stats"
+					]
+				}
 			},
 			"response": []
 		},
@@ -96,12 +161,24 @@
 						}
 					}
 				},
-				"url": "{{SERVER}}/api/v1/technology_devices_stats/EEUU/2019"
+				"url": {
+					"raw": "{{SERVER}}/api/v1/technology_devices_stats/EEUU/2019",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"technology_devices_stats",
+						"EEUU",
+						"2019"
+					]
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "PUT 400",
+			"name": "PUT Conjunto 405",
 			"event": [
 				{
 					"listen": "test",
@@ -120,7 +197,17 @@
 					"mode": "raw",
 					"raw": ""
 				},
-				"url": "{{SERVER}}/api/v1/technology_devices_stats/EEUU/2019"
+				"url": {
+					"raw": "{{SERVER}}/api/v1/technology_devices_stats",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"technology_devices_stats"
+					]
+				}
 			},
 			"response": []
 		},
@@ -129,7 +216,28 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
-				"url": "{{SERVER}}/api/v1/technology_devices_stats/Spain/2019"
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"country\": \"Spain\",\r\n\"year\": 2019,\r\n\"tdwasted\": 1451,\r\n\"mpdisuse\": 45.4,\r\n\"mpreused\": 89\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{SERVER}}/api/v1/technology_devices_stats/Spain/2019",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"technology_devices_stats",
+						"Spain",
+						"2019"
+					]
+				}
 			},
 			"response": []
 		},
@@ -138,7 +246,19 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": "{{SERVER}}/api/v1/technology_devices_stats/Bulgary/2019"
+				"url": {
+					"raw": "{{SERVER}}/api/v1/technology_devices_stats/Bulgary/2019",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"technology_devices_stats",
+						"Bulgary",
+						"2019"
+					]
+				}
 			},
 			"response": []
 		},
@@ -147,7 +267,39 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": "{{SERVER}}/api/v1/technology_devices_stats/Netherland/2019"
+				"url": {
+					"raw": "{{SERVER}}/api/v1/technology_devices_stats/Netherland/2019",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"technology_devices_stats",
+						"Netherland",
+						"2019"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET LoadInitialData",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{SERVER}}/api/v1/technology_devices_stats/LoadInitialData",
+					"host": [
+						"{{SERVER}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"technology_devices_stats",
+						"LoadInitialData"
+					]
+				}
 			},
 			"response": []
 		}
