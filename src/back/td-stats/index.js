@@ -268,6 +268,20 @@ module.exports = (app) => {
         }
     });
 
+    //paginacion
+    function paginacion(req, lista){
+        var res = [];
+        const limit = req.query.limit;
+        const offset = req.query.offset;
+
+        if(limit<1 || offset<0 || offset > lista.length){
+            res.push("Error en el limit y/o offset")
+            return res;
+        }
+        res = lista.slice(offset, parseint(limit) + parseint(offset));
+        return res;
+    }
+
 
 
     };
