@@ -146,8 +146,8 @@ module.exports = (app) => {
                     res.send(JSON.stringify(data,null,2));
                     res.status(200);
                 } else{
-                    console.error("Data not found");
-                    res.sendStatus(404, "Data not found");
+                    res.status(404);
+                    res.send("Data not found");
                 }
             }
         });
@@ -166,7 +166,7 @@ module.exports = (app) => {
 
         db.find({country : tdCountry, year: tdYear}, function(err,data){
             if(err){
-                console.error("ERROR POST: "+err);
+                console.error("ERROR POST: "+ err);
                 res.sendStatus(500, "Internal Server Error");
             }else{
                 if(data.length == 0){
@@ -175,7 +175,7 @@ module.exports = (app) => {
                         return res.sendStatus(400, "Bad Request");
                     }else{
                         db.insert(tdBody);
-                        return res.sendStatus(201).send(JSON.stringify(tdBody,null,2));
+                        return res.status(201).send(JSON.stringify(tdBody,null,2));
                     }
                 }else{
                     console.log("Conflict");
@@ -217,7 +217,6 @@ module.exports = (app) => {
         
         db.remove({country : tdCountry, year: tdYear},{multi:true}, function(err,data){
             if(err){
-                console.log(err);
                 res.sendStatus(500, "Internal Server Error");
             }else if(data == 0){
                 res.status(404);
@@ -274,7 +273,7 @@ module.exports = (app) => {
         const offset = req.query.offset;
 
         if(limit<1 || offset<0 || offset > lista.length){
-            res.push("Error en el limit y/o offset")
+            res.push("Error en el limit y/o offset");
             return res;
         }
         res = lista.slice(offset, parseint(limit) + parseint(offset));
