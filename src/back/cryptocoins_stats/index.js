@@ -126,7 +126,7 @@ module.exports = (app) => {
             db.insert(cryptocoIni);
             res.send(JSON.stringify(cryptocoIni,null,2));
     });
-
+/*
     // GET - RESOURCE
     app.get(BASE_API_URL + url_sergio,(req,res)=>{
         db.find({}, function(err,docs){
@@ -138,8 +138,9 @@ module.exports = (app) => {
         
 
     });
+*/
 
-/*          ALTERNATIVE GET RESOURCE
+//          ALTERNATIVE GET RESOURCE    --      PAGINACION  
     app.get(BASE_API_URL + url_sergio,(req,res)=>{
         var query = req.query;
         var dbInit = {};
@@ -166,7 +167,7 @@ module.exports = (app) => {
         });
  
     });
-*/
+
 
 
     // GET - SUBREPOSITORY - COUNTRY
@@ -294,8 +295,12 @@ module.exports = (app) => {
 
     // PUT - SUBRESOURCE
     app.put(BASE_API_URL + url_sergio + "/:country", (req,res)=>{
-        res.sendStatus(405,"UnabLe to PUT a resource list");
+        res.sendStatus(405,"Unable to PUT a resource list");
     });
+
+    app.put(BASE_API_URL + url_sergio +"?year", (req,res)=>{
+
+    })
 
     // PUT - ELEMENT
     app.put(BASE_API_URL + url_sergio + "/:country/:year", (req,res)=>{
@@ -329,6 +334,7 @@ module.exports = (app) => {
     });
 
 };
+
 
 
 
