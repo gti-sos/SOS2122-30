@@ -2,12 +2,14 @@
 	import Router from "svelte-spa-router"
 	import Home from "./Home.svelte"
 	import cryptocoinTable from "./servelgar1Front/cryptocoinTable.svelte"
+	import TdTable from "./jaiquisicFront/tdTable.svelte";
 
 
 	console.log("Funcionas");
 	const routes = {
 		'/': Home,
-		"/ccTable": cryptocoinTable
+		"/ccTable": cryptocoinTable,
+		"/tdTable": TdTable
 	};
 
 </script>

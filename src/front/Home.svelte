@@ -12,6 +12,7 @@
             Tablas:
         </h2>
         <a href="https://sos2122-30.herokuapp.com/#/ccTable">cryptocoin-stats tabla</a>
+        <a href="https://sos2122-30.herokuapp.com/#/tdTable">technology_devices_stats tabla</a>
         <h2>
             Team:
         </h2>

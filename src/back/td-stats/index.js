@@ -212,8 +212,8 @@ module.exports = (app) => {
 
     //Elemento
     app.delete(BASE_API_URL + url_jaime+ "/:country/:year", (req, res)=>{
-        var tdCountry = req.body.country;
-        var tdYear = parseInt(req.body.year);
+        var tdCountry = req.params.country;
+        var tdYear = parseInt(req.params.year);
         
         db.remove({country : tdCountry, year: tdYear},{multi:true}, function(err,data){
             if(err){
