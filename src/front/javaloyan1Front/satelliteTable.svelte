@@ -6,7 +6,7 @@
 	onMount(getContacts);
 	async function getContacts(){
 		console.log("Fetching stats ... ");
-		const res =  await fetch("/api/v1/cryptocoin-stats");
+		const res =  await fetch("/api/v1/stsatellites-stats");
 		if(res.ok){
 			const data =await res.json();
 			contacts = data;
@@ -26,18 +26,20 @@
 				<th>
 					Country
 				</th>
-
 				<th>
-					year
+					Year
 				</th>
 				<th>
-					ccelectr
+					Quarter
 				</th>
 				<th>
-					ccdemand
+					Stlaunched
 				</th>
 				<th>
-					ccmining
+					Storbit
+				</th>
+				<th>
+					Stdestroyed
 				</th>
 			</tr>
 		</thead>
@@ -51,13 +53,16 @@
 					{contact.year}
 				</td>
 				<td>
-					{contact.ccelectr}
+					{contact.quarter}
 				</td>
 				<td>
-					{contact.ccdemand}
+					{contact.stlaunched}
 				</td>
 				<td>
-					{contact.ccmining}
+					{contact.storbit}
+				</td>
+				<td>
+					{contact.stdestroyed}
 				</td>
 			</tr>
 			{/each}
