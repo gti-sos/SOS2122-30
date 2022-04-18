@@ -8,10 +8,10 @@
 		console.log("Fetching stats ... ");
 		const res =  await fetch("/api/v1/cryptocoin-stats");
 		if(res.ok){
-		const data =await res.json();
-		contacts = data;
-		p1 = contacts[0];
-		console.log("Received stats" + JSON.stringify(contacts,null,2));
+			const data =await res.json();
+			contacts = data;
+			p1 = contacts[0];
+			console.log("Received stats" + JSON.stringify(contacts,null,2));
 		}
 		
 	}
