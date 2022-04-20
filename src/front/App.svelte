@@ -8,8 +8,8 @@
 	console.log("Funcionas");
 	const routes = {
 		'/': Home,
-		"/ccTable": cryptocoinTable,
 		"/tdTable": TdTable,
+		"/ccTable": cryptocoinTable,
 		"/stTable": satelliteTable
 	};
 

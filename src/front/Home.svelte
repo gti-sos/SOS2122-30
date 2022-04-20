@@ -52,11 +52,17 @@
         Jaime docs:
         <a href="http://sos2122-30.herokuapp.com/api/v1/technology_devices_stats/docs">http://sos2122-30.herokuapp.com/api/v1/technology_devices_stats/docs</a>
         <br>
-        Sergio API:
-        <a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/">http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats</a>
+        
+        <a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/">Sergio API v1</a>
         <br>
-        Sergio docs
-        <a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/docs">http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/docs</a>
+        
+        <a href="http://sos2122-30.herokuapp.com/api/v2/cryptocoin-stats/">Sergio API v2</a>
+        <br>
+        
+        <a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/docs">Sergio docs v1</a>
+        <br>
+        
+        <a href="http://sos2122-30.herokuapp.com/api/v2/cryptocoin-stats/docs">Sergio docs v2</a>
 
     </body>
 </main>

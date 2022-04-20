@@ -3,7 +3,7 @@ const express = require("express");
 
 //Para parsear el json
 const bodyParser = require("body-parser");
-const backend_crypto = require("./src/back/cryptocoins_stats/index");
+const backend_crypto = require("./src/back/cryptocoins_stats/v2/index");
 const backend_td = require("./src/back/td-stats/index");
 const backend_satellites = require("./src/back/stsatellites/index");
 
