@@ -160,7 +160,7 @@ module.exports = (app) => {
             cryptocoin.forEach((c)=>{
                 delete c._id
             });
-
+            res.status(200);
             res.send(JSON.stringify(cryptocoin,null,2));
             console.log("GET REQUEST have been sent.")
 
