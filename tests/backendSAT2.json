@@ -72,7 +72,7 @@
 							"});\r",
 							"pm.test(\"Response is an object\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(Array.isArray(jsonData)).to.eql(true);\r",
+							"    pm.expect(Array.isArray(jsonData)).to.eql(false);\r",
 							"});\r",
 							""
 						],
