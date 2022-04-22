@@ -40,11 +40,17 @@
         <h2>
             API-V1:
         </h2>
-        Javier: 
+        Javier API v1: 
         <a href="http://sos2122-30.herokuapp.com/api/v1/stsatellites-stats">http://sos2122-30.herokuapp.com/api/v1/stsatellites-stats</a>
         <br>
-        Javier docs:
+        Javier docs v1:
         <a href="http://sos2122-30.herokuapp.com/api/v1/stsatellites-stats/docs">http://sos2122-30.herokuapp.com/api/v1/stsatellites-stats/docs</a>
+        <br>
+        Javier API v2: 
+        <a href="http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats">http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats</a>
+        <br>
+        Javier docs v2:
+        <a href="http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats/docs">http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats/docs</a>
         <br>
         Jaime API:
         <a href="http://sos2122-30.herokuapp.com/api/v1/technology_devices_stats">http://sos2122-30.herokuapp.com/api/v1/technology_devices_stats</a>
