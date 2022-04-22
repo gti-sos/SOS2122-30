@@ -7,7 +7,7 @@ var db = new DataStore();
 //URLs
 const BASE_API_URL= "/api/v1";
 const url_javier = "/stsatellites-stats";
-const javier_doc = "https://documenter.getpostman.com/view/20110246/UVyn2yXJ";
+const javier_doc = "https://documenter.getpostman.com/view/20110246/UyrAFHTt";
 
 
 //----------------------------------------------------------------------------------------------------
