@@ -6,7 +6,7 @@
 	onMount(getContacts);
 	async function getContacts(){
 		console.log("Fetching stats ... ");
-		const res =  await fetch("/api/v1/stsatellites-stats");
+		const res =  await fetch("/api/v2/stsatellites-stats");
 		if(res.ok){
 			const data =await res.json();
 			contacts = data;
