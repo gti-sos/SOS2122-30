@@ -1,6 +1,6 @@
 <script>
     import {onMount} from 'svelte';
-	import Button from 'sveltestrap/src/Table.svelte';
+	import Button from 'sveltestrap/src/Button.svelte';
 
 	let contacts = [];
 	let newContact = {
