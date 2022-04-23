@@ -74,9 +74,11 @@
 				<td><input bind:value="{newContact.storbit}"></td>
 				<td><input bind:value="{newContact.stdestroyed}"></td>
 				<td><Button 
-					color="primary"
-					on:click="{insertSat}">
-					Insert</Button>
+						outline
+						color="primary"
+						on:click="{insertSat}">
+						Insert
+					</Button>
 				</td>
 			</tr>
 			{#each contacts as contact}
