@@ -1,20 +1,42 @@
 <script>
     import {onMount} from 'svelte';
+	import Button from 'sveltestrap/src/Table.svelte';
+
 	let contacts = [];
-	let p1;
+	let newContact = {
+		name: "",
+		phone: "",
+		email: ""
+	};
+
 	//let loading = true;
 	onMount(getContacts);
+
 	async function getContacts(){
 		console.log("Fetching stats ... ");
 		const res =  await fetch("/api/v2/stsatellites-stats");
 		if(res.ok){
 			const data =await res.json();
 			contacts = data;
-			p1 = contacts[0];
 			console.log("Received stats" + JSON.stringify(contacts,null,2));
 		}
 		
 	}
+
+	async function insertSat(){
+		console.log("inserting contact: " + JSON.stringify(newContact));
+		const res = await fetch("/api/v2/stsatellites-stats",
+			{
+				method: "POST",
+				body: JSON.stringify(newContact),
+				headers: {
+					"Content-Type":"application/json"
+				}
+			}).then(function(res){
+				getContacts();
+			});
+	}
+
 </script>
 <main>
     {#await contacts}
@@ -44,6 +66,19 @@
 			</tr>
 		</thead>
 		<tbody>
+			<tr>
+				<td><input bind:value="{newContact.country}"></td>
+				<td><input bind:value="{newContact.year}"></td>
+				<td><input bind:value="{newContact.quarter}"></td>
+				<td><input bind:value="{newContact.stlaunched}"></td>
+				<td><input bind:value="{newContact.storbit}"></td>
+				<td><input bind:value="{newContact.stdestroyed}"></td>
+				<td><Button 
+					color="primary"
+					on:click="{insertSat}">
+					Insert</Button>
+				</td>
+			</tr>
 			{#each contacts as contact}
 			<tr>
 				<td>
