@@ -103,15 +103,13 @@
 				</td>
 				<td><Button 
 						outline
-						color="primary"
-						on:click="{editSat}">
+						color="primary">
 						Edit
 					</Button>
 				</td>
 				<td><Button 
 						outline
-						color="primary"
-						on:click="{deleteSat}">
+						color="primary">
 						Delete
 					</Button>
 				</td>
