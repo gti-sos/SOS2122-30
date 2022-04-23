@@ -1,6 +1,6 @@
 <script>
     import {onMount} from 'svelte';
-	import Button from "sveltestrap";
+	import Button from "sveltestrap/src/Button.svelte";
 
 	let sat = [];
 	let newSat = {
