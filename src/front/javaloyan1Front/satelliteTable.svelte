@@ -10,9 +10,9 @@
 	};
 
 	//let loading = true;
-	onMount(getSat);
+	onMount(getSatellite);
 
-	async function getSat(){
+	async function getSatellite(){
 		console.log("Fetching stats ... ");
 		const res =  await fetch("/api/v2/stsatellites-stats");
 		if(res.ok){
@@ -33,7 +33,7 @@
 					"Content-Type":"application/json"
 				}
 			}).then(function(res){
-				getSat();
+				getSatellite();
 			});
 	}
 
