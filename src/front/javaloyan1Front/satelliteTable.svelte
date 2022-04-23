@@ -1,47 +1,47 @@
 <script>
     import {onMount} from 'svelte';
-	import Button from 'sveltestrap/src/Button.svelte';
+	import Button from 'sveltestrap';
 
-	let contacts = [];
-	let newContact = {
+	let sat = [];
+	let newSat = {
 		name: "",
 		phone: "",
 		email: ""
 	};
 
 	//let loading = true;
-	onMount(getContacts);
+	onMount(getSat);
 
-	async function getContacts(){
+	async function getSat(){
 		console.log("Fetching stats ... ");
 		const res =  await fetch("/api/v2/stsatellites-stats");
 		if(res.ok){
 			const data =await res.json();
 			contacts = data;
-			console.log("Received stats" + JSON.stringify(contacts,null,2));
+			console.log("Received stats" + JSON.stringify(sat,null,2));
 		}
 		
 	}
 
 	async function insertSat(){
-		console.log("inserting contact: " + JSON.stringify(newContact));
+		console.log("inserting satellite: " + JSON.stringify(newSat));
 		const res = await fetch("/api/v2/stsatellites-stats",
 			{
 				method: "POST",
-				body: JSON.stringify(newContact),
+				body: JSON.stringify(newSat),
 				headers: {
 					"Content-Type":"application/json"
 				}
 			}).then(function(res){
-				getContacts();
+				getSat();
 			});
 	}
 
 </script>
 <main>
-    {#await contacts}
+    {#await sat}
 	loading	
-	{:then contacts} 
+	{:then sat} 
 	<table>
 		<thead>
 			<tr>
@@ -67,12 +67,12 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><input bind:value="{newContact.country}"></td>
-				<td><input bind:value="{newContact.year}"></td>
-				<td><input bind:value="{newContact.quarter}"></td>
-				<td><input bind:value="{newContact.stlaunched}"></td>
-				<td><input bind:value="{newContact.storbit}"></td>
-				<td><input bind:value="{newContact.stdestroyed}"></td>
+				<td><input bind:value="{newSat.country}"></td>
+				<td><input bind:value="{newSat.year}"></td>
+				<td><input bind:value="{newSat.quarter}"></td>
+				<td><input bind:value="{newSat.stlaunched}"></td>
+				<td><input bind:value="{newSat.storbit}"></td>
+				<td><input bind:value="{newSat.stdestroyed}"></td>
 				<td><Button 
 						outline
 						color="primary"
@@ -81,25 +81,25 @@
 					</Button>
 				</td>
 			</tr>
-			{#each contacts as contact}
+			{#each sat as satellite}
 			<tr>
 				<td>
-					{contact.country}
+					{satellite.country}
 				</td>
 				<td>
-					{contact.year}
+					{satellite.year}
 				</td>
 				<td>
-					{contact.quarter}
+					{satellite.quarter}
 				</td>
 				<td>
-					{contact.stlaunched}
+					{satellite.stlaunched}
 				</td>
 				<td>
-					{contact.storbit}
+					{satellite.storbit}
 				</td>
 				<td>
-					{contact.stdestroyed}
+					{satellite.stdestroyed}
 				</td>
 			</tr>
 			{/each}
@@ -109,11 +109,5 @@
 </main>
 
 <style>
-    table{
-		margin-left: auto;
-		margin-right: auto;
-	}
-	td{
-		padding: 1em;
-	}
+   
 </style>
