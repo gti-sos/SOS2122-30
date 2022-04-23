@@ -53,7 +53,7 @@
         <br>
         <a href="http://sos2122-30.herokuapp.com/api/v1/technology_devices_stats">Jaime API</a>
         <br>
-        <a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/">Sergio API/a>
+        <a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/">Sergio API</a>
         <br>
         <h2>
             API-V2:
@@ -66,7 +66,7 @@
         <br>
         
         <!--<a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/docs">Sergio docs v1</a>-->
-
+ 
         
         
 
