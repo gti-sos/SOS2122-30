@@ -143,7 +143,7 @@ module.exports = (app) => {
                 res.sendStatus(500, "Internal Server Error");
             }else {
                 if(data.length != 0){
-                    res.send(JSON.stringify(data,null,2));
+                    res.send(JSON.stringify(data[0],null,2));
                     res.status(200);
                 } else{
                     res.status(404);

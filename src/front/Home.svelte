@@ -53,10 +53,10 @@
         <a href="http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats/docs">http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats/docs</a>
         <br>
         Jaime API:
-        <a href="http://sos2122-30.herokuapp.com/api/v1/technology_devices_stats">http://sos2122-30.herokuapp.com/api/v1/technology_devices_stats</a>
+        <a href="http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats">http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats</a>
         <br>
         Jaime docs:
-        <a href="http://sos2122-30.herokuapp.com/api/v1/technology_devices_stats/docs">http://sos2122-30.herokuapp.com/api/v1/technology_devices_stats/docs</a>
+        <a href="http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/docs">http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/docs</a>
         <br>
         
         <a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/">Sergio API v1</a>
