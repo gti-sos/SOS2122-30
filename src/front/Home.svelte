@@ -38,37 +38,37 @@
         </h2>
         <a href="http://sos2122-30.herokuapp.com/">http://sos2122-30.herokuapp.com/</a>
         <h2>
+            DOCS:
+        </h2>
+        <a href="http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats/docs">Javier docs</a>
+        <br>
+        <a href="http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/docs">Jaime docs</a>
+        <br>
+        <a href="http://sos2122-30.herokuapp.com/api/v2/cryptocoin-stats/docs">Sergio docs</a>
+        <br>
+        <h2>
             API-V1:
         </h2>
-        Javier API v1: 
-        <a href="http://sos2122-30.herokuapp.com/api/v1/stsatellites-stats">http://sos2122-30.herokuapp.com/api/v1/stsatellites-stats</a>
+        <a href="http://sos2122-30.herokuapp.com/api/v1/stsatellites-stats">Javier API</a>
         <br>
-        Javier docs v1:
-        <a href="http://sos2122-30.herokuapp.com/api/v1/stsatellites-stats/docs">http://sos2122-30.herokuapp.com/api/v1/stsatellites-stats/docs</a>
+        <a href="http://sos2122-30.herokuapp.com/api/v1/technology_devices_stats">Jaime API</a>
         <br>
-        Javier API v2: 
-        <a href="http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats">http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats</a>
+        <a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/">Sergio API/a>
         <br>
-        Javier docs v2:
-        <a href="http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats/docs">http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats/docs</a>
+        <h2>
+            API-V2:
+        </h2>
+        <a href="http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats">Javier API</a>
         <br>
-        Jaime API:
-        <a href="http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats">http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats</a>
+        <a href="http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats">Jaime API</a>
         <br>
-        Jaime docs:
-        <a href="http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/docs">http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/docs</a>
+        <a href="http://sos2122-30.herokuapp.com/api/v2/cryptocoin-stats/">Sergio API</a>
         <br>
         
-        <a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/">Sergio API v1</a>
-        <br>
+        <!--<a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/docs">Sergio docs v1</a>-->
+
         
-        <a href="http://sos2122-30.herokuapp.com/api/v2/cryptocoin-stats/">Sergio API v2</a>
-        <br>
         
-        <a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/docs">Sergio docs v1</a>
-        <br>
-        
-        <a href="http://sos2122-30.herokuapp.com/api/v2/cryptocoin-stats/docs">Sergio docs v2</a>
 
     </body>
 </main>
