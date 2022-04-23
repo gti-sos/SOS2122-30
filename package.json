@@ -8,7 +8,7 @@
         "dev": "rollup -c -w",
         "start": "node index.js",
         "test-stsatellites": "npx newman run ./tests/backendSAT2.json -e ./tests/env/local.json",
-        "test-cryptocoins": "npx newman run ./tests/backendCRY.json -e ./tests/env/local.json",
+        "test-cryptocoins": "npx newman run ./tests/backendCRY2.json -e ./tests/env/local.json",
         "test-td": "npx newman run ./tests/backendTD2.json -e ./tests/env/local.json",
         "test": "npm run test-stsatellites && npm run test-cryptocoins && npm run test-td"
     },
