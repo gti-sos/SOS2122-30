@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "1714971d-6a85-4dc3-9c40-d2ed52494afe",
-		"name": "td-stats-v1",
+		"_postman_id": "9d57c785-e365-45e9-8a92-495b6dc9abc3",
+		"name": "td-stats-v2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -25,7 +25,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2122-30.herokuapp.com/api/v1/technology_devices_stats",
+					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats",
 					"protocol": "https",
 					"host": [
 						"sos2122-30",
@@ -34,7 +34,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"technology_devices_stats"
 					]
 				}
@@ -60,7 +60,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2122-30.herokuapp.com/api/v1/technology_devices_stats/Spain/2019",
+					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/Spain/2019",
 					"protocol": "https",
 					"host": [
 						"sos2122-30",
@@ -69,7 +69,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"technology_devices_stats",
 						"Spain",
 						"2019"
@@ -97,7 +97,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2122-30.herokuapp.com/api/v1/technology_devices_stats/Bulgary/2019",
+					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/Bulgary/2019",
 					"protocol": "https",
 					"host": [
 						"sos2122-30",
@@ -106,7 +106,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"technology_devices_stats",
 						"Bulgary",
 						"2019"
@@ -143,7 +143,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2122-30.herokuapp.com/api/v1/technology_devices_stats",
+					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats",
 					"protocol": "https",
 					"host": [
 						"sos2122-30",
@@ -152,7 +152,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"technology_devices_stats"
 					]
 				}
@@ -187,7 +187,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2122-30.herokuapp.com/api/v1/technology_devices_stats",
+					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats",
 					"protocol": "https",
 					"host": [
 						"sos2122-30",
@@ -196,7 +196,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"technology_devices_stats"
 					]
 				}
@@ -231,7 +231,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2122-30.herokuapp.com/api/v1/technology_devices_stats/EEUU/2019",
+					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/EEUU/2019",
 					"protocol": "https",
 					"host": [
 						"sos2122-30",
@@ -240,7 +240,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"technology_devices_stats",
 						"EEUU",
 						"2019"
@@ -272,7 +272,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://sos2122-30.herokuapp.com/api/v1/technology_devices_stats",
+					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats",
 					"protocol": "https",
 					"host": [
 						"sos2122-30",
@@ -281,7 +281,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"technology_devices_stats"
 					]
 				}
@@ -316,7 +316,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://sos2122-30.herokuapp.com/api/v1/technology_devices_stats/Spain/2019",
+					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/Spain/2019",
 					"protocol": "https",
 					"host": [
 						"sos2122-30",
@@ -325,7 +325,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"technology_devices_stats",
 						"Spain",
 						"2019"
@@ -353,7 +353,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://sos2122-30.herokuapp.com/api/v1/technology_devices_stats/Bulgary/2019",
+					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/Bulgary/2019",
 					"protocol": "https",
 					"host": [
 						"sos2122-30",
@@ -362,7 +362,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"technology_devices_stats",
 						"Bulgary",
 						"2019"
@@ -390,7 +390,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://sos2122-30.herokuapp.com/api/v1/technology_devices_stats/Netherland/2019",
+					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/Netherland/2019",
 					"protocol": "https",
 					"host": [
 						"sos2122-30",
@@ -399,7 +399,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"technology_devices_stats",
 						"Netherland",
 						"2019"
@@ -427,7 +427,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://sos2122-30.herokuapp.com/api/v1/technology_devices_stats/LoadInitialData",
+					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/LoadInitialData",
 					"protocol": "https",
 					"host": [
 						"sos2122-30",
@@ -436,7 +436,7 @@
 					],
 					"path": [
 						"api",
-						"v1",
+						"v2",
 						"technology_devices_stats",
 						"LoadInitialData"
 					]

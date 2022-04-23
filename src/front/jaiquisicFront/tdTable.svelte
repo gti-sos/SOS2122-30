@@ -2,11 +2,10 @@
     import {onMount} from 'svelte';
 	let contacts = [];
 	let p1;
-	//let loading = true;
 	onMount(getContacts);
 	async function getContacts(){
 		console.log("Fetching stats ... ");
-		const res =  await fetch("/api/v1/technology_devices_stats");
+		const res =  await fetch("/api/v2/technology_devices_stats");
 		if(res.ok){
 		const data =await res.json();
 		contacts = data;
