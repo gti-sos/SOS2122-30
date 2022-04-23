@@ -101,6 +101,20 @@
 				<td>
 					{satellite.stdestroyed}
 				</td>
+				<td><Button 
+						outline
+						color="primary"
+						on:click="{editSat}">
+						Edit
+					</Button>
+				</td>
+				<td><Button 
+						outline
+						color="primary"
+						on:click="{deleteSat}">
+						Delete
+					</Button>
+				</td>
 			</tr>
 			{/each}
 		</tbody>
