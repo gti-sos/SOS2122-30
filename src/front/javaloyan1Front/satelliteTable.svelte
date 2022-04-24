@@ -4,7 +4,7 @@
 	import { pop } from "svelte-spa-router";
 
 	let sat = [];
-	let initalSat = [];
+	let initialSat = [];
 	let newSat = {
 		name: "",
 		phone: "",
@@ -74,7 +74,7 @@
 		console.log("inserting satellite: " + JSON.stringify(newSat));
 		const res =  await fetch("/api/v2/stsatellites-stats");
 		if(res.ok){
-			sat = initalSat;
+			sat = initialSat;
 			console.log("Received stats" + JSON.stringify(sat,null,2));
 		}
 	}
