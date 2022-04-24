@@ -52,6 +52,23 @@
 			});
 	}
 
+	async function deleteSat(c, y, q){
+		const res = await fetch("/api/v2/stsatellites-stats" + "/" + c + "/" + y + "/" + q, {
+			method: "DELETE"
+		}).then(function(res){
+			getSatellite();
+		});
+	}
+
+	async function deleteSatAll(){
+		const res = await fetch("/api/v2/stsatellites-stats", {
+			method: "DELETE"
+		}).then(function(res){
+			getSatellite();
+		});
+	}
+
+
 </script>
 <main>
 	<h1>Satellite stats</h1>
@@ -118,18 +135,25 @@
 					{satellite.stdestroyed}
 				</td>
 				<td>
-					<a color = "primary" href = "/#/stTable/{satellite.country}/{satellite.year}/{satellite.quarter}">
-						Edit
+					<a href = "/#/stTable/{satellite.country}/{satellite.year}/{satellite.quarter}">
+						<Button 
+							outline
+							color="primary">
+							Edit
+						</Button> 
 					</a>
 				</td>
 				<td><Button 
 						outline
 						color="primary">
+						on:click = "{deleteSat}"
 						Delete
 					</Button>
 				</td>
 			</tr>
 			{/each}
+			<Button outline color = "primary" on:click = "{deleteSatAll}">Delete All</Button>
+			<br>
 			<Button outline color = "secondary" on:click = "{pop}">Back</Button>
 		</tbody>
 	</table>

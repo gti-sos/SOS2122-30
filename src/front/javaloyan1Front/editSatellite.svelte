@@ -6,7 +6,7 @@
 </script>
 <main>
     <h1>Edit Satellite </h1>
-   
+    <Button outline color = "secondary" on:click = "{pop}">Back</Button>
 </main>
 
 <style>
