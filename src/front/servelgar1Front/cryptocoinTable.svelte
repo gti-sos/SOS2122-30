@@ -31,7 +31,17 @@
     let total = 0;
 
 
+	// VARIABLES DE BUSQUEDA
 
+	let searchCountry = "";
+	let searchYear = "";
+	let searchFrom = "";
+	let searchTo = "";
+
+
+	onMount(getCrypto);
+
+	// FUNCIONES DE PAGINACIÓN
 
 	function range(size, start = 0) {
       return [...Array(size).keys()].map((i) => i + start);
@@ -58,8 +68,8 @@
       } 
     }
 
-	//let loading = true;
-	onMount(getCrypto);
+
+	
 	async function getCrypto(){
 		console.log("Fetching stats ... ");
 		const res =  await fetch("/api/v2/cryptocoin-stats");
@@ -88,6 +98,9 @@
 			window.alert(res.status);
 		}
   	}
+
+
+	  // INSERTAR ELEMENTO
 
 	async function insertCryptocoin(){
 		console.log("Inserting cryptocoin stat...." +JSON.stringify(newCC));
@@ -121,10 +134,13 @@
 						visible=true;
 						window.alert("ERROR!" + errorMsg);
 					}
-					window.alert("???");
+					window.alert("No se han introducido todos los datos");
 				}
 			}); 
 	}
+
+
+	// BORRAR ELEMENTO CONCRETO
 
 	async function delCryptoUnico(countryDel, yearDel) {const res = 
 			await fetch("/api/v2/cryptocoin-stats"+ "/" + countryDel + "/" + yearDel, {
@@ -156,6 +172,8 @@
         });
    	 }
 
+		// BORRAR TODOS LOS ELEMENTOS
+
 		async function delCrypto() {
     	console.log("Deleting all data");
 		const res = await fetch("/api/v2/cryptocoin-stats",{
@@ -177,6 +195,7 @@
 							})
 	}
 
+	// LOAD INITIAL DATA
 
 	async function loadCrypto(){
         console.log("Loading entries....");
@@ -217,11 +236,63 @@
             console.log("ERROR!");
         }
     }
+
+
+	// BÚSQUEDA DE REPOSITORIO
+
+	async function busqueda (searchCountry, searchYear, searchFrom, searchTo){
+		if (typeof searchCountry=='undefined'){
+			searchCountry = "";
+		}
+		if (typeof searchYear == 'undefined'){
+			searchYear = "";
+		}
+		if (typeof searchFrom == 'undefined'){
+			searchFrom = "";
+		}
+		if (typeof searchTo == 'undefined'){
+			searchTo = "";
+		}
+
+		const res = await fetch("/api/v2/cryptocoin-stats?country="+searchCountry+"&year="+searchYear+"&from="+searchFrom+"&to="+searchTo);
+
+		if(res.ok){
+			const data = await res.json();
+			cc = data;
+			if(cc.length == 1){
+				errorMsg = "Se ha encontrado "+ cc.length + " dato"
+			} else {
+				errorMsg = "Se han encontrado "+ cc.length + " datos"
+			}
+		} else if (res.status == 404){
+			errorMsg = "No se ha encontrado datos con los parámetros introducidos."
+		}
+		window.alert(errorMsg);
+	}
+
+
 </script>
 
 
 
 <main>
+	<p><strong>Filtrado de datos</strong></p>
+	<Table borderless responsive>
+		<tr>
+			<td><strong><label>Pais: <input id="filterpais"  bind:value="{searchCountry}"></label></strong></td>
+			<td><strong><label>Año: <input  id="campoaño" bind:value="{searchYear}"></label></strong></td>
+		</tr>
+
+		<tr>
+			<td><strong><label>Año(Desde): <input bind:value="{searchFrom}"></label></strong></td>
+			<td><strong><label>Año(Hasta): <input bind:value="{searchTo}"></label></strong></td>
+		</tr>
+	</Table>
+	<div style="text-align:center;padding-bottom: 1%">
+		<Button outline color="primary" on:click="{busqueda (searchCountry, searchYear,searchFrom,searchTo)}">Buscar</Button>
+	</div>
+
+
     {#await cc}
 	loading	
 	{:then cc} 
@@ -233,7 +304,8 @@
 				<td><Button outline color="danger" on:click={delCrypto}>Borrar todo</Button></td>
 			</tr>
 			
-
+		
+			
 			<tr>
 				<th>Country</th>
 				<th>year</th>
@@ -245,11 +317,11 @@
 		<tbody>
 <!--			{#each cc as cc}  -->
 			<tr>
-				<td><input bind:value={newCC.country} type="text"/></td>
-				<td><input bind:value={newCC.year} type="text" /></td>
-				<td><input bind:value={newCC.ccelectr} type="text" /></td>
-				<td><input bind:value={newCC.ccdemand} type="text" /></td>
-				<td><input bind:value={newCC.ccmining} type="text" /></td>
+				<td><input bind:value="{newCC.country}"/></td>
+				<td><input bind:value="{newCC.year}"  type="number"/></td>
+				<td><input bind:value="{newCC.ccelectr}" type="number" /></td>
+				<td><input bind:value="{newCC.ccdemand}" type ="number" /></td>
+				<td><input bind:value="{newCC.ccmining}" type = "number" /></td>
 				<td><Button 
 					outline 
 					color="primary"
@@ -273,8 +345,6 @@
 			{/each}
 			
 		</tbody>
-
-
 	</Table>
 		<div>
 			<Pagination ariaLabel="Web pagination">

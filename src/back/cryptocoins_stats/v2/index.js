@@ -199,6 +199,8 @@ module.exports = (app) => {
         var ccCountry = req.params.country;
         var ccYear = parseInt(req.params.year);
 
+        console.log(ccYear);
+
         db.find({country : ccCountry, year: ccYear}, {_id:0}, function(err,data){
             if(err){
                 console.error("ERROR GET: "+err);
@@ -215,6 +217,8 @@ module.exports = (app) => {
                 }
             }
         });
+        
+
 
     });
 
