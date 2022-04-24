@@ -236,10 +236,11 @@
 						</Button> 
 					</a>
 				</td>
-				<td><Button 
+				<td>
+					<Button 
 						outline
 						color="primary"
-						on:click = {deleteSat(satellite.country, satellite.year, satellite.quarter)}>
+						on:click = {deleteSat(satellite.country,satellite.year,satellite.quarter)}>
 						Borrar
 					</Button>
 				</td>
