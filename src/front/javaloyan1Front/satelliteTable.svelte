@@ -13,6 +13,12 @@
 	};
 
 
+	let errorMsg = "";
+	let okMsg = "";
+	let visible = false;
+	let visibleOk = false;
+
+
 	//Paginación
 	//---------------------------------------------------------------------
 	// Variables para la paginación
@@ -137,6 +143,26 @@
 		}).then(function(res){
 			getSatellite();
 			getPagination();
+			if (res.status==200 || res.status == 201) {
+                errorMsg = "Recurso "+country +" " + year+ " " +quarter+ "se ha borrado correctamente";
+                console.log("Deleted " + country);
+				visibleOk = true;
+				visible = false;
+				window.alert(errorMsg);  
+				           
+            } else if (res.status==404) {
+                errorMsg = "No se ha encontrado el objeto " + country;
+                console.log("Resource NOT FOUND");
+				visibleOk = false;
+				visible = true;
+				window.alert(errorMsg);              
+            } else {
+                errorMsg= res.status + ": " + "No se pudo borrar el recurso";
+                console.log("ERROR!");
+				visibleOk = false;
+				visible = true; 
+				window.alert(errorMsg); 
+            }
 		});
 	}
 
