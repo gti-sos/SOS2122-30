@@ -263,11 +263,6 @@
 			<br>
 			<Button outline color = "secondary" on:click = "{pop}">Volver</Button>
 		</tbody>
-
-		<div>
-			
-		</div>
-
 	</table>
 	<div>
 		<Pagination ariaLabel="Web pagination">
