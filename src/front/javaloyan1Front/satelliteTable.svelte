@@ -27,8 +27,6 @@
 		
 	}
 
-
-
 	async function getSatelliteD(){
 		console.log("Fetching stats ... ");
 		const res =  await fetch("/api/v2/stsatellites-stats");
@@ -74,6 +72,7 @@
 			method: "DELETE"
 		}).then(function(res){
 			getSatellite();
+			getPaginacion();
 		});
 	}
 
@@ -173,7 +172,7 @@
 				<td><Button 
 						outline
 						color="primary"
-						on:click = "{deleteSat(satellite.country, satellite.year, satellite.quarter)}">
+						on:click = {deleteSat(satellite.country, satellite.year, satellite.quarter)}>
 						Borrar
 					</Button>
 				</td>
