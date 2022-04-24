@@ -48,6 +48,7 @@
             }).then(function (res) {
                 visible = true;
                 getSatellite();
+                res.redirected("#/stTable");
             });
     }
 
@@ -100,7 +101,7 @@
     </table>
     {/await}
     
-    <Button outline color = "secondary" on:click = "{pop}">Back</Button>
+    <Button outline color = "secondary" on:click = "{pop}">Volver</Button>
 </main>
 
 <style>
