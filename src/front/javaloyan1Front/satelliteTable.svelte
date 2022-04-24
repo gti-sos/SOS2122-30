@@ -137,14 +137,14 @@
 		const res = await fetch("/api/v2/stsatellites-stats/" + countryS + "/" + yearS + "/" + quarterS, {
 			method: "DELETE"
 		}).then(function(res){
-			getSatellite();
-			getPagination();
 			if (res.status==200 || res.status == 201) {
                 okM = "Recurso "+countryS +"-" + yearS+ "-" +quarterS+ "se ha borrado correctamente";
                 console.log("Deleted " + countryS);
 				visibleOk = true;
 				visible = false;
 				window.alert(okM);    
+				getSatellite();
+				getPagination();
             } else if (res.status==404) {
                 errorM = "No se ha encontrado el objeto " + countryS + "-" + yearS + "-" + quarterS;
                 console.log("Resource NOT FOUND");
@@ -191,6 +191,7 @@
 				console.log("200");
 				okM = "Datos iniciales cargados correctamente";
 				window.alert(okM);
+				getSatellite();
 			} else if (res.status == 400){
 				errorM = "Ha ocurrido un fallo";
 				window.alert(errorM);
