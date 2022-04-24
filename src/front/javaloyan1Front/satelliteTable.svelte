@@ -1,6 +1,7 @@
 <script>
     import {onMount} from 'svelte';
 	import Button from "sveltestrap/src/Button.svelte";
+	import { pop } from "svelte-spa-router";
 
 	let sat = [];
 	let newSat = {
@@ -134,6 +135,7 @@
 				</td>
 			</tr>
 			{/each}
+			<Button outline color = "secondary" on:click = "{pop}">Back</Button>
 		</tbody>
 	</table>
 	{/await}
