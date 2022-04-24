@@ -5,12 +5,12 @@
 
     let sat = {};
 
-    let updateC = {};
-    let updateY = {};
-    let updateQ = {};
-    let updateSL = {};
-    let updateSO = {};
-    let updateSD = {};
+    let updateC = "";
+    let updateY = "";
+    let updateQ = "";
+    let updateSL = "";
+    let updateSO = "";
+    let updateSD = "";
 
     async function getSatellite(){
 		console.log("Fetching stats ... ");
@@ -47,7 +47,7 @@
                 }
             }).then(function (res) {
                 visible = true;
-                getCrypto();
+                getSatellite();
             });
     }
 
