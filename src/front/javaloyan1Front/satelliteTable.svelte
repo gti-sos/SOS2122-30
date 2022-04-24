@@ -124,20 +124,20 @@
 	}
 
 	//Eliminar 1 st
-	async function deleteSat(country, year, quarter){
-		const res = await fetch("/api/v2/stsatellites-stats/" + country + "/" + year + "/" + quarter, {
+	async function deleteSat(countryS, yearS, quarterS){
+		const res = await fetch("/api/v2/stsatellites-stats/" + countryS + "/" + yearS + "/" + quarterS, {
 			method: "DELETE"
 		}).then(function(res){
 			getSatellite();
 			getPagination();
 			if (res.status==200 || res.status == 201) {
-                errorMsg = "Recurso "+country +"-" + year+ "-" +quarter+ "se ha borrado correctamente";
-                console.log("Deleted " + country);
+                errorMsg = "Recurso "+countryS +"-" + yearS+ "-" +quarterS+ "se ha borrado correctamente";
+                console.log("Deleted " + countryS);
 				visibleOk = true;
 				visible = false;
 				window.alert(errorMsg);    
             } else if (res.status==404) {
-                errorMsg = "No se ha encontrado el objeto " + country + "-" + year + "-" + quarter;
+                errorMsg = "No se ha encontrado el objeto " + countryS + "-" + yearS + "-" + quarterS;
                 console.log("Resource NOT FOUND");
 				visibleOk = false;
 				visible = true;
