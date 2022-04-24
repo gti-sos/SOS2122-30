@@ -138,7 +138,7 @@
 
 	//Eliminar 1 st
 	async function deleteSat(country, year, quarter){
-		const res = await fetch("/api/v2/stsatellites-stats" + "/" + country + "/" + year + "/" + quarter, {
+		const res = await fetch("/api/v2/stsatellites-stats/" + country + "/" + year + "/" + quarter, {
 			method: "DELETE"
 		}).then(function(res){
 			getSatellite();
@@ -148,10 +148,9 @@
                 console.log("Deleted " + country);
 				visibleOk = true;
 				visible = false;
-				window.alert(errorMsg);  
-				           
+				window.alert(errorMsg);    
             } else if (res.status==404) {
-                errorMsg = "No se ha encontrado el objeto " + country;
+                errorMsg = "No se ha encontrado el objeto " + country + year + quarter;
                 console.log("Resource NOT FOUND");
 				visibleOk = false;
 				visible = true;
