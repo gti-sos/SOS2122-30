@@ -2,8 +2,8 @@
     export let params = {};
 
     import {onMount} from 'svelte';
-	import { Button } from ".sveltestrap/src/Button.svelte";
-    import { Table } from ".sveltestrap/src/Table.svelte";
+	import { Button } from "sveltestrap/src/Button.svelte";
+    import { Table } from "sveltestrap/src/Table.svelte";
     import { pop } from "svelte-spa-router";
 
     onMount(getEwaste);
