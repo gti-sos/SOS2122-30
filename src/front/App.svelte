@@ -5,7 +5,7 @@
 	import cryptocoinEdit from "./servelgar1Front/cryptocoinEdit.svelte"
 	import TdTable from "./jaiquisicFront/tdTable.svelte"
 	import satelliteTable from "./javaloyan1Front/satelliteTable.svelte"
-import EditSatellite from "./javaloyan1Front/editSatellite.svelte";
+	import EditSatellite from "./javaloyan1Front/editSatellite.svelte";
 
 	console.log("Funcionas");
 	const routes = {
