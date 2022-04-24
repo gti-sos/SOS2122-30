@@ -117,7 +117,7 @@
 					{satellite.stdestroyed}
 				</td>
 				<td>
-					<a href = "/stTable/{satellite.country}/{satellite.year}/{satellite.quarter}">
+					<a href = "/#/stTable/{satellite.country}/{satellite.year}/{satellite.quarter}">
 						<Button 
 							outline
 							color="primary"
