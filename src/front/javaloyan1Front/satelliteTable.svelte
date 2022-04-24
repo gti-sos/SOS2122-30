@@ -144,7 +144,7 @@
                 console.log("Deleted " + countryS);
 				visibleOk = true;
 				visible = false;
-				window.alert(errorM);    
+				window.alert(okM);    
             } else if (res.status==404) {
                 errorM = "No se ha encontrado el objeto " + countryS + "-" + yearS + "-" + quarterS;
                 console.log("Resource NOT FOUND");
@@ -190,12 +190,12 @@
 			if(res.status == 200 || res.status == 201){
 				console.log("200");
 				okM = "Datos iniciales cargados correctamente";
-				window.alert(errorM);
+				window.alert(okM);
 			} else if (res.status == 400){
 				errorM = "Ha ocurrido un fallo";
 				window.alert(errorM);
 			} else {
-				errorM= res.status + ": " + res.statusText;
+				errorM= res.status + "Fallo inesperado" + res.statusText;
 				window.alert(errorM);
 			}
 		});
