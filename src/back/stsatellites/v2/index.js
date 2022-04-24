@@ -121,6 +121,37 @@ module.exports = (app) => {
 
     //GET 
 
+    //PAGINACION  
+    app.get(BASE_API_URL + url_javier,(req,res)=>{
+        var query = req.query;
+        var dbInit = {};
+        var offset = parseInt(query.offset);
+        var limit = parseInt(query.limit);
+
+        // PARSERS
+        if(query.country) dbInit["country"] = query.country;
+        if(query.year) dbInit["year"] = parseInt(query.year);
+        if(query.ccelectr) dbInit["quarter"] = query.quarter;
+        if(query.ccdemand) dbInit["stlaunched"] = parseInt(query.stlaunched);
+        if(query.ccmining) dbInit["storbit"] = parseInt(query.storbit);
+        if(query.ccmining) dbInit["stdestroyed"] = parseInt(query.stdestroyed);
+
+        // 1 --> regular order
+        // -1 --> reverse order
+        db.find(dbInit).sort({country:1,year:-1}).skip(offset).limit(limit).exec((error,satellite)=>{
+            satellite.forEach((s)=>{
+                delete s._id
+            });
+            res.status(200);
+            res.send(JSON.stringify(satellite,null,2));
+            console.log("GET REQUEST have been sent.")
+
+        });
+ 
+    });
+
+
+
     //Conjunto
     app.get(BASE_API_URL + url_javier, (req, res)=>{
         db.find({}, function(err,docs){
@@ -146,11 +177,11 @@ module.exports = (app) => {
                 res.sendStatus(500, "Internal Server Error");
             }else {
                 console.log("2");
-                if(data.length > 0){
+                if(data.length != 0){
                     console.log("3");
-                    res.send(data);
+                    res.send(JSON.stringify(data[0],null,2));
                     res.status(200);
-                } else{
+                }else{
                     console.log("4");
                     console.error("Data not found");
                     res.status(404);
