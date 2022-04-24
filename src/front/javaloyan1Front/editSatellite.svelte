@@ -12,6 +12,9 @@
     let updateSO = "";
     let updateSD = "";
 
+    onMount(getSatellite);
+
+
     async function getSatellite(){
 		console.log("Fetching stats ... ");
 		const res =  await fetch("/api/v2/stsatellites-stats/" + params.country +"/"
