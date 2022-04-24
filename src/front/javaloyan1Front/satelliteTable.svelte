@@ -2,6 +2,7 @@
     import {onMount} from 'svelte';
 	import Button from "sveltestrap/src/Button.svelte";
 	import { pop } from "svelte-spa-router";
+	import {Pagination, PaginationItem, PaginationLink} from "sveltestrap";
 
 	let sat = [];
 	let initialSat = [];
@@ -15,6 +16,20 @@
 	onMount(getSatellite);
 
 	async function getSatellite(){
+		console.log("Fetching stats ... ");
+		const res =  await fetch("/api/v2/stsatellites-stats");
+		if(res.ok){
+			const data = await res.json();
+			sat = data;
+			initialSat = data;
+			console.log("Received stats" + JSON.stringify(sat,null,2));
+		}
+		
+	}
+
+
+
+	async function getSatelliteD(){
 		console.log("Fetching stats ... ");
 		const res =  await fetch("/api/v2/stsatellites-stats");
 		if(res.ok){
@@ -169,6 +184,11 @@
 			<br>
 			<Button outline color = "secondary" on:click = "{pop}">Volver</Button>
 		</tbody>
+
+		<div>
+			
+		</div>
+
 	</table>
 	{/await}
 </main>

@@ -18,7 +18,7 @@ import EditSatellite from "./javaloyan1Front/editSatellite.svelte";
 
 
 		"/stTable": satelliteTable,
-		"/stTable/country/year/quarter": EditSatellite
+		"/stTable/:country/:year/:quarter": EditSatellite
 	};
 
 </script>
