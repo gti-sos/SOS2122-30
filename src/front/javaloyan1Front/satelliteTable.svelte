@@ -222,28 +222,28 @@
 					</Button>
 				</td>
 			</tr>
-			{#each sat as satellite}
+			{#each sat as sat}
 			<tr>
 				<td>
-					{satellite.country}
+					{sat.country}
 				</td>
 				<td>
-					{satellite.year}
+					{sat.year}
 				</td>
 				<td>
-					{satellite.quarter}
+					{sat.quarter}
 				</td>
 				<td>
-					{satellite.stlaunched}
+					{sat.stlaunched}
 				</td>
 				<td>
-					{satellite.storbit}
+					{sat.storbit}
 				</td>
 				<td>
-					{satellite.stdestroyed}
+					{sat.stdestroyed}
 				</td>
 				<td>
-					<a href = "/#/stTable/{satellite.country}/{satellite.year}/{satellite.quarter}">
+					<a href = "/#/stTable/{sat.country}/{sat.year}/{sat.quarter}">
 						<Button 
 							outline
 							color="primary">
@@ -255,7 +255,7 @@
 					<Button 
 						outline
 						color="primary"
-						on:click = {deleteSat(satellite.country,satellite.year,satellite.quarter)}>
+						on:click = {deleteSat(sat.country,sat.year,sat.quarter)}>
 						Borrar
 					</Button>
 				</td>
