@@ -128,7 +128,7 @@
 
 	//Eliminar 1 st
 	async function deleteSat(countryS, yearS, quarterS){
-		const res = await fetch("/api/v2/stsatellites-stats/" + countryS + "/" + yearS + "/" + quarterS, {
+		const res = await fetch("/api/v2/stsatellites-stats/" + countryS + "/" + yearS + "/" + quarterS +"/", {
 			method: "DELETE"
 		}).then(function(res){
 			getSatellite();
@@ -186,24 +186,12 @@
 	<table>
 		<thead>
 			<tr>
-				<th>
-					Country
-				</th>
-				<th>
-					Year
-				</th>
-				<th>
-					Quarter
-				</th>
-				<th>
-					Stlaunched
-				</th>
-				<th>
-					Storbit
-				</th>
-				<th>
-					Stdestroyed
-				</th>
+				<th>Country</th>
+				<th>Year</th>
+				<th>Quarter</th>
+				<th>Stlaunched</th>
+				<th>Storbit</th>
+				<th>Stdestroyed</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -224,24 +212,12 @@
 			</tr>
 			{#each sat as sat}
 			<tr>
-				<td>
-					{sat.country}
-				</td>
-				<td>
-					{sat.year}
-				</td>
-				<td>
-					{sat.quarter}
-				</td>
-				<td>
-					{sat.stlaunched}
-				</td>
-				<td>
-					{sat.storbit}
-				</td>
-				<td>
-					{sat.stdestroyed}
-				</td>
+				<td>{sat.country}</td>
+				<td>{sat.year}</td>
+				<td>{sat.quarter}</td>
+				<td>{sat.stlaunched}</td>
+				<td>{sat.storbit}</td>
+				<td>{sat.stdestroyed}</td>
 				<td>
 					<a href = "/#/stTable/{sat.country}/{sat.year}/{sat.quarter}">
 						<Button 
