@@ -16,6 +16,12 @@
     let updateSO = "";
     let updateSD = "";
 
+    let errorM = "";
+ 	let okM = "";
+	let visible = false;
+	let visibleOk = false;
+
+
     onMount(getSatellite);
 
 
@@ -54,7 +60,17 @@
             }).then(function (res) {
                 visible = true;
                 getSatellite();
-            });
+                if(res.status == 200 || res.status == 201){
+                    okM = "Actualización correcta";
+                    visibleOk=true;
+                }else{
+                    if(res.status === 404){
+                        errorM ="El dato solicitado no existe";
+                        visibleOk=false;
+                        window.alert(errorM);
+                    }   
+                }
+          });
     }
 
 </script>
@@ -88,9 +104,9 @@
     </thead>
     <tbody>
         <tr>
-            <td>{updateC}</td>
-            <td>{updateY}</td>
-            <td>{updateQ}</td>
+            <td><input bind:value="{updateC}"></td>
+            <td><input bind:value="{updateY}"></td>
+            <td><input bind:value="{updateQ}"></td>
             <td><input bind:value="{updateSL}"></td>
             <td><input bind:value="{updateSO}"></td>
             <td><input bind:value="{updateSD}"></td>

@@ -16,8 +16,8 @@
 	};
 
 
-	let errorMsg = "";
-	let okMsg = "";
+	let errorM = "";
+	let okM = "";
 	let visible = false;
 	let visibleOk = false;
 
@@ -105,52 +105,58 @@
 					"Content-Type":"application/json"
 				}
 			}).then(function(res){
-				getSatellite();
-				getPagination();
-			});
+				if(res.status == 200 ||res.status == 201){
+					getSatellite();
+					getPagination();
+					okM = "Recurso añadido correctamente";
+					visibleOk=true;
+					visible=false;
+					window.alert(okM);
+				
+				}else{
+					if(res.status == 409){
+						errorM ="Ya existe ese dato";
+						visibleOk=false;
+						visible=true;
+						window.alert("Error" + errorM);
+					}
+					if(res.status == 409){
+						errorM ="El dato ya existe";
+						visibleOk=false;
+						visible=true;
+						window.alert("Error" + errorM);
+					}
+					window.alert("No se han introducido todos los datos");
+				}
+			}); 
 	}
 
-	//Editar un st
-	async function editSat(){
-		console.log("inserting satellite: " + JSON.stringify(newSat));
-		const res = await fetch("/api/v2/stsatellites-stats",
-			{
-				method: "PUT",
-				body: JSON.stringify(newSat),
-				headers: {
-					"Content-Type":"application/json"
-				}
-			}).then(function(res){
-				getSatellite();
-				getPagination();
-			});
-	}
 
 	//Eliminar 1 st
 	async function deleteSat(countryS, yearS, quarterS){
-		const res = await fetch("/api/v2/stsatellites-stats/" + countryS + "/" + yearS, {
+		const res = await fetch("/api/v2/stsatellites-stats/" + countryS + "/" + yearS + "/" + quarterS, {
 			method: "DELETE"
 		}).then(function(res){
 			getSatellite();
 			getPagination();
 			if (res.status==200 || res.status == 201) {
-                errorMsg = "Recurso "+countryS +"-" + yearS+ "-" +quarterS+ "se ha borrado correctamente";
+                okM = "Recurso "+countryS +"-" + yearS+ "-" +quarterS+ "se ha borrado correctamente";
                 console.log("Deleted " + countryS);
 				visibleOk = true;
 				visible = false;
-				window.alert(errorMsg);    
+				window.alert(errorM);    
             } else if (res.status==404) {
-                errorMsg = "No se ha encontrado el objeto " + countryS + "-" + yearS + "-" + quarterS;
+                errorM = "No se ha encontrado el objeto " + countryS + "-" + yearS + "-" + quarterS;
                 console.log("Resource NOT FOUND");
 				visibleOk = false;
 				visible = true;
-				window.alert(errorMsg);              
+				window.alert(errorM);              
             } else {
-                errorMsg= res.status + ": " + "No se pudo borrar el recurso";
+                errorM= res.status + ": " + "No se pudo borrar el recurso";
                 console.log("ERROR!");
 				visibleOk = false;
 				visible = true; 
-				window.alert(errorMsg); 
+				window.alert(errorM); 
             }
 		});
 	}
@@ -160,8 +166,19 @@
 		const res = await fetch("/api/v2/stsatellites-stats", {
 			method: "DELETE"
 		}).then(function(res){
-			getSatellite();
-			getPagination();
+			if(res.ok){
+				getSatellite();
+				getPagination();
+				okM = "Todos los datos se han eliminado";
+				visibleOk=true;
+				visible=false;
+				window.alert(okM);
+			}else{
+				errorM = "No hay datos que borrar";
+				visibleOk=false;
+				visible=true;
+				window.alert(errorM);
+			}
 		});
 	}
 
@@ -169,12 +186,19 @@
 	async function ilSat(){
 		console.log("inserting satellite: " + JSON.stringify(newSat));
 		const res =  await fetch("/api/v2/stsatellites-stats/loadInitialData").then(function(res){
-			getSatellite();
+		visible = true;
+			if(res.status == 200 || res.status == 201){
+				console.log("200");
+				okM = "Datos iniciales cargados correctamente";
+				window.alert(errorM);
+			} else if (res.status == 400){
+				errorM = "Ha ocurrido un fallo";
+				window.alert(errorM);
+			} else {
+				errorM= res.status + ": " + res.statusText;
+				window.alert(errorM);
+			}
 		});
-		if(res.ok){
-			sat = initialSat;
-			console.log("Received stats" + JSON.stringify(sat,null,2));
-		}
 	}
 
 </script>
