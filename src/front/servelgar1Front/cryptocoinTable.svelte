@@ -21,7 +21,6 @@
 	let visible = false;
 	let visibleOk = false;
 	let p1;
-	let totaldata=12;
 
 	// Variables para la paginación
 	let c_offset = 0;
@@ -39,14 +38,13 @@
 	}
 
 	function cambiapag(page, offset) {
-      
       lastPage = Math.ceil(total/10);
       console.log("Last page = " + lastPage);
       if (page !== c_page) {
         c_offset = offset;
         c_page = page;
-        getReg();
-		getOlimpic1();
+        getCrypto();
+		getPagination();
       }
     }
 
@@ -68,33 +66,26 @@
 		if(res.status == 200 || res.status == 201){
 			const data =await res.json();
 			cc = data;
+			total = data.length;
+			paginacion();
 			p1 = cc[0];
 			console.log("Received stats" + JSON.stringify(cc,null,2));
 		}
 		
 	}
 
-	async function getOlimpic1() {
+	async function getPagination() {
     	console.log("Fetching data...");
    		const res = await fetch("/api/v2/cryptocoin-stats" + "?limit=" + limit + "&offset=" + c_offset);
 		
-        if(res.status == 200 || res.status == 201){
-			console.log("Ok.");
-			const json = await res.json();
-			cc = json;
-			console.log(`We have ${cc.length} olimpic.`);
-			for(let i=0; i<cc.length ; i++){
-				let c = [];
-				let y = cc[i].year;
-				if(y > yFrom && y<yTo){
-					c.push(y);
-					cc = c;
-				}
-			}
+		   if(res.ok){
+			console.log("getPagination Ok.");
+			const data = await res.json();
+			cc = data;
+			console.log("Estadísticas recibidas: "+cc.length);
 			paginacion();
 		}else{
-			console.log("Error");
-			
+			window.alert(res.status);
 		}
   	}
 
@@ -111,7 +102,7 @@
 				
 				if(res.status == 200 ||res.status == 201){
 					getCrypto();
-					getOlimpic1();
+					getPagination();
 					okMsg = "Recurso añadido correctamente";
 					visibleOk=true;
 					visible=false;
@@ -140,23 +131,26 @@
             method: "DELETE"
         }).then(function (res) {
             getCrypto();
-			getOlimpic1();      
+			getPagination();      
             if (res.status==200 || res.status == 201) {
                 errorMsg = "Recurso "+countryDel +" " + yearDel+ " borrado correctamente";
                 console.log("Deleted " + countryDel);
 				visibleOk = true;
-				visible = false;  
+				visible = false;
+				window.alert(errorMsg);  
 				           
             } else if (res.status==404) {
                 errorMsg = "No se ha encontrado el objeto " + countryDel;
                 console.log("Resource NOT FOUND");
 				visibleOk = false;
-				visible = true;              
+				visible = true;
+				window.alert(errorMsg);              
             } else {
                 errorMsg= res.status + ": " + "No se pudo borrar el recurso";
                 console.log("ERROR!");
 				visibleOk = false;
-				visible = true;  
+				visible = true; 
+				window.alert(errorMsg); 
             }
 			     
         });
@@ -169,14 +163,16 @@
 							}).then( function (res) {
 							if(res.ok){
 								getCrypto();
-								getOlimpic1();
+								getPagination();
 								okMsg = "Todos los datos se han eliminado";
 								visibleOk=true;
 								visible=false;
+								window.alert(okMsg);
 							}else{
 								errorMsg = "No hay datos que borrar";
 								visibleOk=false;
 								visible=true;
+								window.alert(errorMsg);
 							}
 							})
 	}
@@ -189,16 +185,23 @@
 			if(res.status == 200 || res.status == 201){
 				console.log("200");
 				errorMsg = "Objetos cargados correctamente";
+				window.alert(errorMsg);
 			} else if (res.status == 400){
 				errorMsg = "Ha ocurrido un fallo";
 				console.log("BAD REQUEST");
+				window.alert(errorMsg);
 			} else {
-				errorMSG= res.status + ": " + res.statusText;
+				errorMsg= res.status + ": " + res.statusText;
                 console.log("ERROR!");
+				window.alert(errorMsg);
 			}
 		});
 
-		const elements = await fetch("/api/v2/cryptocoin-stats/loadInitialData"); //datos cargados
+		const elements = await fetch("/api/v2/cryptocoin-stats/loadInitialData")
+			.then(function(elements){
+				getCrypto();
+				getPagination();
+			}); //datos cargados
         const jsonElements = await elements.json();
         c_page = 1;
         totalObj = jsonElements.length;
@@ -208,13 +211,11 @@
             console.log("Ok:");
             const json = await res.json();
             cc = json;
-			getCrypto();
-            console.log("Loading "+poverty.length+" objects");
-            console.log("Received " + poverty.length + " cryptocoin stat.");
+            console.log("Loading "+cc.length+" objects");
+            console.log("Received " + cc.length + " cryptocoin stat.");
         } else {
             console.log("ERROR!");
         }
-
     }
 </script>
 
@@ -272,6 +273,9 @@
 			{/each}
 			
 		</tbody>
+
+
+	</Table>
 		<div>
 			<Pagination ariaLabel="Web pagination">
 				<PaginationItem class = {c_page === 1 ? "enable" : ""}>
@@ -289,6 +293,6 @@
 				</PaginationItem>
 			  </Pagination>
 		</div>
-	</Table>
+	
 	{/await}
 </main>

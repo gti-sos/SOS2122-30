@@ -2,6 +2,7 @@
 	import Router from "svelte-spa-router"
 	import Home from "./Home.svelte"
 	import cryptocoinTable from "./servelgar1Front/cryptocoinTable.svelte"
+	import cryptocoinEdit from "./servelgar1Front/cryptocoinEdit.svelte"
 	import TdTable from "./jaiquisicFront/tdTable.svelte"
 	import satelliteTable from "./javaloyan1Front/satelliteTable.svelte"
 import EditSatellite from "./javaloyan1Front/editSatellite.svelte";
@@ -10,7 +11,12 @@ import EditSatellite from "./javaloyan1Front/editSatellite.svelte";
 	const routes = {
 		'/': Home,
 		"/tdTable": TdTable,
+
+
 		"/ccTable": cryptocoinTable,
+		"/ccTable/:country/:year": cryptocoinEdit,
+
+
 		"/stTable": satelliteTable,
 		"/stTable/country/year/quarter": EditSatellite
 	};

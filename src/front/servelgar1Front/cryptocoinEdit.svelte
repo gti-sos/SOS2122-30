@@ -1,30 +1,31 @@
 
 <script>
-	  import {onMount} from "svelte";
+	import {onMount} from "svelte";
     import {pop} from "svelte-spa-router";
     import Alert from 'sveltestrap/src/Alert.svelte';
     import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
 
-  export let params = {};
-  let cc = {};
+    export let params = {};
+
+    let cc = {};
 	let upCountry = "";
 	let upYear = "";
 	let upElectr = "";
 	let upDemand = "";
 	let upMining = "";
-  let errorMsg = "";
+    let errorMsg = "";
  	let okMsg = "";
 	let visible = false;
 	let visibleOk = false;
 
 
-  onMount(getCrypto);
+    onMount(getCrypto);
 
 
   async function getCrypto() {
         console.log("Fetching data..." + params.country + " " + params.year);
-        const res = await fetch("/api/v2/cryptocoin-stats" + params.country +"/" + params.year);
+        const res = await fetch("/api/v2/cryptocoin-stats/" + params.country +"/" + params.year);
         if (res.ok) {
             console.log("Ok:");
             const json = await res.json();
@@ -53,14 +54,14 @@
 
     async function updateCC() {
         console.log("Updating data..." );
-        const res = await fetch("/api/v2/cryptocoin-stats" + upCountry +"/" + upYear, {
+        const res = await fetch("/api/v2/cryptocoin-stats/" + params.country +"/" + params.year, {
             method: "PUT",
             body: JSON.stringify({
               country : upCountry,
               year : parseInt(upYear),
-			        ccelectr : parseInt(upElectr),
+			  ccelectr : parseInt(upElectr),
               ccdemand : parseInt(upDemand),
-	 		        ccmining : parseInt(upMining)
+	 		  ccmining : parseInt(upMining)
             }),
             headers: {
                 "Content-Type": "application/json"
@@ -75,9 +76,9 @@
                 if(res.status === 404){
                   errorMsg ="El dato solicitado no existe";
                   visibleOk=false;
+                  window.alert(errorMsg);
                 }
               }
-              console.log("ERROR!" + errorMsg);
           });
     }
 
@@ -86,7 +87,10 @@
 </script>
 
 <main>
-  <h3>Editar campos <strong>{params.country}</strong><strong>{params.year}</strong></h3>
+  <h1>Editar campos: <strong>{params.country}</strong>  <strong>{params.year}</strong></h1>
+  {#await cc}
+  loading
+    {:then cc}
   <Table bordered>
       <thead>
           <div>
@@ -128,4 +132,5 @@
   
   
   <Button outline color="secondary" on:click="{pop}">Volver</Button>
+  {/await}
   </main>
