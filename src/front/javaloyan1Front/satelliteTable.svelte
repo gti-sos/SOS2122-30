@@ -144,13 +144,13 @@
 			getSatellite();
 			getPagination();
 			if (res.status==200 || res.status == 201) {
-                errorMsg = "Recurso "+country +" " + year+ " " +quarter+ "se ha borrado correctamente";
+                errorMsg = "Recurso "+country +"-" + year+ "-" +quarter+ "se ha borrado correctamente";
                 console.log("Deleted " + country);
 				visibleOk = true;
 				visible = false;
 				window.alert(errorMsg);    
             } else if (res.status==404) {
-                errorMsg = "No se ha encontrado el objeto " + country + year + quarter;
+                errorMsg = "No se ha encontrado el objeto " + country + "-" + year + "-" + quarter;
                 console.log("Resource NOT FOUND");
 				visibleOk = false;
 				visible = true;
@@ -264,7 +264,7 @@
 				<td>
 					<Button 
 						outline
-						color="danger"
+						color="primary"
 						on:click = {deleteSat(satellite.country,satellite.year,satellite.quarter)}>
 						Borrar
 					</Button>
