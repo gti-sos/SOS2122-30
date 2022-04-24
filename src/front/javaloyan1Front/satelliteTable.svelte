@@ -27,14 +27,7 @@
 		
 	}
 
-	async function paginacion() {
-      const data = await fetch("/api/v2/cryptocoin-stats");
-      if (data.status == 200 || res.status == 201 ) {
-        const json = await data.json();
-        total = json.length;
-        cambiapag(c_page, c_offset);
-      } 
-    }
+
 
 	async function getSatelliteD(){
 		console.log("Fetching stats ... ");
@@ -193,21 +186,7 @@
 		</tbody>
 
 		<div>
-			<Pagination ariaLabel="Web pagination">
-				<PaginationItem class = {c_page === 1 ? "enable" : ""}>
-					  <PaginationLink previous href="#/ccTable" on:click={() => cambiapag(c_page - 1, c_offset - 10)}/>
-				</PaginationItem>
-				{#each range(lastPage, 1) as page}
-					  <PaginationItem class = {c_page === page ? "active" : ""}>
-						<PaginationLink previous href="#/ccTable" on:click={() => cambiapag(page, (page - 1) * 10)}>
-							{page}
-						</PaginationLink>
-					  </PaginationItem>
-				{/each}
-				<PaginationItem class = {c_page === lastPage ? "disabled" : ""}>
-					  <PaginationLink next href="#/ccTable" on:click={() => cambiapag(c_page + 1, c_offset + 10)}/>
-				</PaginationItem>
-			</Pagination>
+			
 		</div>
 
 	</table>
