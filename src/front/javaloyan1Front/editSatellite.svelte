@@ -35,9 +35,6 @@
             + params.year + "/"+params.quarter, {
                 method: "PUT",
                 body: JSON.stringify({
-                    country: updateC,
-                    year: parseInt(updateY),
-                    quarter: updateQ,
                     stlaunched: parseInt(updateSL),
                     storbit: parseInt(updateSO),
                     stdestroyed: parseInt(updateSD)
@@ -48,7 +45,6 @@
             }).then(function (res) {
                 visible = true;
                 getSatellite();
-                res.redirected("#/stTable");
             });
     }
 
@@ -83,9 +79,6 @@
     </thead>
     <tbody>
         <tr>
-            <td><input bind:value="{updateC}"></td>
-            <td><input bind:value="{updateY}"></td>
-            <td><input bind:value="{updateQ}"></td>
             <td><input bind:value="{updateSL}"></td>
             <td><input bind:value="{updateSO}"></td>
             <td><input bind:value="{updateSD}"></td>
