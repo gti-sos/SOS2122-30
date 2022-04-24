@@ -4,13 +4,15 @@
 	import cryptocoinTable from "./servelgar1Front/cryptocoinTable.svelte"
 	import cryptocoinEdit from "./servelgar1Front/cryptocoinEdit.svelte"
 	import TdTable from "./jaiquisicFront/tdTable.svelte"
+	import TdEdit from "./jaiquisicFront/tdEdit.svelte"
 	import satelliteTable from "./javaloyan1Front/satelliteTable.svelte"
-import EditSatellite from "./javaloyan1Front/editSatellite.svelte";
+	import EditSatellite from "./javaloyan1Front/editSatellite.svelte";
 
 	console.log("Funcionas");
 	const routes = {
 		'/': Home,
 		"/tdTable": TdTable,
+		"/tdTable/:country/:year": TdEdit,
 
 
 		"/ccTable": cryptocoinTable,

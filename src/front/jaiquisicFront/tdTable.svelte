@@ -1,76 +1,227 @@
 <script>
     import {onMount} from 'svelte';
-	let contacts = [];
+	import Table from "sveltestrap/src/Table.svelte";
+	import Button from "sveltestrap/src/Button.svelte";
+	import { pop } from "svelte-spa-router";
+	import {Pagination, PaginationItem, PaginationLink} from "sveltestrap";
+	
+	
+	let ewaste = [];
+	let newEwaste = {
+		country: "",
+		year: "",
+        tdwasted: "",
+        mpdisuse: "",
+        mpreused: ""
+	};
+
+	let errorMsg = "";
+	let okMsg = "";
+	let visible = false;
+	let visibleOk = false;
 	let p1;
-	onMount(getContacts);
-	async function getContacts(){
+
+	// Variables para la paginación
+	let e_offset = 0;
+    let offset = 0;
+    let limit = 10;
+    let e_page = 1;
+    let lastPage = 1;
+    let total = 0;
+
+	onMount(getEwaste);
+	async function getEwaste(){
 		console.log("Fetching stats ... ");
 		const res =  await fetch("/api/v2/technology_devices_stats");
 		if(res.ok){
 		const data =await res.json();
-		contacts = data;
-		p1 = contacts[0];
-		console.log("Received stats" + JSON.stringify(contacts,null,2));
+		ewaste = data;
+		p1 = ewaste[0];
+		console.log("Received stats" + JSON.stringify(ewaste,null,2));
 		}
 		
 	}
+	function range(size, start = 0) {
+      return [...Array(size).keys()].map((i) => i + start);
+	}
+
+	function cambiapag(page, offset) {
+      lastPage = Math.ceil(total/10);
+      console.log("Last page = " + lastPage);
+      if (page !== e_page) {
+        e_offset = offset;
+        e_page = page;
+        getEwaste();
+		getPagination();
+      }
+    }
+
+
+	async function paginacion() {
+      const data = await fetch("/api/v2/technology_devices_stats");
+      if (data.status == 200 || res.status == 201 ) {
+        const json = await data.json();
+        total = json.length;
+        cambiapag(e_page, e_offset);
+      } 
+    }
+	async function getPagination() {
+    	console.log("Fetching data...");
+   		const res = await fetch("/api/v2/technology_devices_stats" + "?limit=" + limit + "&offset=" + e_offset);
+		
+		   if(res.ok){
+			console.log("getPagination Ok.");
+			const data = await res.json();
+			ewaste = data;
+			console.log("Estadísticas recibidas: "+ ewaste.length);
+			paginacion();
+		}else{
+			window.alert(res.status);
+		}
+  	}
+
+
+	async function insertEwaste(){
+		console.log("Insert new e-waste stat: " + JSON.stringify(newEwaste));
+		const res =  await fetch("/api/v2/technology_devices_stats",
+		{
+			method:"POST",
+			body: JSON.stringify(newEwaste),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		}).then(function (res){
+			getEwaste
+		});
+		console.log("Done");
+		}
+	
+		async function deleteTD(country, year){
+		const res = await fetch("/api/v2/technology_devices_stats/" + country + "/" + year + "/", {
+			method: "DELETE"
+		}).then(function(res){
+			getEwaste();
+			getPagination();
+			if (res.status==200 || res.status == 201) {
+                errorMsg = "Recurso "+country +"-" + year+ "-"+ "se ha borrado correctamente";
+                console.log("Deleted " + country);
+				visibleOk = true;
+				visible = false;
+				window.alert(errorMsg);    
+            } else if (res.status==404) {
+                errorMsg = "No se ha encontrado el objeto " + country + "-" + year + "-";
+                console.log("Resource NOT FOUND");
+				visibleOk = false;
+				visible = true;
+				window.alert(errorMsg);              
+            } else {
+                errorMsg= res.status + ": " + "No se pudo borrar el recurso";
+                console.log("ERROR!");
+				visibleOk = false;
+				visible = true; 
+				window.alert(errorMsg); 
+            }
+		});
+	}
+
+	async function deleteAll(){
+		const res = await fetch("/api/v2/technology_devices_stats", {
+			method: "DELETE"
+		}).then(function(res){
+			getEwaste();
+			getPagination();
+		});
+	}
+	async function initialEwaste(){
+		console.log("inserting satellite: " + JSON.stringify(newSat));
+		const res =  await fetch("/api/v2/technology_devices_stats/loadInitialData").then(function(res){
+			getEwaste();
+		});
+		if(res.ok){
+			sat = initialEwaste;
+			console.log("Received stats" + JSON.stringify(sat,null,2));
+		}
+	}
 </script>
 <main>
-    {#await contacts}
+    {#await ewaste}
 	loading	
-	{:then contacts} 
-	<table>
+	{:then ewaste} 
+	<Table bordered>
 		<thead>
 			<tr>
-				<th>
-					Country
-				</th>
-
-				<th>
-					year
-				</th>
-				<th>
-					tdwasted
-				</th>
-				<th>
-					mpdisuse
-				</th>
-				<th>
-					mpreused
-				</th>
+				<th>Country</th>
+				<th>year</th>
+				<th>tdwasted</th>
+				<th>mpdisuse</th>
+				<th>mpreused</th>
 			</tr>
 		</thead>
 		<tbody>
-			{#each contacts as contact}
+			<tr> 
+				<td><input bind:value="{newEwaste.country}"></td>
+				<td><input bind:value="{newEwaste.year}"></td>
+				<td><input bind:value="{newEwaste.tdwasted}"></td>
+				<td><input bind:value="{newEwaste.mpdisuse}"></td>
+				<td><input bind:value="{newEwaste.mpreused}"></td>
+				<td><Button outline color="primary" on:click="{insertEwaste}">Insert</Button></td>
+				
+				
+				
+			</tr>
+			{#each ewaste as ewaste}
 			<tr>
+				<td>{ewaste.country}</td>
+				<td>{ewaste.year}</td>
+				<td>{ewaste.tdwasted}</td>
+				<td>{ewaste.mpdisuse}</td>
+				<td>{ewaste.mpreused}</td>
+
 				<td>
-					{contact.country}
+					<a href = "/#/tdTable/{ewaste.country}/{ewaste.year}">
+						<Button 
+							outline
+							color="primary">
+							Edit
+						</Button> 
+					</a>
 				</td>
 				<td>
-					{contact.year}
-				</td>
-				<td>
-					{contact.tdwasted}
-				</td>
-				<td>
-					{contact.mpdisuse}
-				</td>
-				<td>
-					{contact.mpreused}
+					<Button 
+						outline
+						color="primary"
+						on:click = {deleteTD(ewaste.country,ewaste.year)}>
+						Delete
+					</Button>
 				</td>
 			</tr>
 			{/each}
+			<Button outline color = "primary" on:click = "{initialEwaste}">Load Data</Button>
+			<Button outline color = "primary" on:click = "{deleteAll}">Delete Data</Button>
+			<br>
+			<Button outline color = "secondary" on:click = "{pop}">Back</Button>
 		</tbody>
-	</table>
+
+		<div>
+			
+		</div>
+	</Table>
+	<div>
+		<Pagination ariaLabel="Web pagination">
+			<PaginationItem class = {e_page === 1 ? "enable" : ""}>
+				  <PaginationLink previous href="#/tdTable" on:click={() => cambiapag(e_page - 1, e_offset - 10)}/>
+			</PaginationItem>
+			{#each range(lastPage, 1) as page}
+				  <PaginationItem class = {e_page === page ? "active" : ""}>
+					<PaginationLink previous href="#/tdTable" on:click={() => cambiapag(page, (page - 1) * 10)}>
+						{page}
+					</PaginationLink>
+				  </PaginationItem>
+			{/each}
+			<PaginationItem class = {e_page === lastPage ? "disabled" : ""}>
+				  <PaginationLink next href="#/tdTable" on:click={() => cambiapag(e_page + 1, e_offset + 10)}/>
+			</PaginationItem>
+			</Pagination>
+	</div>
 	{/await}
 </main>
-
-<style>
-    table{
-		margin-left: auto;
-		margin-right: auto;
-	}
-	td{
-		padding: 1em;
-	}
-</style>

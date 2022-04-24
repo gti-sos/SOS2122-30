@@ -8,7 +8,7 @@ const url_jaime = "/technology_devices_stats";
 const jaime_URL_API = "https://documenter.getpostman.com/view/19584746/UVyoUwqe";
 
 module.exports = (app) => {
-    console.log("Exporting Technology Devices Stats");
+    console.log("Exporting E-waste Stats");
 
     app.use(bodyParser.json());
     
