@@ -7,9 +7,12 @@
 	let sat = [];
 	let initialSat = [];
 	let newSat = {
-		name: "",
-		phone: "",
-		email: ""
+		country: "",
+		year: "",
+		quarter: "",
+		stlaunched: "",
+		storbit: "",
+		stdestroyed: ""
 	};
 
 
@@ -68,7 +71,7 @@
 		if(res.ok){
 			const data = await res.json();
 			sat = data;
-			paginacion();
+			pagination();
 			initialSat = data;
 			console.log("Received stats" + JSON.stringify(sat,null,2));
 		}
