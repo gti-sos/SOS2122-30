@@ -4,13 +4,15 @@
 	import cryptocoinTable from "./servelgar1Front/cryptocoinTable.svelte"
 	import TdTable from "./jaiquisicFront/tdTable.svelte"
 	import satelliteTable from "./javaloyan1Front/satelliteTable.svelte"
+import EditSatellite from "./javaloyan1Front/editSatellite.svelte";
 
 	console.log("Funcionas");
 	const routes = {
 		'/': Home,
 		"/tdTable": TdTable,
 		"/ccTable": cryptocoinTable,
-		"/stTable": satelliteTable
+		"/stTable": satelliteTable,
+		"/stTable/country/year/quarter": EditSatellite
 	};
 
 </script>

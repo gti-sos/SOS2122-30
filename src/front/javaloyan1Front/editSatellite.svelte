@@ -53,7 +53,7 @@
 
 </script>
 <main>
-	<h1>Satellite stats</h1>
+    <h1>Edit Satellite</h1>
     {#await sat}
 	loading	
 	{:then sat} 
@@ -116,15 +116,12 @@
 				<td>
 					{satellite.stdestroyed}
 				</td>
-				<td>
-					<a href = "/stTable/{satellite.country}/{satellite.year}/{satellite.quarter}">
-						<Button 
-							outline
-							color="primary"
-							on:click="{editSat}">
-							Edit
-						</Button> 
-					</a>
+				<td><Button 
+						outline
+						color="primary"
+						on:click="{editSat}">
+						Edit
+					</Button>
 				</td>
 				<td><Button 
 						outline
