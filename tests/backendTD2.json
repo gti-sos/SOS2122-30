@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9d57c785-e365-45e9-8a92-495b6dc9abc3",
+		"_postman_id": "03ba5188-acf5-487d-97f3-bd2da573c71d",
 		"name": "td-stats-v2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -378,7 +378,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"DELTED DATA\", function () {\r",
+							"pm.test(\"DELETED DATA\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});"
 						],

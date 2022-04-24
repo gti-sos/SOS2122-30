@@ -217,12 +217,14 @@ module.exports = (app) => {
         
         db.remove({country : tdCountry, year: tdYear},{multi:true}, function(err,data){
             if(err){
-                res.sendStatus(500, "Internal Server Error");
+                console.error(err);
+                res.sendStatus(500);
             }else if(data == 0){
+                console.log("Data not found in database.");
                 res.status(404);
-                res.send("Data not found");
             }else{
-                res.sendStatus(200);
+                console.log("DELETE REQUEST");
+                res.status(200);
             }
         });
     });

@@ -278,11 +278,10 @@ module.exports = (app) => {
 
         db.remove({country : ccCountry, year : ccYear},{multi:true},function(err,data){
             if(err){
-                console.error(err);
-                res.sendStatus(500);
+                res.sendStatus(500, "Internal Server Error");
             } else if(data == 0){
-                console.log("Data not found in database.");
                 res.status(404);
+                res.send("Data not found");
             } else {
                 console.log("DELETE REQUEST");
                 res.status(200).send("All data with "+ccCountry+" and "+ccYear+" has been removed.")
