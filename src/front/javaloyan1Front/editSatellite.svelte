@@ -82,6 +82,9 @@
     </thead>
     <tbody>
         <tr>
+            <td>{updateC}</td>
+            <td>{updateY}</td>
+            <td>{updateQ}</td>
             <td><input bind:value="{updateSL}"></td>
             <td><input bind:value="{updateSO}"></td>
             <td><input bind:value="{updateSD}"></td>
