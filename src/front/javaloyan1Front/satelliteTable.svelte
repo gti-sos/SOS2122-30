@@ -259,11 +259,11 @@
 	<div>
 		<Pagination ariaLabel="Web pagination">
 			<PaginationItem class = {s_page === 1 ? "enable" : ""}>
-				  <PaginationLink previous href="#/ccTable" on:click={() => cambiapag(s_page - 1, s_offset - 10)}/>
+				  <PaginationLink previous href="#/stTable" on:click={() => cambiapag(s_page - 1, s_offset - 10)}/>
 			</PaginationItem>
 			{#each range(lastPage, 1) as page}
 				  <PaginationItem class = {s_page === page ? "active" : ""}>
-					<PaginationLink previous href="#/ccTable" on:click={() => cambiapag(page, (page - 1) * 10)}>
+					<PaginationLink previous href="#/stTable" on:click={() => cambiapag(page, (page - 1) * 10)}>
 						{page}
 					</PaginationLink>
 				  </PaginationItem>
