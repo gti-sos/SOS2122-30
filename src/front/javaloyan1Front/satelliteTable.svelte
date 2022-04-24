@@ -55,23 +55,6 @@
     }
 
 
-	async function getPagination() {
-    	console.log("Fetching data...");
-   		const res = await fetch("/api/v2/stsatellites-stats" + "?limit=" + limit + "&offset=" + s_offset);
-		
-		   if(res.ok){
-			console.log("getPagination Ok.");
-			const data = await res.json();
-			sat = data;
-			console.log("Estadísticas recibidas: "+sat.length);
-			pagination();
-		}else{
-			window.alert(res.status);
-		}
-  	}
-
-
-
 	//---------------------------------------------------------------------
 
 
@@ -92,17 +75,21 @@
 		
 	}
 
-	async function getSatelliteD(){
-		console.log("Fetching stats ... ");
-		const res =  await fetch("/api/v2/stsatellites-stats");
-		if(res.ok){
+	async function getPagination() {
+    	console.log("Fetching data...");
+   		const res = await fetch("/api/v2/stsatellites-stats" + "?limit=" + limit + "&offset=" + s_offset);
+		
+		   if(res.ok){
+			console.log("getPagination Ok.");
 			const data = await res.json();
 			sat = data;
-			initialSat = data;
-			console.log("Received stats" + JSON.stringify(sat,null,2));
+			console.log("Estadísticas recibidas: "+sat.length);
+			pagination();
+		}else{
+			window.alert(res.status);
 		}
-		
-	}
+  	}
+
 
 	//Put
 	async function insertSat(){
