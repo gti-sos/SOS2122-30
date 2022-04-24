@@ -4,6 +4,7 @@
 	import { pop } from "svelte-spa-router";
 
 	let sat = [];
+	let initalSat = [];
 	let newSat = {
 		name: "",
 		phone: "",
@@ -19,6 +20,7 @@
 		if(res.ok){
 			const data = await res.json();
 			sat = data;
+			initialSat = data;
 			console.log("Received stats" + JSON.stringify(sat,null,2));
 		}
 		
@@ -68,6 +70,14 @@
 		});
 	}
 
+	async function ilSat(){
+		console.log("inserting satellite: " + JSON.stringify(newSat));
+		const res =  await fetch("/api/v2/stsatellites-stats");
+		if(res.ok){
+			sat = initalSat;
+			console.log("Received stats" + JSON.stringify(sat,null,2));
+		}
+	}
 
 </script>
 <main>
@@ -110,7 +120,7 @@
 						outline
 						color="primary"
 						on:click="{insertSat}">
-						Insert
+						Insertar
 					</Button>
 				</td>
 			</tr>
@@ -139,22 +149,23 @@
 						<Button 
 							outline
 							color="primary">
-							Edit
+							Editar
 						</Button> 
 					</a>
 				</td>
 				<td><Button 
 						outline
 						color="primary">
-						on:click = "{deleteSat}"
-						Delete
+						on:click = "{deleteSat}">
+						Borrar
 					</Button>
 				</td>
 			</tr>
 			{/each}
-			<Button outline color = "primary" on:click = "{deleteSatAll}">Delete All</Button>
+			<Button outline color = "primary" on:click = "{ilSat}">Cargar Datos</Button>
+			<Button outline color = "primary" on:click = "{deleteSatAll}">Borrar Datos</Button>
 			<br>
-			<Button outline color = "secondary" on:click = "{pop}">Back</Button>
+			<Button outline color = "secondary" on:click = "{pop}">Volver</Button>
 		</tbody>
 	</table>
 	{/await}
