@@ -1,5 +1,7 @@
 <script>
     export let params = {};
+
+    import {onMount} from "svelte";
 	import Button from "sveltestrap/src/Button.svelte";
     import { pop } from "svelte-spa-router";
 
@@ -17,8 +19,7 @@
 
     async function getSatellite(){
 		console.log("Fetching stats ... ");
-		const res =  await fetch("/api/v2/stsatellites-stats/" + params.country +"/"
-            + params.year + "/"+params.quarter);
+		const res =  await fetch("/api/v2/stsatellites-stats/" + params.country +"/"+ params.year + "/"+params.quarter);
 		if(res.ok){
 			const data = await res.json();
 			sat = data;
