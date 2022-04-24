@@ -118,13 +118,8 @@
 					{satellite.stdestroyed}
 				</td>
 				<td>
-					<a href = "/#/stTable/{satellite.country}/{satellite.year}/{satellite.quarter}">
-						<Button 
-							outline
-							color="primary"
-							on:click="{editSat}">
-							Edit
-						</Button> 
+					<a color = "primary" href = "/#/stTable/{satellite.country}/{satellite.year}/{satellite.quarter}">
+						Edit
 					</a>
 				</td>
 				<td><Button 
