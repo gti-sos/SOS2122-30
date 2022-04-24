@@ -71,7 +71,7 @@
 		if(res.ok){
 			const data = await res.json();
 			sat = data;
-			paginacion();
+			pagination();
 			initialSat = data;
 			console.log("Received stats" + JSON.stringify(sat,null,2));
 		}
@@ -128,7 +128,7 @@
 
 	//Eliminar 1 st
 	async function deleteSat(countryS, yearS, quarterS){
-		const res = await fetch("/api/v2/stsatellites-stats/" + countryS + "/" + parseInt(yearS) + "/" + quarterS, {
+		const res = await fetch("/api/v2/stsatellites-stats/" + countryS + "/" + yearS + "/" + quarterS, {
 			method: "DELETE"
 		}).then(function(res){
 			getSatellite();
