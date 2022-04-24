@@ -37,6 +37,20 @@
 			});
 	}
 
+	async function editSat(){
+		console.log("inserting satellite: " + JSON.stringify(newSat));
+		const res = await fetch("/api/v2/stsatellites-stats",
+			{
+				method: "PUT",
+				body: JSON.stringify(newSat),
+				headers: {
+					"Content-Type":"application/json"
+				}
+			}).then(function(res){
+				getSatellite();
+			});
+	}
+
 </script>
 <main>
     {#await sat}
@@ -103,7 +117,8 @@
 				</td>
 				<td><Button 
 						outline
-						color="primary">
+						color="primary"
+						on:click="{editSat}">
 						Edit
 					</Button>
 				</td>

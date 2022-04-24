@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "f9e9fbf6-14f3-46a3-8f06-f95d0f812c61",
-		"name": "stsatellites-stats-v2",
+		"name": "stsatellites-stats",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
