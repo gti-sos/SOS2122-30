@@ -12,7 +12,7 @@ import EditSatellite from "./javaloyan1Front/editSatellite.svelte";
 		"/tdTable": TdTable,
 		"/ccTable": cryptocoinTable,
 		"/stTable": satelliteTable,
-		"/stTable/country/year/quarter": EditSatellite
+		"/stTable/:country/:year/:quarter": EditSatellite
 	};
 
 </script>

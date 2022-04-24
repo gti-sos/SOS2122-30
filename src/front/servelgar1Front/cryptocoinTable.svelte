@@ -287,7 +287,7 @@
 				<PaginationItem class = {c_page === lastPage ? "disabled" : ""}>
 					  <PaginationLink next href="#/ccTable" on:click={() => cambiapag(c_page + 1, c_offset + 10)}/>
 				</PaginationItem>
-			  </Pagination>
+				</Pagination>
 		</div>
 	</Table>
 	{/await}
