@@ -45,7 +45,9 @@
               visible=true;
 		      	} else if (res.status === 500) {
         		    errorMsg = "No se han podido acceder a la base de datos";
-      	  	}
+      	  	} else {
+                    errorMsg = "No se han introducido todos los datos.";
+                }
 			
       		console.log("ERROR!" + errorMsg);
         }
