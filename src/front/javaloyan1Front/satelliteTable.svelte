@@ -12,15 +12,74 @@
 		email: ""
 	};
 
-	//let loading = true;
+
+	//Paginación
+	//---------------------------------------------------------------------
+	// Variables para la paginación
+	let s_offset = 0;
+    let offset = 0;
+    let limit = 10;
+    let s_page = 1;
+    let lastPage = 1;
+    let total = 0;
+	
+	function range(size, start = 0) {
+      return [...Array(size).keys()].map((i) => i + start);
+	}
+
+	function cambiapag(page, offset) {
+      lastPage = Math.ceil(total/10);
+      console.log("Last page = " + lastPage);
+      if (page !== s_page) {
+        s_offset = offset;
+        s_page = page;
+        getSatellite();
+		getPagination();
+      }
+    }
+
+
+	async function pagination() {
+      const data = await fetch("/api/v2/stsatellites-stats");
+      if (data.status == 200 || res.status == 201 ) {
+        const json = await data.json();
+        total = json.length;
+        cambiapag(s_page, s_offset);
+      } 
+    }
+
+
+	async function getPagination() {
+    	console.log("Fetching data...");
+   		const res = await fetch("/api/v2/stsatellites-stats" + "?limit=" + limit + "&offset=" + s_offset);
+		
+		   if(res.ok){
+			console.log("getPagination Ok.");
+			const data = await res.json();
+			sat = data;
+			console.log("Estadísticas recibidas: "+sat.length);
+			pagination();
+		}else{
+			window.alert(res.status);
+		}
+  	}
+
+
+
+	//---------------------------------------------------------------------
+
+
+
 	onMount(getSatellite);
 
+	//Get inicial
 	async function getSatellite(){
 		console.log("Fetching stats ... ");
 		const res =  await fetch("/api/v2/stsatellites-stats");
 		if(res.ok){
 			const data = await res.json();
 			sat = data;
+			paginacion();
 			initialSat = data;
 			console.log("Received stats" + JSON.stringify(sat,null,2));
 		}
@@ -39,6 +98,7 @@
 		
 	}
 
+	//Put
 	async function insertSat(){
 		console.log("inserting satellite: " + JSON.stringify(newSat));
 		const res = await fetch("/api/v2/stsatellites-stats",
@@ -50,9 +110,11 @@
 				}
 			}).then(function(res){
 				getSatellite();
+				getPagination();
 			});
 	}
 
+	//Editar un st
 	async function editSat(){
 		console.log("inserting satellite: " + JSON.stringify(newSat));
 		const res = await fetch("/api/v2/stsatellites-stats",
@@ -64,26 +126,31 @@
 				}
 			}).then(function(res){
 				getSatellite();
+				getPagination();
 			});
 	}
 
+	//Eliminar 1 st
 	async function deleteSat(c, y, q){
 		const res = await fetch("/api/v2/stsatellites-stats" + "/" + c + "/" + y + "/" + q, {
 			method: "DELETE"
 		}).then(function(res){
 			getSatellite();
-			getPaginacion();
+			getPagination();
 		});
 	}
 
+	//Eliminar todos los st
 	async function deleteSatAll(){
 		const res = await fetch("/api/v2/stsatellites-stats", {
 			method: "DELETE"
 		}).then(function(res){
 			getSatellite();
+			getPagination();
 		});
 	}
 
+	//Carga inicial
 	async function ilSat(){
 		console.log("inserting satellite: " + JSON.stringify(newSat));
 		const res =  await fetch("/api/v2/stsatellites-stats/loadInitialData").then(function(res){
@@ -189,6 +256,23 @@
 		</div>
 
 	</table>
+	<div>
+		<Pagination ariaLabel="Web pagination">
+			<PaginationItem class = {s_page === 1 ? "enable" : ""}>
+				  <PaginationLink previous href="#/ccTable" on:click={() => cambiapag(s_page - 1, s_offset - 10)}/>
+			</PaginationItem>
+			{#each range(lastPage, 1) as page}
+				  <PaginationItem class = {s_page === page ? "active" : ""}>
+					<PaginationLink previous href="#/ccTable" on:click={() => cambiapag(page, (page - 1) * 10)}>
+						{page}
+					</PaginationLink>
+				  </PaginationItem>
+			{/each}
+			<PaginationItem class = {s_page === lastPage ? "disabled" : ""}>
+				  <PaginationLink next href="#/stTable" on:click={() => cambiapag(s_page + 1, s_offset + 10)}/>
+			</PaginationItem>
+			</Pagination>
+	</div>
 	{/await}
 </main>
 
