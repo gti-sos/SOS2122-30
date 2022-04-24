@@ -157,7 +157,7 @@
 				</td>
 				<td><Button 
 						outline
-						color="primary">
+						color="primary"
 						on:click = "{deleteSat(satellite.country, satellite.year, satellite.quarter)}">
 						Borrar
 					</Button>
