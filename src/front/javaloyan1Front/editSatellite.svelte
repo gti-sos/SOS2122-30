@@ -35,6 +35,9 @@
             + params.year + "/"+params.quarter, {
                 method: "PUT",
                 body: JSON.stringify({
+                    country: updateC,
+                    year: parseInt(updateY),
+                    quarter: updateQ,
                     stlaunched: parseInt(updateSL),
                     storbit: parseInt(updateSO),
                     stdestroyed: parseInt(updateSD)
