@@ -7,9 +7,12 @@
 	let sat = [];
 	let initialSat = [];
 	let newSat = {
-		name: "",
-		phone: "",
-		email: ""
+		country: "",
+		year: "",
+		quarter: "",
+		stlaunched: "",
+		storbit: "",
+		stdestroyed: ""
 	};
 
 
@@ -125,7 +128,7 @@
 
 	//Eliminar 1 st
 	async function deleteSat(countryS, yearS, quarterS){
-		const res = await fetch("/api/v2/stsatellites-stats/" + countryS + "/" + yearS + "/" + quarterS, {
+		const res = await fetch("/api/v2/stsatellites-stats/" + countryS + "/" + parseInt(yearS) + "/" + quarterS, {
 			method: "DELETE"
 		}).then(function(res){
 			getSatellite();
