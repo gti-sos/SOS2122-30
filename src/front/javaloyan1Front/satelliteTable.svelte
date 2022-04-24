@@ -72,7 +72,7 @@
 
 	async function ilSat(){
 		console.log("inserting satellite: " + JSON.stringify(newSat));
-		const res =  await fetch("/api/v2/stsatellites-stats");
+		const res =  await fetch("/api/v2/stsatellites-stats/loadInitialData");
 		if(res.ok){
 			sat = initialSat;
 			console.log("Received stats" + JSON.stringify(sat,null,2));
