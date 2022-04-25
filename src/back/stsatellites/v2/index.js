@@ -193,33 +193,6 @@ module.exports = (app) => {
     });
     _
 
-     //Elemento
-     app.get(BASE_API_URL + url_javier + "/:country", (req, res)=>{
-        var satCountry = req.params.country;
-
-        db.find({country : satCountry}, {_id:0}, function(err,data){
-            console.log("0");
-            if(err){
-                console.log("1");
-                console.error("ERROR GET: "+ err);
-                res.sendStatus(500, "Internal Server Error");
-            }else {
-                console.log("2");
-                if(data.length != 0){
-                    console.log("3");
-                    res.send(JSON.stringify(data,null,2));
-                    res.status(200);
-                }else{
-                    console.log("4");
-                    console.error("Data not found");
-                    res.status(404);
-                    res.send("Data not found");
-                }
-            }
-        });
-
-    });
-
     //POST
 
     //Conjunto
