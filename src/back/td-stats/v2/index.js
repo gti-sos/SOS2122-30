@@ -5,7 +5,7 @@ var db = new DataStore();
 
 const BASE_API_URL= "/api/v2";
 const url_jaime = "/technology_devices_stats";
-const jaime_URL_API = "https://documenter.getpostman.com/view/19584746/UVyoUwqe";
+const jaime_URL_API = "https://documenter.getpostman.com/view/19584746/UyrBjbck";
 
 module.exports = (app) => {
     console.log("Exporting E-waste Stats");
