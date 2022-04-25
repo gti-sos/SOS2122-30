@@ -6,16 +6,19 @@
     import  Table  from "sveltestrap/src/Table.svelte";
     import { pop } from "svelte-spa-router";
 
-    onMount(getEwaste);
+    
 
     let ewaste = {};
-    let updatedCountry;
-    let updatedYear;
-    let updatedTdwasted;
-    let updatedMpdisuse;
-    let updatedMpreused;
+    let updatedCountry = "";
+    let updatedYear= "";
+    let updatedTdwasted = "";
+    let updatedMpdisuse = "";
+    let updatedMpreused = "";
+    let okMsg = "";
+	let visible = false;
+	let visibleOk = false;
 
-
+    onMount(getEwaste);
 
     async function getEwaste(){
 		console.log("Fetching stats ... ");
@@ -35,7 +38,33 @@
 		
 	}
     async function editEwaste(){
-
+        console.log("Updating data..." );
+        const res = await fetch("/api/v2/cryptocoin-stats/" + params.country +"/" + params.year, {
+            method: "PUT",
+            body: JSON.stringify({
+              country : updatedCountry,
+              year : parseInt(updatedYear),
+			  tdwasted : parseInt(updatedTdwasted),
+              mpdisuse : parseInt(updatedMpdisuse),
+	 		  mpreused : parseInt(updatedMpreused)
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function (res) {
+          visible = true;
+          getCrypto();
+            if(res.status == 200 || res.status == 201){
+                okMsg = "Actualización correcta";
+              visibleOk=true;
+              }else{
+                if(res.status === 404){
+                  errorMsg ="El dato solicitado no existe";
+                  visibleOk=false;
+                  window.alert(errorMsg);
+                }
+              }
+          });
     }
 </script>
 
