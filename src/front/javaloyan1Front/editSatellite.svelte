@@ -63,6 +63,7 @@
                 if(res.status == 200 || res.status == 201){
                     okM = "Actualización correcta";
                     visibleOk=true;
+                    window.alert(okM);
                 }else{
                     if(res.status === 404){
                         errorM ="El dato solicitado no existe";
