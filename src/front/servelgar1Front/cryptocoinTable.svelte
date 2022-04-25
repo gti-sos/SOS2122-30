@@ -256,13 +256,13 @@
 
 		const res = await fetch("/api/v2/cryptocoin-stats?country="+searchCountry+"&year="+searchYear+"&from="+searchFrom+"&to="+searchTo);
 
-		if(res.ok){
+		if(res.status == 200 || res.status == 201){
 			const data = await res.json();
 			cc = data;
 			if(cc.length == 1){
 				errorMsg = "Se ha encontrado "+ cc.length + " dato"
 			} else {
-				errorMsg = "Se han encontrado "+ cc.length + " datos"
+				errorMsg = "No se ha encontrado el dato con país: "+ searchCountry
 			}
 		} else if (res.status == 404){
 			errorMsg = "No se ha encontrado datos con los parámetros introducidos."
