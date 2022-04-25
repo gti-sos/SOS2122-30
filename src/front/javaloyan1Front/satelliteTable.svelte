@@ -226,7 +226,7 @@
 		if(res.status == 200 || res.status == 201){
 			const data = await res.json();
 			sat = data;
-			if(sat.length >=1){
+			if(sat.length ==1){
 				errorM = "Se ha encontrado "+ sat.length + " dato";
 			} else {
 				errorM = "No se ha encontrado el dato con país: "+ searchC + " " + searchY + " " + searchQ;
