@@ -128,12 +128,6 @@
 						visible=true;
 						window.alert("ERROR!" + errorMsg);
 					}
-					if(res.status == 409){
-						errorMsg ="El dato solicitado ya existe";
-						visibleOk=false;
-						visible=true;
-						window.alert("ERROR!" + errorMsg);
-					}
 					window.alert("No se han introducido todos los datos");
 				}
 			}); 
