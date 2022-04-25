@@ -19,11 +19,11 @@
         <h2>
             Team:
         </h2>
-        <a href="https://github.com/Servelgar">Sergio Velázquez García</a>
+        <a href="https://github.com/Servelgar">Sergio Velázquez García</a> - cryptocoin-stats
         <br> 
-        <a href="https://github.com/alonyanez">Javier Alonso Yáñez</a>
+        <a href="https://github.com/alonyanez">Javier Alonso Yáñez </a> - stsatellites-stats
         <br> 
-        <a href="https://github.com/Jaiquisic23">Jaime Quintero Sicre</a> 
+        <a href="https://github.com/Jaiquisic23">Jaime Quintero Sicre </a> - technology_devices_stats
         <h2>
             Project description:
         </h2>
