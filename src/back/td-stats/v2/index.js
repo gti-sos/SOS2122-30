@@ -221,10 +221,10 @@ module.exports = (app) => {
                 res.sendStatus(500);
             }else if(data == 0){
                 console.log("Data not found in database.");
-                res.status(404);
+                res.sendStatus(404);
             }else{
                 console.log("DELETE REQUEST");
-                res.status(200);
+                res.sendStatus(200);
             }
         });
     });
