@@ -86,7 +86,7 @@
 			console.log("getPagination Ok.");
 			const data = await res.json();
 			sat = data;
-			console.log("Estadísticas recibidas: "+sat.length);
+			console.log("Estadísticas recibidas: "+ sat.length);
 			pagination();
 		}else{
 			window.alert(res.status);
@@ -115,7 +115,7 @@
 				
 				}else{
 					if(res.status == 409){
-						errorM ="Ya existe ese dato";
+						errorM ="Ya existe el dato: " + newSat;
 						visibleOk=false;
 						visible=true;
 						window.alert("Error" + errorM);
@@ -152,7 +152,7 @@
 				visible = true;
 				window.alert(errorM);              
             } else {
-                errorM= res.status + ": " + "No se pudo borrar el recurso";
+                errorM= res.status + ": " + "No se pudo borrar el recurso " + countryS + "-" + yearS + "-" + quarterS;
                 console.log("ERROR!");
 				visibleOk = false;
 				visible = true; 
