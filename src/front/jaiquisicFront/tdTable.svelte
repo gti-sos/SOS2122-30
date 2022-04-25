@@ -124,7 +124,7 @@
 			getEwaste();
 			getPagination();
 			if (res.status==200 || res.status == 201) {
-                errorMsg = "Recurso "+country +"-" + year+ "-"+ "se ha borrado correctamente";
+                errorMsg = "Recurso "+ country +"-" + year+ "-" + "se ha borrado correctamente";
                 console.log("Deleted " + country);
 				visibleOk = true;
 				visible = false;
@@ -152,6 +152,7 @@
 			getEwaste();
 			getPagination();
 		});
+		window.alert("Tabla borrada correctamente");
 	}
 	async function initialEwaste(){
 		console.log("inserting e-waste stat: " + JSON.stringify(newEwaste));
@@ -160,7 +161,7 @@
 		});
 		if(res.ok){
 			ewaste = initialEwaste;
-			console.log("Received stats" + JSON.stringify(ewaste,null,2));
+			console.log("Lista inicializada correctamente")
 		}
 	}
 
@@ -239,8 +240,6 @@
 				<td><input bind:value="{newEwaste.mpdisuse}"></td>
 				<td><input bind:value="{newEwaste.mpreused}"></td>
 				<td><Button outline color="primary" on:click="{insertEwaste}">Añadir</Button></td>
-				
-				
 				
 			</tr>
 			{#each ewaste as ewaste}
