@@ -200,7 +200,7 @@ module.exports = (app) => {
     app.delete(BASE_API_URL + url_jaime, (req, res)=>{
         db.remove({},{multi:true}, function (err, dbRemoved){
             if(err || dbRemoved == 0){
-                console.log("ERROR IN DELETING DB:" + err);
+                console.log("ERROR IN DELETING DB: " + err);
                 res.sendStatus(500, "Internal Server Error");
             }else{
                 console.log("Successfully removed");
