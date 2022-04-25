@@ -247,11 +247,11 @@ module.exports = (app) => {
 
     //Elemento
     app.delete(BASE_API_URL + url_javier + "/:country/:year/:quarter", (req, res)=>{
-        var satC = req.body.country;
-        var satY = parseInt(req.body.year);
-        var satQt = req.body.quarter;
+        var satC = req.params.country;
+        var satY = parseInt(req.params.year);
+        var satQ = req.params.quarter;
 
-        db.remove({country : satC, year: satY, quarter: satQt},{multi:true}, function(err,data){
+        db.remove({country : satC, year: satY, quarter: satQ},{multi:true}, function(err,data){
             console.log("0");
             if(err){
                 console.log("1");
