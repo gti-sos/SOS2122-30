@@ -132,7 +132,7 @@
 	}
 
 
-	//Eliminar 1 st
+	//Eliminar 1 sat
 	async function deleteSat(countryS, yearS, quarterS){
 		const res = await fetch("/api/v2/stsatellites-stats/" + countryS + "/" + yearS + "/" + quarterS, {
 			method: "DELETE"
