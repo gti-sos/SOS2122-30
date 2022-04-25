@@ -86,7 +86,7 @@
 			searchTo = "";
 		}
 
-		const res = await fetch("/api/v2/stsatellites-stats?country="+searchC+"&year="+searchY+"&quearter="+searchQ+"&from="+searchFrom+"&to="+searchTo);
+		const res = await fetch("/api/v2/stsatellites-stats?country="+searchC+"&year="+searchY+"&quarter="+searchQ+"&from="+searchFrom+"&to="+searchTo);
 
 		if(res.status == 200 || res.status == 201){
 			const data = await res.json();
