@@ -113,19 +113,12 @@
 					visible=false;
 					window.alert(okM);
 				
-				}else{
-					if(res.status == 409){
+				}else if(res.status == 409){
 						errorM ="Ya existe el dato: " + newSat;
 						visibleOk=false;
 						visible=true;
 						window.alert("Error" + errorM);
-					}
-					if(res.status == 409){
-						errorM ="El dato ya existe";
-						visibleOk=false;
-						visible=true;
-						window.alert("Error" + errorM);
-					}
+				}else{
 					window.alert("No se han introducido todos los datos");
 				}
 			}); 
