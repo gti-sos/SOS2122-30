@@ -26,7 +26,8 @@
 	let searchC = "";
 	let searchY = "";
 	let searchQ = "";
-
+	let searchFrom = "";
+	let searchTo = "";
 
 	//Paginación
 	//---------------------------------------------------------------------
@@ -68,7 +69,7 @@
 
 // BÚSQUEDA DE REPOSITORIO
 
-	async function busqueda (searchC, searchY, searchQ){
+	async function busqueda (searchC, searchY, searchQ, searchFrom, searchTo){
 		if (typeof searchC=='undefined'){
 			searchC = "";
 		}
@@ -78,19 +79,25 @@
 		if (typeof searchQ == 'undefined'){
 			searchQ = "";
 		}
+		if (typeof searchFrom == 'undefined'){
+			searchFrom = "";
+		}
+		if (typeof searchTo == 'undefined'){
+			searchTo = "";
+		}
 
-		const res = await fetch("/api/v2/stsatellites-stats?country="+searchC+"&year="+searchY+"&quearter="+searchQ);
+		const res = await fetch("/api/v2/stsatellites-stats?country="+searchC+"&year="+searchY+"&quearter="+searchQ+"&from="+searchFrom+"&to="+searchTo);
 
 		if(res.status == 200 || res.status == 201){
 			const data = await res.json();
 			sat = data;
-			if(cc.length == 1){
-				errorM = "Se ha encontrado "+ sat.length + " dato"
+			if(sat.length == 1){
+				errorM = "Se ha encontrado "+ sat.length + " dato";
 			} else {
-				errorM = "No se ha encontrado el dato con país: "+ searchC
+				errorM = "No se ha encontrado el dato con país: "+ searchC + " " + searchY + " " + searchQ;
 			}
 		} else if (res.status == 404){
-			errorM = "No se ha encontrado datos con los parámetros introducidos."
+			errorM = "No se ha encontrado datos con los parámetros introducidos.";
 		}
 		window.alert(errorM);
 	}
@@ -241,9 +248,13 @@
 			<td><strong><label>Año: <input  id="campoaño" bind:value="{searchY}"></label></strong></td>
 			<td><strong><label>Cuatrimestre: <input  id="cuatrimestre" bind:value="{searchQ}"></label></strong></td>
 		</tr>
+		<tr>
+			<td><strong><label>Año(Desde): <input bind:value="{searchFrom}"></label></strong></td>
+			<td><strong><label>Año(Hasta): <input bind:value="{searchTo}"></label></strong></td>
+		</tr>
 	</table>
 	<div style="text-align:center;padding-bottom: 1%">
-		<Button outline color="primary" on:click="{busqueda (searchC,searchY,searchQ)}">Buscar</Button>
+		<Button outline color="primary" on:click="{busqueda (searchC,searchY,searchQ,searchFrom,searchTo)}">Buscar</Button>
 	</div>
 
 
