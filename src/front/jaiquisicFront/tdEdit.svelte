@@ -39,7 +39,7 @@
 	}
     async function editEwaste(){
         console.log("Updating data..." );
-        const res = await fetch("/api/v2/cryptocoin-stats/" + params.country +"/" + params.year, {
+        const res = await fetch("/api/v2/technology_devices_stats/" + params.country +"/" + params.year, {
             method: "PUT",
             body: JSON.stringify({
               country : updatedCountry,
@@ -55,11 +55,11 @@
           visible = true;
           getCrypto();
             if(res.status == 200 || res.status == 201){
-                okMsg = "Actualización correcta";
+                okMsg = "Correct update";
               visibleOk=true;
               }else{
                 if(res.status === 404){
-                  errorMsg ="El dato solicitado no existe";
+                  errorMsg ="DATA NOT FOUND";
                   visibleOk=false;
                   window.alert(errorMsg);
                 }
