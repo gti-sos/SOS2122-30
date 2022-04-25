@@ -238,7 +238,7 @@
 				<td><input bind:value="{newEwaste.tdwasted}"></td>
 				<td><input bind:value="{newEwaste.mpdisuse}"></td>
 				<td><input bind:value="{newEwaste.mpreused}"></td>
-				<td><Button outline color="primary" on:click="{insertEwaste}">Insertar</Button></td>
+				<td><Button outline color="primary" on:click="{insertEwaste}">Añadir</Button></td>
 				
 				
 				
@@ -265,7 +265,7 @@
 						outline
 						color="primary"
 						on:click = {deleteTD(ewaste.country,ewaste.year)}>
-						Delete
+						Borrar
 					</Button>
 				</td>
 			</tr>
