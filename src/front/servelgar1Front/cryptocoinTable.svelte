@@ -301,11 +301,11 @@
 		
 			
 			<tr>
-				<th>Country</th>
-				<th>year</th>
-				<th>ccelectr</th>
-				<th>ccdemand</th>
-				<th>ccmining</th>
+				<th>País</th>
+				<th>Añi</th>
+				<th>Consumo eléctrico</th>
+				<th>Demanda eléctrica</th>
+				<th>% de minería</th>
 			</tr>
 		</thead>
 		<tbody>

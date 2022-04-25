@@ -29,6 +29,13 @@
     let lastPage = 1;
     let total = 0;
 
+	// VARIABLES DE BUSQUEDA
+
+	let searchCountry = "";
+	let searchYear = "";
+	let searchFrom = "";
+	let searchTo = "";
+
 	onMount(getEwaste);
 	async function getEwaste(){
 		console.log("Fetching stats ... ");
@@ -91,12 +98,26 @@
 				"Content-Type": "application/json"
 			}
 		}).then(function (res){
-			getEwaste();
-		});
-		console.log("Done");
+			if(res.status == 200 ||res.status == 201){
+					getEwaste();
+					getPagination();
+					okMsg = "Recurso añadido correctamente";
+					visibleOk=true;
+					visible=false;
+					window.alert(okMsg);
+				
+				}else{
+					if(res.status == 409){
+						errorMsg ="Ya existe ese dato";
+						visibleOk=false;
+						visible=true;
+						window.alert("ERROR!" + errorMsg);
+					}
+					window.alert("No se han introducido todos los datos");
 		}
-	
-		async function deleteTD(country, year){
+	});
+}
+	async function deleteTD(country, year){
 		const res = await fetch("/api/v2/technology_devices_stats/" + country + "/" + year + "/", {
 			method: "DELETE"
 		}).then(function(res){
@@ -142,16 +163,69 @@
 			console.log("Received stats" + JSON.stringify(ewaste,null,2));
 		}
 	}
+
+	
+	// BÚSQUEDA DE REPOSITORIO
+
+	async function busqueda(searchCountry, searchYear, searchFrom, searchTo){
+		if (typeof searchCountry=='undefined'){
+			searchCountry = "";
+		}
+		if (typeof searchYear == 'undefined'){
+			searchYear = "";
+		}
+		if (typeof searchFrom == 'undefined'){
+			searchFrom = "";
+		}
+		if (typeof searchTo == 'undefined'){
+			searchTo = "";
+		}
+
+		const res = await fetch("/api/v2/technology_devices_stats?country="+searchCountry+"&year="+searchYear+"&from="+searchFrom+"&to="+searchTo);
+
+		if(res.status == 200 || res.status == 201){
+			const data = await res.json();
+			ewaste = data;
+			if(ewaste.length == 1){
+				errorMsg = "Se ha encontrado "+ ewaste.length + " dato";
+			} else {
+				errorMsg = "No se ha encontrado el dato con país: "+ searchCountry;
+			}
+		} else if (res.status == 404){
+			errorMsg = "No se ha encontrado datos con los parámetros introducidos.";
+		}
+		window.alert(errorMsg);
+	}
+	
+
 </script>
+
 <main>
+
+	<p><strong>Filtrado de datos</strong></p>
+	<Table borderless responsive>
+		<tr>
+			<td><strong><label>Pais: <input id="filterpais"  bind:value="{searchCountry}"></label></strong></td>
+			<td><strong><label>Año: <input  id="campoaño" bind:value="{searchYear}"></label></strong></td>
+		</tr>
+
+		<tr>
+			<td><strong><label>Año(Desde): <input bind:value="{searchFrom}"></label></strong></td>
+			<td><strong><label>Año(Hasta): <input bind:value="{searchTo}"></label></strong></td>
+		</tr>
+	</Table>
+	<div style="text-align:center;padding-bottom: 1%">
+		<Button outline color="primary" on:click="{busqueda (searchCountry, searchYear,searchFrom,searchTo)}">Buscar</Button>
+	</div>
+
     {#await ewaste}
 	loading	
 	{:then ewaste} 
 	<Table bordered>
 		<thead>
 			<tr>
-				<th>Country</th>
-				<th>year</th>
+				<th>País</th>
+				<th>Año</th>
 				<th>tdwasted</th>
 				<th>mpdisuse</th>
 				<th>mpreused</th>
@@ -164,7 +238,7 @@
 				<td><input bind:value="{newEwaste.tdwasted}"></td>
 				<td><input bind:value="{newEwaste.mpdisuse}"></td>
 				<td><input bind:value="{newEwaste.mpreused}"></td>
-				<td><Button outline color="primary" on:click="{insertEwaste}">Insert</Button></td>
+				<td><Button outline color="primary" on:click="{insertEwaste}">Insertar</Button></td>
 				
 				
 				
@@ -182,7 +256,7 @@
 						<Button 
 							outline
 							color="primary">
-							Edit
+							Editar
 						</Button> 
 					</a>
 				</td>
@@ -196,10 +270,10 @@
 				</td>
 			</tr>
 			{/each}
-			<Button outline color = "primary" on:click = "{initialEwaste}">Load Data</Button>
-			<Button outline color = "primary" on:click = "{deleteAll}">Delete Data</Button>
+			<Button outline color = "primary" on:click = "{initialEwaste}">Cargar Datos</Button>
+			<Button outline color = "primary" on:click = "{deleteAll}">Borrar datos</Button>
 			<br>
-			<Button outline color = "secondary" on:click = "{pop}">Back</Button>
+			<Button outline color = "secondary" on:click = "{pop}">Volver</Button>
 		</tbody>
 
 		<div>
