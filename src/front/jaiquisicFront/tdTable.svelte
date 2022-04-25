@@ -133,7 +133,7 @@
 		});
 	}
 	async function initialEwaste(){
-		console.log("inserting e-waste stat: " + JSON.stringify(newSat));
+		console.log("inserting e-waste stat: " + JSON.stringify(newEwaste));
 		const res =  await fetch("/api/v2/technology_devices_stats/loadInitialData").then(function(res){
 			getEwaste();
 		});
