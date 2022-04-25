@@ -223,13 +223,13 @@
 
 		const res = await fetch("/api/v2/stsatellites-stats?country="+searchC+"&year="+searchY+"&quarter="+searchQ+"&from="+searchFrom+"&to="+searchTo);
 
-		if(res.status == 200 || res.status == 201){
-			const data = await res.json();
-			sat = data;
+		if(res.ok){
+			const json = await res.json();
+			sat = json;
 			if(sat.length ==1){
 				errorM = "Se ha encontrado "+ sat.length + " dato";
 			} else {
-				errorM = "No se ha encontrado el dato con país: "+ searchC + " " + searchY + " " + searchQ;
+				errorM = "Se han encontrado "+ sat.length + " datos";
 			}
 		} else if (res.status == 404){
 			errorM = "No se ha encontrado datos con los parámetros introducidos.";
