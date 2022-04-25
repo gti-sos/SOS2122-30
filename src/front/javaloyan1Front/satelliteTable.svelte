@@ -22,6 +22,12 @@
 	let visibleOk = false;
 
 
+	
+	let searchC = "";
+	let searchY = "";
+	let searchQ = "";
+
+
 	//Paginación
 	//---------------------------------------------------------------------
 	// Variables para la paginación
@@ -59,6 +65,35 @@
 
 
 	//---------------------------------------------------------------------
+
+// BÚSQUEDA DE REPOSITORIO
+
+	async function busqueda (searchC, searchY, searchQ){
+		if (typeof searchC=='undefined'){
+			searchC = "";
+		}
+		if (typeof searchY == 'undefined'){
+			searchY = "";
+		}
+		if (typeof searchQ == 'undefined'){
+			searchQ = "";
+		}
+
+		const res = await fetch("/api/v2/stsatellites-stats?country="+searchC+"&year="+searchY+"&quearter="+searchQ);
+
+		if(res.status == 200 || res.status == 201){
+			const data = await res.json();
+			sat = data;
+			if(cc.length == 1){
+				errorM = "Se ha encontrado "+ sat.length + " dato"
+			} else {
+				errorM = "No se ha encontrado el dato con país: "+ searchC
+			}
+		} else if (res.status == 404){
+			errorM = "No se ha encontrado datos con los parámetros introducidos."
+		}
+		window.alert(errorM);
+	}
 
 
 
@@ -198,6 +233,21 @@
 </script>
 <main>
 	<h1>Satellite stats</h1>
+
+	<p><strong>Filtrado de datos</strong></p>
+	<table>
+		<tr>
+			<td><strong><label>Pais: <input id="filterpais"  bind:value="{searchC}"></label></strong></td>
+			<td><strong><label>Año: <input  id="campoaño" bind:value="{searchY}"></label></strong></td>
+			<td><strong><label>Cuatrimestre: <input  id="cuatrimestre" bind:value="{searchQ}"></label></strong></td>
+		</tr>
+	</table>
+	<div style="text-align:center;padding-bottom: 1%">
+		<Button outline color="primary" on:click="{busqueda (searchC,searchY,searchQ)}">Buscar</Button>
+	</div>
+
+
+
     {#await sat}
 	loading	
 	{:then sat} 
