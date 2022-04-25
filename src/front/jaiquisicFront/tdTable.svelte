@@ -116,8 +116,8 @@
 					window.alert("No se han introducido todos los datos");
 		}
 	});
-	
-		async function deleteTD(country, year){
+}
+	async function deleteTD(country, year){
 		const res = await fetch("/api/v2/technology_devices_stats/" + country + "/" + year + "/", {
 			method: "DELETE"
 		}).then(function(res){
@@ -167,7 +167,7 @@
 	
 	// BÚSQUEDA DE REPOSITORIO
 
-	async function busqueda (searchCountry, searchYear, searchFrom, searchTo){
+	async function busqueda(searchCountry, searchYear, searchFrom, searchTo){
 		if (typeof searchCountry=='undefined'){
 			searchCountry = "";
 		}
@@ -187,16 +187,16 @@
 			const data = await res.json();
 			ewaste = data;
 			if(ewaste.length == 1){
-				errorMsg = "Se ha encontrado "+ ewaste.length + " dato"
+				errorMsg = "Se ha encontrado "+ ewaste.length + " dato";
 			} else {
-				errorMsg = "No se ha encontrado el dato con país: "+ searchCountry
+				errorMsg = "No se ha encontrado el dato con país: "+ searchCountry;
 			}
 		} else if (res.status == 404){
-			errorMsg = "No se ha encontrado datos con los parámetros introducidos."
+			errorMsg = "No se ha encontrado datos con los parámetros introducidos.";
 		}
 		window.alert(errorMsg);
 	}
-}
+	
 
 </script>
 
