@@ -11,6 +11,7 @@
 	console.log("Funcionas");
 	const routes = {
 		'/': Home,
+		'/info': Home,
 		"/tdTable": TdTable,
 		"/tdTable/:country/:year": TdEdit,
 
