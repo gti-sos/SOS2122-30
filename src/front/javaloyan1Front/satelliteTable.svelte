@@ -67,41 +67,6 @@
 
 	//---------------------------------------------------------------------
 
-// BÚSQUEDA DE REPOSITORIO
-
-	async function busqueda (searchC, searchY, searchQ, searchFrom, searchTo){
-		if (typeof searchC=='undefined'){
-			searchC = "";
-		}
-		if (typeof searchY == 'undefined'){
-			searchY = "";
-		}
-		if (typeof searchQ == 'undefined'){
-			searchQ = "";
-		}
-		if (typeof searchFrom == 'undefined'){
-			searchFrom = "";
-		}
-		if (typeof searchTo == 'undefined'){
-			searchTo = "";
-		}
-
-		const res = await fetch("/api/v2/stsatellites-stats?country="+searchC+"&year="+searchY+"&quarter="+searchQ+"&from="+searchFrom+"&to="+searchTo);
-
-		if(res.status == 200 || res.status == 201){
-			const data = await res.json();
-			sat = data;
-			if(sat.length == 1){
-				errorM = "Se ha encontrado "+ sat.length + " dato";
-			} else {
-				errorM = "No se ha encontrado el dato con país: "+ searchC + " " + searchY + " " + searchQ;
-			}
-		} else if (res.status == 404){
-			errorM = "No se ha encontrado datos con los parámetros introducidos.";
-		}
-		window.alert(errorM);
-	}
-
 
 
 	onMount(getSatellite);
@@ -237,6 +202,41 @@
 		});
 	}
 
+	// BÚSQUEDA DE REPOSITORIO
+
+	async function busqueda (searchC, searchY, searchQ, searchFrom, searchTo){
+		if (typeof searchC=='undefined'){
+			searchC = "";
+		}
+		if (typeof searchY == 'undefined'){
+			searchY = "";
+		}
+		if (typeof searchQ == 'undefined'){
+			searchQ = "";
+		}
+		if (typeof searchFrom == 'undefined'){
+			searchFrom = "";
+		}
+		if (typeof searchTo == 'undefined'){
+			searchTo = "";
+		}
+
+		const res = await fetch("/api/v2/stsatellites-stats?country="+searchC+"&year="+searchY+"&quarter="+searchQ+"&from="+searchFrom+"&to="+searchTo);
+
+		if(res.status == 200 || res.status == 201){
+			const data = await res.json();
+			sat = data;
+			if(sat.length >=1){
+				errorM = "Se ha encontrado "+ sat.length + " dato";
+			} else {
+				errorM = "No se ha encontrado el dato con país: "+ searchC + " " + searchY + " " + searchQ;
+			}
+		} else if (res.status == 404){
+			errorM = "No se ha encontrado datos con los parámetros introducidos.";
+		}
+		window.alert(errorM);
+	}
+
 </script>
 <main>
 	<h1>Satellite stats</h1>
@@ -254,7 +254,7 @@
 		</tr>
 	</table>
 	<div style="text-align:center;padding-bottom: 1%">
-		<Button outline color="primary" on:click="{busqueda (searchC,searchY,searchQ,searchFrom,searchTo)}">Buscar</Button>
+		<Button outline color="primary" on:click="{busqueda(searchC,searchY,searchQ,searchFrom,searchTo)}">Buscar</Button>
 	</div>
 
 
