@@ -53,7 +53,7 @@
             }
         }).then(function (res) {
           visible = true;
-          getCrypto();
+          getEwaste();
             if(res.status == 200 || res.status == 201){
                 okMsg = "Correct update";
               visibleOk=true;

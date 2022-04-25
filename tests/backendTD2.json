@@ -409,6 +409,43 @@
 			"response": []
 		},
 		{
+			"name": "Delete All",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"DELETED DATA\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/Netherland/2019",
+					"protocol": "https",
+					"host": [
+						"sos2122-30",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"technology_devices_stats",
+						"Netherland",
+						"2019"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GET LoadInitialData",
 			"event": [
 				{
