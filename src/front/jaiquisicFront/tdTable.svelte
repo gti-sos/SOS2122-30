@@ -91,7 +91,7 @@
 				"Content-Type": "application/json"
 			}
 		}).then(function (res){
-			getEwaste
+			getEwaste();
 		});
 		console.log("Done");
 		}
