@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4047ebf1-3863-4f9b-9dd0-8851334a66b2",
+		"_postman_id": "03ba5188-acf5-487d-97f3-bd2da573c71d",
 		"name": "td-stats-v2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -135,7 +135,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"country\": \"Netherland\",\r\n\"year\": 2019,\r\n\"tdwasted\": 2065,\r\n\"mpdisuse\": 220,\r\n\"mpreused\": 79\r\n}\r\n",
+					"raw": "{\r\n\"country\": \"Bulgary\",\r\n\"year\": 2019,\r\n\"tdwasted\": 2065,\r\n\"mpdisuse\": 220,\r\n\"mpreused\": 79\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -353,7 +353,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/Bulgary/2019",
+					"raw": "https://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/Moroco/2019",
 					"protocol": "https",
 					"host": [
 						"sos2122-30",
@@ -364,7 +364,7 @@
 						"api",
 						"v2",
 						"technology_devices_stats",
-						"Bulgary",
+						"Moroco",
 						"2019"
 					]
 				}

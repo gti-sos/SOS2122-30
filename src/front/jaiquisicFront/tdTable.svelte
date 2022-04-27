@@ -207,8 +207,8 @@
 			<td><strong><label>Pais: <input id="filterpais"  bind:value="{searchCountry}"></label></strong></td>
 		</tr>
 		<tr>
-			<td><strong><label>Año(Desde): <input bind:value="{searchFrom}"></label></strong></td>
-			<td><strong><label>Año(Hasta): <input bind:value="{searchTo}"></label></strong></td>
+			<td><strong><label>Desde: <input bind:value="{searchFrom}"></label></strong></td>
+			<td><strong><label>Hasta: <input bind:value="{searchTo}"></label></strong></td>
 		</tr>
 	</Table>
 	<div style="text-align:center;padding-bottom: 1%">
