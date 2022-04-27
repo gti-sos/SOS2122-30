@@ -172,9 +172,6 @@
 		if (typeof searchCountry=='undefined'){
 			searchCountry = "";
 		}
-		if (typeof searchYear == 'undefined'){
-			searchYear = "";
-		}
 		if (typeof searchFrom == 'undefined'){
 			searchFrom = "";
 		}
@@ -182,7 +179,7 @@
 			searchTo = "";
 		}
 
-		const res = await fetch("/api/v2/technology_devices_stats?country="+searchCountry+"&year="+searchYear+"&from="+searchFrom+"&to="+searchTo);
+		const res = await fetch("/api/v2/technology_devices_stats?country="+searchCountry+"&from="+searchFrom+"&to="+searchTo);
 
 		if(res.status == 200 || res.status == 201){
 			const data = await res.json();
@@ -208,9 +205,7 @@
 	<Table borderless responsive>
 		<tr>
 			<td><strong><label>Pais: <input id="filterpais"  bind:value="{searchCountry}"></label></strong></td>
-			<td><strong><label>Año: <input  id="campoaño" bind:value="{searchYear}"></label></strong></td>
 		</tr>
-
 		<tr>
 			<td><strong><label>Año(Desde): <input bind:value="{searchFrom}"></label></strong></td>
 			<td><strong><label>Año(Hasta): <input bind:value="{searchTo}"></label></strong></td>
@@ -229,8 +224,8 @@
 				<th>País</th>
 				<th>Año</th>
 				<th>E-waste (Ton)</th>
-				<th>Teléfonos móviles en desuso</th>
-				<th>% Teléfonos móviles reciclados</th>
+				<th>Teléfonos móviles en desuso (en millones)</th>
+				<th>% Teléfonos móviles reciclados/reutilizados</th>
 			</tr>
 		</thead>
 		<tbody>

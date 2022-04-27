@@ -71,16 +71,16 @@
 <main>
     <h1>Editar información de E-waste: <strong>{params.country}</strong>  <strong>{params.year}</strong></h1>   
         {#await ewaste}
-        loading	
+        Cargando	
         {:then ewaste} 
         <Table bordered>
             <thead>
                 <tr>
-                    <th>Country</th>
-                    <th>year</th>
-                    <th>tdwasted</th>
-                    <th>mpdisuse</th>
-                    <th>mpreused</th>
+                    <th>País</th>
+                    <th>Año</th>
+                    <th>E-waste (Ton)</th>
+                    <th>Teléfonos móviles en desuso (en millones)</th>
+                    <th>% Teléfonos móviles reciclados/reutilizados</th>
                 </tr>
             </thead>
             <tbody>
@@ -90,12 +90,12 @@
                     <td><input bind:value="{updatedTdwasted}"></td>
                     <td><input bind:value="{updatedMpdisuse}"></td>
                     <td><input bind:value="{updatedMpreused}"></td>
-                    <td><Button outline color="primary" on:click="{editEwaste}">Edit</Button></td>
+                    <td><Button outline color="primary" on:click="{editEwaste}">Editar</Button></td>
                 
                 </tr>
             </tbody>
         </Table>
 
-        <Button outline color = "secondary" on:click = "{pop}">Back</Button>
+        <Button outline color = "secondary" on:click = "{pop}">Volver</Button>
     {/await}
 </main>

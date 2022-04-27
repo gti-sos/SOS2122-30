@@ -4,7 +4,7 @@
 </script>
 
 <main>
-	<h1>E-waste stats</h1>
+	<h1>Estadísticas de E-waste</h1>
 	 
     <td_Table />  
   </main>

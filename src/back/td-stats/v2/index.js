@@ -55,6 +55,26 @@ module.exports = (app) => {
             "tdwasted": 739,
             "mpdisuse": 22.5,
             "mpreused": 70
+        },{
+            "country": "Netherland",
+            "year": 2019,
+            "tdwasted": 323,
+            "mpdisuse": 13.4,
+            "mpreused": 75
+        },
+        {
+            "country": "Italy",
+            "year": 2019,
+            "tdwasted": 2078,
+            "mpdisuse": 63.4,
+            "mpreused": 75
+        },
+        {
+            "country": "Finland",
+            "year": 2019,
+            "tdwasted": 205,
+            "mpdisuse": 7.1,
+            "mpreused": 89
         }
 
     ];
@@ -113,6 +133,27 @@ module.exports = (app) => {
                 "tdwasted": 739,
                 "mpdisuse": 22.5,
                 "mpreused": 70
+            },
+            {
+                "country": "Netherland",
+                "year": 2019,
+                "tdwasted": 323,
+                "mpdisuse": 13.4,
+                "mpreused": 75
+            },
+            {
+                "country": "Italy",
+                "year": 2019,
+                "tdwasted": 2078,
+                "mpdisuse": 63.4,
+                "mpreused": 75
+            },
+            {
+                "country": "Finland",
+                "year": 2019,
+                "tdwasted": 205,
+                "mpdisuse": 7.1,
+                "mpreused": 89
             }
     
         ];
