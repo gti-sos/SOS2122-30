@@ -161,7 +161,7 @@
 		});
 		if(res.ok){
 			ewaste = initialEwaste;
-			console.log("Lista inicializada correctamente")
+			window.alert("Lista inicializada correctamente")
 		}
 	}
 
@@ -202,6 +202,7 @@
 </script>
 
 <main>
+	<h1>Estadísticas de E-waste</h1>
 
 	<p><strong>Filtrado de datos</strong></p>
 	<Table borderless responsive>
@@ -220,16 +221,16 @@
 	</div>
 
     {#await ewaste}
-	loading	
+	Cargando	
 	{:then ewaste} 
 	<Table bordered>
 		<thead>
 			<tr>
 				<th>País</th>
 				<th>Año</th>
-				<th>tdwasted</th>
-				<th>mpdisuse</th>
-				<th>mpreused</th>
+				<th>E-waste (Ton)</th>
+				<th>Teléfonos móviles en desuso</th>
+				<th>% Teléfonos móviles reciclados</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -249,23 +250,13 @@
 				<td>{ewaste.tdwasted}</td>
 				<td>{ewaste.mpdisuse}</td>
 				<td>{ewaste.mpreused}</td>
-
 				<td>
 					<a href = "/#/tdTable/{ewaste.country}/{ewaste.year}">
-						<Button 
-							outline
-							color="primary">
-							Editar
-						</Button> 
+						<Button outline color="primary">Editar</Button> 
 					</a>
 				</td>
 				<td>
-					<Button 
-						outline
-						color="primary"
-						on:click = {deleteTD(ewaste.country,ewaste.year)}>
-						Borrar
-					</Button>
+					<Button outline color="primary" on:click = {deleteTD(ewaste.country,ewaste.year)}>Borrar</Button>
 				</td>
 			</tr>
 			{/each}
