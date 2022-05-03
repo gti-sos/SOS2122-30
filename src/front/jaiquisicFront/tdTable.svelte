@@ -168,7 +168,7 @@
 	
 	// BÚSQUEDA DE REPOSITORIO
 
-	async function busqueda(searchCountry, searchYear, searchFrom, searchTo){
+	async function busqueda (searchCountry, searchFrom, searchTo){
 		if (typeof searchCountry=='undefined'){
 			searchCountry = "";
 		}
@@ -187,7 +187,7 @@
 			if(ewaste.length == 1){
 				errorMsg = "Se ha encontrado "+ ewaste.length + " dato";
 			} else {
-				errorMsg = "No se ha encontrado el dato con país: "+ searchCountry;
+				errorMsg = "No se ha encontrado ningún dato para los parametros introducidos";
 			}
 		} else if (res.status == 404){
 			errorMsg = "No se ha encontrado datos con los parámetros introducidos.";
@@ -207,12 +207,14 @@
 			<td><strong><label>Pais: <input id="filterpais"  bind:value="{searchCountry}"></label></strong></td>
 		</tr>
 		<tr>
+			<h1>Año</h1>
+			<br>
 			<td><strong><label>Desde: <input bind:value="{searchFrom}"></label></strong></td>
 			<td><strong><label>Hasta: <input bind:value="{searchTo}"></label></strong></td>
 		</tr>
 	</Table>
 	<div style="text-align:center;padding-bottom: 1%">
-		<Button outline color="primary" on:click="{busqueda (searchCountry, searchYear,searchFrom,searchTo)}">Buscar</Button>
+		<Button outline color="primary" on:click="{busqueda (searchCountry, searchFrom, searchTo)}">Buscar</Button>
 	</div>
 
     {#await ewaste}
