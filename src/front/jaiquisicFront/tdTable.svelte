@@ -168,9 +168,12 @@
 	
 	// BÚSQUEDA DE REPOSITORIO
 
-	async function busqueda (searchCountry, searchFrom, searchTo){
+	async function busqueda (searchCountry,searchYear, searchFrom, searchTo){
 		if (typeof searchCountry=='undefined'){
 			searchCountry = "";
+		}
+		if (typeof searchYear == 'undefined'){
+			searchYear = "";
 		}
 		if (typeof searchFrom == 'undefined'){
 			searchFrom = "";
@@ -179,7 +182,7 @@
 			searchTo = "";
 		}
 
-		const res = await fetch("/api/v2/technology_devices_stats?country="+searchCountry+"&from="+searchFrom+"&to="+searchTo);
+		const res = await fetch("/api/v2/technology_devices_stats?country="+searchCountry+"&year="+searchYear+"&from="+searchFrom+"&to="+searchTo);
 
 		if(res.status == 200 || res.status == 201){
 			const data = await res.json();
@@ -205,16 +208,15 @@
 	<Table borderless responsive>
 		<tr>
 			<td><strong><label>Pais: <input id="filterpais"  bind:value="{searchCountry}"></label></strong></td>
+			<td><strong><label>Año: <input  id="campoaño" bind:value="{searchYear}"></label></strong></td>
 		</tr>
 		<tr>
-			<h1>Año</h1>
-			<br>
-			<td><strong><label>Desde: <input bind:value="{searchFrom}"></label></strong></td>
-			<td><strong><label>Hasta: <input bind:value="{searchTo}"></label></strong></td>
+			<td><strong><label>Año(Desde): <input bind:value="{searchFrom}"></label></strong></td>
+			<td><strong><label>Año(Hasta): <input bind:value="{searchTo}"></label></strong></td>
 		</tr>
 	</Table>
 	<div style="text-align:center;padding-bottom: 1%">
-		<Button outline color="primary" on:click="{busqueda (searchCountry, searchFrom, searchTo)}">Buscar</Button>
+		<Button outline color="primary" on:click="{busqueda (searchCountry,searchYear, searchFrom, searchTo)}">Buscar</Button>
 	</div>
 
     {#await ewaste}
