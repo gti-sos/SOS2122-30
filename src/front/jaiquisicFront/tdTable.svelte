@@ -37,17 +37,8 @@
 	let searchTo = "";
 
 	onMount(getEwaste);
-	async function getEwaste(){
-		console.log("Fetching stats ... ");
-		const res =  await fetch("/api/v2/technology_devices_stats");
-		if(res.ok){
-		const data =await res.json();
-		ewaste = data;
-		p1 = ewaste[0];
-		console.log("Received stats" + JSON.stringify(ewaste,null,2));
-		}
-		
-	}
+
+	
 	function range(size, start = 0) {
       return [...Array(size).keys()].map((i) => i + start);
 	}
@@ -72,6 +63,20 @@
         cambiapag(e_page, e_offset);
       } 
     }
+
+	async function getEwaste(){
+		console.log("Fetching stats ... ");
+		const res =  await fetch("/api/v2/technology_devices_stats");
+		if(res.ok){
+		const data =await res.json();
+		ewaste = data;
+		total = data.length;
+		paginacion();
+		p1 = ewaste[0];
+		console.log("Received stats" + JSON.stringify(ewaste,null,2));
+		}
+		
+	}
 	async function getPagination() {
     	console.log("Fetching data...");
    		const res = await fetch("/api/v2/technology_devices_stats" + "?limit=" + limit + "&offset=" + e_offset);
@@ -118,19 +123,19 @@
 	});
 }
 	async function deleteTD(country, year){
-		const res = await fetch("/api/v2/technology_devices_stats/" + country + "/" + year + "/", {
+		const res = await fetch("/api/v2/technology_devices_stats/" + country + "/" + year, {
 			method: "DELETE"
 		}).then(function(res){
 			getEwaste();
 			getPagination();
 			if (res.status==200 || res.status == 201) {
-                errorMsg = "Recurso "+ country +"-" + year+ "-" + "se ha borrado correctamente";
+                errorMsg = "Recurso "+ country +" " + year+ " se ha borrado correctamente";
                 console.log("Deleted " + country);
 				visibleOk = true;
 				visible = false;
 				window.alert(errorMsg);    
             } else if (res.status==404) {
-                errorMsg = "No se ha encontrado el objeto " + country + "-" + year + "-";
+                errorMsg = "No se ha encontrado el objeto " + country + " " + year ;
                 console.log("Resource NOT FOUND");
 				visibleOk = false;
 				visible = true;
@@ -154,16 +159,47 @@
 		});
 		window.alert("Tabla borrada correctamente");
 	}
+
+
 	async function initialEwaste(){
-		console.log("inserting e-waste stat: " + JSON.stringify(newEwaste));
-		const res =  await fetch("/api/v2/technology_devices_stats/loadInitialData").then(function(res){
-			getEwaste();
+		console.log("Loading entries....");
+        const msg = await fetch("/api/v2/technology_devices_stats/loadInitialData").then(function(res){
+			visible = true;
+			if(res.status == 200 || res.status == 201){
+				console.log("200");
+				errorMsg = "Objetos cargados correctamente";
+				window.alert(errorMsg);
+			} else if (res.status == 400){
+				errorMsg = "Ha ocurrido un fallo";
+				console.log("BAD REQUEST");
+				window.alert(errorMsg);
+			} else {
+				errorMsg= res.status + ": " + res.statusText;
+                console.log("ERROR!");
+				window.alert(errorMsg);
+			}
 		});
-		if(res.ok){
-			ewaste = initialEwaste;
-			window.alert("Lista inicializada correctamente")
-		}
-	}
+
+		const elements = await fetch("/api/v2/technology_devices_stats/loadInitialData")
+			.then(function(elements){
+				getEwaste();
+				getPagination();
+			}); //datos cargados
+        const jsonElements = await elements.json();
+        e_page = 1;
+        totalObj = jsonElements.length;
+        console.log("ELEMENTOS: "+ totalObj);
+        const res = await fetch("/api/v2/technology_devices_stats?limit=10&offset=1"); //datos mostrados
+        if (res.ok) {
+            console.log("Ok: ");
+            const json = await res.json();
+            ewaste = json;
+            console.log("Loading "+ ewaste.length+" objects");
+            console.log("Received " + ewaste.length + " e-waste stat.");
+        } else {
+            console.log("ERROR!");
+        }
+    }
 
 	
 	// BÚSQUEDA DE REPOSITORIO
