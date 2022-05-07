@@ -94,6 +94,7 @@
 			cc = data;
 			console.log("Estadísticas recibidas: "+cc.length);
 			paginacion();
+			
 		}else{
 			window.alert(res.status);
 		}
@@ -302,7 +303,7 @@
 			
 			<tr>
 				<th>País</th>
-				<th>Añi</th>
+				<th>Año</th>
 				<th>Consumo eléctrico</th>
 				<th>Demanda eléctrica</th>
 				<th>% de minería</th>

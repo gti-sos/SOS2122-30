@@ -1,0 +1,232 @@
+<script>
+    import {onMount} from 'svelte';    
+    import {Button} from 'sveltestrap';
+    import{Nav, NavItem, NavLink } from "sveltestrap";
+    const delay = ms => new Promise(res => setTimeout(res,ms));
+    //CC STATS
+    let cryptoCoinData = [];
+    let cryptoCoinChartCountryYear = [];
+    let cryptoCoinChartElectr = [];
+    let cryptoCoinChartDemand = [];
+    let cryptoCoinChartMining = []; 
+    //TD STATS
+    let tdStats = [];
+    let td_country_year = [];
+    let td_tdwasted = [];
+    let td_mpdisuse = [];
+    let td_mpreused = []; 
+
+    //ST STATS
+    let stStats = [];
+    let st_country_year = [];
+    let st_quarter = [];
+    let st_launched = [];
+    let st_storbit = [];
+    let st_destroyed = [];
+
+
+    async function getcryptoCoinData(){
+        console.log("Fetching stats....");
+        const res = await fetch("/api/v2/cryptocoin-stats");
+        if(res.ok){
+            const data = await res.json();
+            cryptoCoinData = data;
+            console.log("Estadísticas recibidas: "+cryptoCoinData.length);
+            //inicializamos los arrays para mostrar los datos
+            cryptoCoinData.forEach(stat => {
+                cryptoCoinChartCountryYear.push(stat.country+"-"+stat.year);
+                cryptoCoinChartElectr.push(parseFloat(stat.ccelectr));
+                cryptoCoinChartMining.push(parseFloat(stat.ccelectr));
+                cryptoCoinChartDemand.push(parseFloat(stat.ccelectr));            
+            });
+            await delay(500);
+        }else{
+            console.log("Error cargando los datos");
+		}
+    }
+    async function getTDStats(){
+        console.log("Fetching stats....");
+        const res = await fetch("/api/v2/technology_devices_stats");
+        if(res.ok){
+            const data = await res.json();
+            tdStats = data;
+            console.log("Estadísticas recibidas: "+tdStats.length);
+            //inicializamos los arrays para mostrar los datos
+            tdStats.forEach(stat => {
+                td_country_year.push(stat.country+"-"+stat.year);
+                td_tdwasted.push(parseFloat(stat.tdwasted));
+                td_mpdisuse.push(parseFloat(stat.mpdisuse));
+                td_mpreused.push(parseFloat(stat.mpreused));            
+            });
+            await delay(500);
+        }else{
+            console.log("Error cargando los datos");
+        }
+    }
+
+    async function getSTStats(){
+        console.log("Fetching stats....");
+        const res = await fetch("/api/v2/stsatellites-stats");
+        if(res.ok){
+            const data = await res.json();
+            stStats = data;
+            console.log("Estadísticas recibidas: "+stStats.length);
+            //inicializamos los arrays para mostrar los datos
+            tdStats.forEach(stat => {
+                st_country_year.push(stat.country+"-"+stat.year);
+                st_launched.push(parseFloat(stat.stlaunched));
+                st_storbit.push(parseFloat(stat.storbit));
+                st_destroyed.push(parseFloat(stat.stdestroyed));            
+            });
+            await delay(500);
+        }else{
+            console.log("Error cargando los datos");
+        }
+    }
+
+    async function loadGraph(){
+        Highcharts.chart('container', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: 'Public expenditure stats by country and year'
+            },
+            subtitle: {
+                text: 'Source: https://datosmacro.expansion.com'
+            },
+            yAxis: {
+                title: {
+                    text: 'Valor'
+                }
+            },
+            xAxis: {
+                title: {
+                    text: "Country-Year",
+                },
+                categories: cryptoCoinChartCountryYear,
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },            
+            series: [
+                {
+                name: 'Electric consumption (TWh)',
+                data: cryptoCoinChartElectr
+                },
+                {
+                name: 'Mining (%)',
+                data: cryptoCoinChartMining
+                },
+                {
+                name: 'Electric Demand (GW)',
+                data: cryptoCoinChartDemand
+                },
+                //TD STATS
+                {
+                name: '...',
+                data: td_tdwasted
+                },
+                {
+                name: '...',
+                data: td_mpdisuse,
+                },
+                {
+                name: '...',
+                data: td_mpreused
+                },
+                // ST STATS
+                {
+                name: '...',
+                data: st_destroyed
+                },
+                {
+                name: '...',
+                data: st_launched,
+                },
+                {
+                name: '...',
+                data: st_storbit
+                }
+            ],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+        });
+    }
+    onMount(getcryptoCoinData);
+    onMount(getTDStats);
+    onMount(getSTStats);
+    
+</script>
+
+<svelte:head>
+    <script src="https://code.highcharts.com/highcharts.js" on:load="{loadGraph}"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js" on:load="{loadGraph}"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js" on:load="{loadGraph}"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js" on:load="{loadGraph}"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js" on:load="{loadGraph}"></script>    
+</svelte:head>
+
+<main>
+
+    <Nav>
+        <NavItem>
+          <NavLink href="#/info">Main Page</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="#/ccTable">Cryptocoin Data</NavLink>
+        </NavItem>
+        <NavItem>
+            <NavLink href="#/stTable">StarLink Satellites Data</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="#/tdTable">Technology Devices Data</NavLink>
+          </NavItem>
+    </Nav>
+<div>
+    
+</div>
+    <div>
+        <h2>
+            Merged Analytics SOS2122-30
+        </h2>
+    </div>
+
+    <figure class="highcharts-figure">
+        <div id="container"></div>
+        <p class="highcharts-description">
+            
+        </p>
+    </figure>
+
+    <Button outline color="secondary" href="/">Volver</Button>
+</main>
+
+<style>
+    main {
+        text-align: center;
+        padding: 30px;       
+    }
+    p.error{
+      color: red; 
+      text-align:center;
+      font-size: 20px;
+      margin-top:80px;
+    }
+    
+   
+  </style>

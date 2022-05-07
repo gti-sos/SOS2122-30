@@ -75,6 +75,11 @@
               okMsg = "Actualización correcta";
               visibleOk=true;
               }else{
+                  if(res.status === 400){
+                    errorMsg ="Rellene los campos.";
+                    visibleOk=false;
+                  }
+                
                 if(res.status === 404){
                   errorMsg ="El dato solicitado no existe";
                   visibleOk=false;

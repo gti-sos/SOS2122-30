@@ -9,6 +9,11 @@
             SOS2122-30
         </h1>
         <h2>
+            Gráficos:
+            <a href= "https://sos2122-30.herokuapp.com/#/Analytics">Analytics</a>
+            <a href= "https://sos2122-30.herokuapp.com/#/ccTable/cryptoChart">Cryptocoin chart</a>
+        </h2>
+        <h2>
             Tablas:
         </h2>
         <a href="https://sos2122-30.herokuapp.com/#/ccTable">cryptocoin-stats tabla</a>
@@ -47,15 +52,6 @@
         <a href="http://sos2122-30.herokuapp.com/api/v2/cryptocoin-stats/docs">Sergio docs</a>
         <br>
         <h2>
-            API-V1:
-        </h2>
-        <a href="http://sos2122-30.herokuapp.com/api/v1/stsatellites-stats">Javier API</a>
-        <br>
-        <a href="http://sos2122-30.herokuapp.com/api/v1/technology_devices_stats">Jaime API</a>
-        <br>
-        <a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/">Sergio API</a>
-        <br>
-        <h2>
             API-V2:
         </h2>
         <a href="http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats">Javier API</a>
@@ -64,10 +60,18 @@
         <br>
         <a href="http://sos2122-30.herokuapp.com/api/v2/cryptocoin-stats/">Sergio API</a>
         <br>
-        
+<!--
+        <h2>
+            API-V1:
+        </h2>
+        <a href="http://sos2122-30.herokuapp.com/api/v1/stsatellites-stats">Javier API</a>
+        <br>
+        <a href="http://sos2122-30.herokuapp.com/api/v1/technology_devices_stats">Jaime API</a>
+        <br>
+        <a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/">Sergio API</a>
+        <br>
+    -->    
         <!--<a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/docs">Sergio docs v1</a>-->
- 
-        
         
 
     </body>

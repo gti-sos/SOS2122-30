@@ -7,21 +7,29 @@
 	import TdEdit from "./jaiquisicFront/tdEdit.svelte"
 	import satelliteTable from "./javaloyan1Front/satelliteTable.svelte"
 	import EditSatellite from "./javaloyan1Front/editSatellite.svelte";
+	import cryptoHighChart from "./servelgar1Front/cryptoHighChart.svelte"
+	import cryptoChart from "./servelgar1Front/cryptoChart.svelte";
+	import MergeGraph from "./MergeGraph.svelte";
 
 	console.log("Funcionas");
 	const routes = {
 		'/': Home,
 		'/info': Home,
+
 		"/tdTable": TdTable,
 		"/tdTable/:country/:year": TdEdit,
 
 
 		"/ccTable": cryptocoinTable,
 		"/ccTable/:country/:year": cryptocoinEdit,
+		"/ccTable/cryptoHighChart": cryptoHighChart,
+		"/ccTable/cryptoChart" : cryptoChart,
 
 
 		"/stTable": satelliteTable,
-		"/stTable/:country/:year/:quarter": EditSatellite
+		"/stTable/:country/:year/:quarter": EditSatellite,
+
+		"/Analytics": MergeGraph
 	};
 
 </script>
