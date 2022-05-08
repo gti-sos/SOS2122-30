@@ -18,7 +18,7 @@
         </h2>
         <a href="https://sos2122-30.herokuapp.com/#/ccTable">cryptocoin-stats tabla</a>
         <br>
-        <a href="https://sos2122-30.herokuapp.com/#/tdTable">technology_devices_stats tabla</a>
+        <a href="https://sos2122-30.herokuapp.com/#/tdTable">ewaste-stats tabla</a>
         <br>
         <a href="https://sos2122-30.herokuapp.com/#/stTable">stsatellites-stats tabla</a>
         <h2>
@@ -28,7 +28,7 @@
         <br> 
         <a href="https://github.com/alonyanez">Javier Alonso Yáñez </a> - stsatellites-stats
         <br> 
-        <a href="https://github.com/Jaiquisic23">Jaime Quintero Sicre </a> - technology_devices_stats
+        <a href="https://github.com/Jaiquisic23">Jaime Quintero Sicre </a> - ewaste-stats
         <h2>
             Project description:
         </h2>
