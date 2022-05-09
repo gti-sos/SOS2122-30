@@ -72,7 +72,7 @@
             stStats = data;
             console.log("Estadísticas recibidas: "+stStats.length);
             //inicializamos los arrays para mostrar los datos
-            tdStats.forEach(stat => {
+            stStats.forEach(stat => {
                 st_country_year.push(stat.country+"-"+stat.year);
                 st_launched.push(parseFloat(stat.stlaunched));
                 st_storbit.push(parseFloat(stat.storbit));
@@ -105,6 +105,7 @@
                     text: "Country-Year",
                 },
                 categories: cryptoCoinChartCountryYear,
+                categories: ewasteChartCountryYear
             },
             legend: {
                 layout: 'vertical',

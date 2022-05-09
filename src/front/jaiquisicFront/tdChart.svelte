@@ -12,7 +12,7 @@
         MyData = await resData.json();
       
 
-        var russia = MyData.filter((p)=>{
+        var eeuu = MyData.filter((p)=>{
             return p.country == "EEUU"
         }).map((dato)=>{
             return parseFloat(dato.mpreused)
