@@ -12,6 +12,7 @@
             Gráficos:
             <a href= "https://sos2122-30.herokuapp.com/#/Analytics">Analytics</a>
             <a href= "https://sos2122-30.herokuapp.com/#/ccTable/cryptoChart">Cryptocoin chart</a>
+            <a href= "https://sos2122-30.herokuapp.com/#/tdTable/tdChart">E-waste chart</a>
         </h2>
         <h2>
             Tablas:
