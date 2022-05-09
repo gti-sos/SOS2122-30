@@ -98,10 +98,9 @@ Highcharts.chart('container', {
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
 <script
-    src="https://code.highcharts.com/modules/accessibility.js"
-    on:load={loadChart}></script>
+    src="https://code.highcharts.com/modules/accessibility.js" on:load={loadChart}></script>
 
 <figure class="highcharts-figure">
     <div id="container"></div>
@@ -115,7 +114,7 @@ Highcharts.chart('container', {
           <NavLink href="#/info">Main Page</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="#/tdTable/ewasteChart">Chart.js</NavLink>
+          <NavLink href="#/tdTable/ewasteChart">Chart</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="#/tdTable">Data</NavLink>

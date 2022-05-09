@@ -36,7 +36,7 @@
         <h2>
             Project description:
         </h2>
-        Analysis of the relation that exists between the sources of pollution of different new-age Tecnology 
+        Analysis of the relation that exists between the sources of pollution of different new-age Technology 
         <h2>
             Repository:
 

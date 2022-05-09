@@ -12,10 +12,7 @@
         MyData = await resData.json();
       
 
-
-        // recoger datos por paises
-
-        var russia = MyData.filter((p)=>{
+        var eeuu = MyData.filter((p)=>{
             return p.country == "EEUU"
         }).map((dato)=>{
             return parseFloat(dato.mpreused)
@@ -77,7 +74,6 @@
         var myDoughnutChart = new Chart(ctx, {
           type: 'doughnut',
           data: data
-          
           });
         
       }
