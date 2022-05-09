@@ -10,11 +10,11 @@
     let cryptoCoinChartDemand = [];
     let cryptoCoinChartMining = []; 
     //TD STATS
-    let tdStats = [];
-    let td_country_year = [];
-    let td_tdwasted = [];
-    let td_mpdisuse = [];
-    let td_mpreused = []; 
+    let ewasteStats=[];
+    let ewasteChartCountryYear = [];
+    let ewasteChartTdwasted = [];
+    let ewasteChartMpdisused = [];
+    let ewasteChartMpreused = [];
 
     //ST STATS
     let stStats = [];
@@ -44,19 +44,19 @@
             console.log("Error cargando los datos");
 		}
     }
-    async function getTDStats(){
+    async function getEwasteStats(){
         console.log("Fetching stats....");
         const res = await fetch("/api/v2/technology_devices_stats");
         if(res.ok){
             const data = await res.json();
-            tdStats = data;
-            console.log("Estadísticas recibidas: "+tdStats.length);
+            ewasteStats = data;
+            console.log("Estadísticas recibidas: "+ewasteStats.length);
             //inicializamos los arrays para mostrar los datos
-            tdStats.forEach(stat => {
-                td_country_year.push(stat.country+"-"+stat.year);
-                td_tdwasted.push(parseFloat(stat.tdwasted));
-                td_mpdisuse.push(parseFloat(stat.mpdisuse));
-                td_mpreused.push(parseFloat(stat.mpreused));            
+            ewasteStats.forEach(stat => {
+                ewasteChartCountryYear.push(stat.country+"-"+stat.year);
+                ewasteChartTdwasted.push(parseFloat(stat.tdwasted));
+                ewasteChartMpdisused.push(parseFloat(stat.mpdisuse));
+                ewasteChartMpreused.push(parseFloat(stat.mpreused));            
             });
             await delay(500);
         }else{
@@ -127,15 +127,15 @@
                 //TD STATS
                 {
                 name: 'E-waste (Ton)',
-                data: td_tdwasted
+                data: ewasteChartTdwasted
                 },
                 {
                 name: 'Mobile phones in disuse amount',
-                data: td_mpdisuse,
+                data: ewasteChartMpdisused,
                 },
                 {
                 name: 'Recycled and reused MP (%)',
-                data: td_mpreused
+                data: ewasteChartMpreused
                 },
                 // ST STATS
                 {
@@ -168,7 +168,7 @@
         });
     }
     onMount(getcryptoCoinData);
-    onMount(getTDStats);
+    onMount(getEwasteStats);
     onMount(getSTStats);
     
 </script>
@@ -216,6 +216,7 @@
     <Button outline color="secondary" href="/">Volver</Button>
 </main>
 
+
 <style>
     main {
         text-align: center;
@@ -230,3 +231,4 @@
     
    
   </style>
+  
