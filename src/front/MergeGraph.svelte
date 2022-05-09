@@ -36,8 +36,8 @@
             cryptoCoinData.forEach(stat => {
                 cryptoCoinChartCountryYear.push(stat.country+"-"+stat.year);
                 cryptoCoinChartElectr.push(parseFloat(stat.ccelectr));
-                cryptoCoinChartMining.push(parseFloat(stat.ccelectr));
-                cryptoCoinChartDemand.push(parseFloat(stat.ccelectr));            
+                cryptoCoinChartMining.push(parseFloat(stat.ccmining));
+                cryptoCoinChartDemand.push(parseFloat(stat.ccdemand));            
             });
             await delay(500);
         }else{

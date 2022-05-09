@@ -20,7 +20,7 @@
             cryptoCoinChartCountryYear.push(stat.country+"-"+stat.year);
             cryptoCoinChartElectr.push(parseFloat(stat.ccelectr));
             cryptoCoinChartDemand.push(parseFloat(stat.ccdemand));
-            cryptoCoinChartMining.push(parseFloat(stat.ccmining));
+            cryptoCoinChartMining.push(parseFloatstat.ccelectr);
             });
             cargados=true;
         }
