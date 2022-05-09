@@ -33,6 +33,24 @@
             return sum+value;
         },0) / spain.length;
 
+        var germany = MyData.filter((p)=>{
+            return p.country == "Germany"
+        }).map((dato)=>{
+            return parseFloat(dato.mpreused)
+        })
+        germany = germany.reduce(function(sum,value){
+            return sum+value;
+        },0) / germany.length;
+
+        var uk = MyData.filter((p)=>{
+            return p.country == "UK"
+        }).map((dato)=>{
+            return parseFloat(dato.mpreused)
+        })
+        uk = uk.reduce(function(sum,value){
+            return sum+value;
+        },0) / uk.length;
+
         var france = MyData.filter((p)=>{
             return p.country == "France"
         }).map((dato)=>{
@@ -45,14 +63,16 @@
         var ctx = document.getElementById('myChart').getContext('2d');
        var data = {
       datasets: [{
-          data: [eeuu,spain,france],
+          data: [eeuu,spain,france, germany, uk],
           backgroundColor: [
           'rgba(200,200, 30)',
           'rgba(0, 0, 200)',
-          'rgba(255,30,30)'
+          'rgba(255,30,30)',
+          'rgba(200,30,30)',
+          'rgba(0,30,30)'
           ]
       }],
-      labels: ["EEUU","Spain","France"]
+      labels: ["EEUU","Spain","France", "Germany", "UK"]
   };
         var myDoughnutChart = new Chart(ctx, {
           type: 'doughnut',
