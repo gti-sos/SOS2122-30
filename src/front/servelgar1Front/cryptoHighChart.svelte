@@ -20,7 +20,7 @@
             cryptoCoinChartCountryYear.push(stat.country+"-"+stat.year);
             cryptoCoinChartElectr.push(parseFloat(stat.ccelectr));
             cryptoCoinChartDemand.push(parseFloat(stat.ccdemand));
-            cryptoCoinChartMining.push(parseFloatstat.ccelectr);
+            cryptoCoinChartMining.push(parseFloat(stat.ccmining));
             });
             cargados=true;
         }
@@ -63,13 +63,13 @@
           data: cryptoCoinChartElectr
       },
       {
-                name: 'Electric demand',
-                data: cryptoCoinChartDemand,
-                },
-                {
-                name: '% of Mining',
-                data: cryptoCoinChartMining
-                }]
+          name: 'Electric demand',
+          data: cryptoCoinChartDemand,
+       },
+       {
+          name: '% of Mining',
+          data: cryptoCoinChartMining
+      }]
   });
     }
 
