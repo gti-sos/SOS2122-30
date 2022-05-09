@@ -85,7 +85,7 @@
     </script>
     
   <svelte:head>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0" on:load="{loadGraphs}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jquery/jquery/dist/jquery.min.js" on:load="{loadGraphs}"></script>
   </svelte:head>
   
   
