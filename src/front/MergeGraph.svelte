@@ -50,10 +50,10 @@
         if(res.ok){
             const data = await res.json();
             ewasteStats = data;
-            console.log("Estadísticas recibidas: "+ewasteStats.length);
+            console.log("Estadísticas recibidas: "+ ewasteStats.length);
             //inicializamos los arrays para mostrar los datos
             ewasteStats.forEach(stat => {
-                ewasteChartCountryYear.push(stat.country+"-"+stat.year);
+                ewasteChartCountryYear.push(stat.country + "-" + stat.year);
                 ewasteChartTdwasted.push(parseFloat(stat.tdwasted));
                 ewasteChartMpdisused.push(parseFloat(stat.mpdisuse));
                 ewasteChartMpreused.push(parseFloat(stat.mpreused));            
@@ -217,18 +217,5 @@
 </main>
 
 
-<style>
-    main {
-        text-align: center;
-        padding: 30px;       
-    }
-    p.error{
-      color: red; 
-      text-align:center;
-      font-size: 20px;
-      margin-top:80px;
-    }
-    
-   
-  </style>
+
   
