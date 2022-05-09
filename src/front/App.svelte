@@ -5,6 +5,8 @@
 	import cryptocoinEdit from "./servelgar1Front/cryptocoinEdit.svelte"
 	import TdTable from "./jaiquisicFront/tdTable.svelte"
 	import TdEdit from "./jaiquisicFront/tdEdit.svelte"
+	import tdChart from "./jaiquisicFront/tdChart.svelte"
+	import tdHighCharts from "./jaiquisicFront/tdHighCharts.svelte"
 	import satelliteTable from "./javaloyan1Front/satelliteTable.svelte"
 	import EditSatellite from "./javaloyan1Front/editSatellite.svelte";
 	import cryptoHighChart from "./servelgar1Front/cryptoHighChart.svelte"
@@ -18,6 +20,8 @@
 
 		"/tdTable": TdTable,
 		"/tdTable/:country/:year": TdEdit,
+		"/tdTable/tdHighCharts": tdHighCharts,
+		"/tdTable/tdChart": tdChart,
 
 
 		"/ccTable": cryptocoinTable,

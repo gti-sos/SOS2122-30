@@ -10,8 +10,11 @@
         </h1>
         <h2>
             Gráficos:
+            <br>
             <a href= "https://sos2122-30.herokuapp.com/#/Analytics">Analytics</a>
+            <br>
             <a href= "https://sos2122-30.herokuapp.com/#/ccTable/cryptoChart">Cryptocoin chart</a>
+            <br>
             <a href= "https://sos2122-30.herokuapp.com/#/tdTable/tdChart">E-waste chart</a>
         </h2>
         <h2>
