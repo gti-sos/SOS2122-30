@@ -12,9 +12,6 @@
         MyData = await resData.json();
       
 
-
-        // recoger datos por paises
-
         var russia = MyData.filter((p)=>{
             return p.country == "EEUU"
         }).map((dato)=>{
