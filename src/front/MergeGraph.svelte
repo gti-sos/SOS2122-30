@@ -126,15 +126,15 @@
                 },
                 //TD STATS
                 {
-                name: '...',
+                name: 'E-waste (Ton)',
                 data: td_tdwasted
                 },
                 {
-                name: '...',
+                name: 'Mobile phones in disuse amount',
                 data: td_mpdisuse,
                 },
                 {
-                name: '...',
+                name: 'Recycled and reused MP (%)',
                 data: td_mpreused
                 },
                 // ST STATS
@@ -194,7 +194,7 @@
             <NavLink href="#/stTable">StarLink Satellites Data</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="#/tdTable">Technology Devices Data</NavLink>
+            <NavLink href="#/tdTable">E-waste Data</NavLink>
           </NavItem>
     </Nav>
 <div>
