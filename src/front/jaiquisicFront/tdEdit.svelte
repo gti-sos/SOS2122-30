@@ -9,6 +9,8 @@
     
 
     let ewaste = {};
+    let updatedCountry = "";
+    let updatedYear= "";
     let updatedTdwasted = "";
     let updatedMpdisuse = "";
     let updatedMpreused = "";
@@ -24,7 +26,9 @@
 		if(res.ok){
 		const data =await res.json();
 		ewaste = data;
-            
+
+        updatedCountry = ewaste.country;
+        updatedYear = ewaste.year;
         updatedTdwasted = ewaste.tdwasted;
         updatedMpdisuse = ewaste.mpdisuse;
         updatedMpreused = ewaste.mpreused;
@@ -38,6 +42,8 @@
         const res = await fetch("/api/v2/technology_devices_stats/" + params.country +"/" + params.year, {
             method: "PUT",
             body: JSON.stringify({
+              country : updatedCountry,
+              year : parseInt(updatedYear),
 			  tdwasted : parseInt(updatedTdwasted),
               mpdisuse : parseInt(updatedMpdisuse),
 	 		  mpreused : parseInt(updatedMpreused)
@@ -79,6 +85,8 @@
             </thead>
             <tbody>
                 <tr> 
+                    <td><input bind:value="{updatedCountry}"></td>
+                    <td><input bind:value="{updatedYear}"></td>
                     <td><input bind:value="{updatedTdwasted}"></td>
                     <td><input bind:value="{updatedMpdisuse}"></td>
                     <td><input bind:value="{updatedMpreused}"></td>
