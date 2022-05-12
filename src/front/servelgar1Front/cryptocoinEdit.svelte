@@ -32,9 +32,9 @@
             cc = json;
             upCountry = cc.country;
             upYear = parseInt(cc.year);
-            upElectr = parseInt(cc.ccelectr);
-            upDemand = parseInt(cc.ccdemand);
-            upMining = parseInt(cc.ccmining);
+            upElectr = parseFloat(cc.ccelectr);
+            upDemand = parseFloat(cc.ccdemand);
+            upMining = parseFloat(cc.ccmining);
             console.log(JSON.stringify(cc));
             console.log("Received data.");
         } else {
@@ -61,9 +61,9 @@
             body: JSON.stringify({
               country : upCountry,
               year : parseInt(upYear),
-			  ccelectr : parseInt(upElectr),
-              ccdemand : parseInt(upDemand),
-	 		  ccmining : parseInt(upMining)
+			  ccelectr : parseFloat(upElectr),
+              ccdemand : parseFloat(upDemand),
+	 		  ccmining : parseFloat(upMining)
             }),
             headers: {
                 "Content-Type": "application/json"
@@ -128,9 +128,9 @@
           <tr>
               <td>{upCountry}</td>
               <td>{upYear }</td>
-              <td><input type=number bind:value="{upElectr}"></td>
-              <td><input type=number bind:value="{upDemand}"></td>
-              <td><input type=number bind:value="{upMining}"></td>
+              <td><input type=float bind:value="{upElectr}"></td>
+              <td><input type=float bind:value="{upDemand}"></td>
+              <td><input type=float bind:value="{upMining}"></td>
               <td><Button on:click={updateCC}>Actualizar</Button></td>
               
           </tr>
