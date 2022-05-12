@@ -104,6 +104,7 @@
                 title: {
                     text: "Country-Year",
                 },
+                // Listado del eje X, actualmente está puesto para que se listen los paises y años de Jaime
                 categories: cryptoCoinChartCountryYear,
                 categories: ewasteChartCountryYear
             },

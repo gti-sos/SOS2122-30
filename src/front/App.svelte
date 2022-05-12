@@ -33,7 +33,7 @@
 		"/stTable": satelliteTable,
 		"/stTable/:country/:year/:quarter": EditSatellite,
 
-		"/Analytics": MergeGraph
+		"/analytics": MergeGraph
 	};
 
 </script>
