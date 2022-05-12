@@ -26,10 +26,8 @@ import {
             Project description:
         </h2>
         Analysis of the relation that exists between the sources of pollution of different new-age Technology 
-
         <br>
         
-
         <a href="/#/info">
             <Button color="primary">Info</Button>
           </a>
@@ -42,6 +40,22 @@ import {
           </a>
           <a href="/#/ccTable/cryptoChart">
             <Button color="primary">Gráfica Cryptocoin</Button>
+          </a>
+
+          <h2>
+            Frontend:
+          </h2>
+          <br>
+
+          <a href="/#/ccTable">
+            <Button color="primary">cryptocoin-stats Frontend</Button>
+          </a>
+      
+          <a href="/#/stTable">
+            <Button color="primary">stsatellites-stats Frontend</Button>
+          </a>
+          <a href="/#/tdTable">
+            <Button color="primary">ewaste-stats Frontend</Button>
           </a>
 
 
@@ -73,11 +87,12 @@ import {
         <a href="https://github.com/Jaiquisic23">Jaime Quintero Sicre </a> - ewaste-stats
 
         -->
-
+        <br>
         <h2>
             Repository:
 
         </h2>
+        
         <a href="https://github.com/gti-sos/SOS2122-30">gti-sos/SOS2122-30</a>
         <h2>
             URL:

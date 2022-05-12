@@ -358,6 +358,10 @@
 				</PaginationItem>
 				</Pagination>
 		</div>
-	
+
+		<a href="/#/info">
+            <Button color="primary">Volver</Button>
+          </a>
+		  
 	{/await}
 </main>
