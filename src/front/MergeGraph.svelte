@@ -104,9 +104,9 @@
                 title: {
                     text: "Country-Year",
                 },
-                // Listado del eje X, actualmente está puesto para que se listen los paises y años de Jaime
+                // Listado del eje X de Sergio
                 categories: cryptoCoinChartCountryYear,
-                categories: ewasteChartCountryYear
+                
             },
             legend: {
                 layout: 'vertical',
@@ -133,7 +133,7 @@
                 },
                 {
                 name: 'Mobile phones in disuse amount',
-                data: ewasteChartMpdisused,
+                data: ewasteChartMpdisused
                 },
                 {
                 name: 'Recycled and reused MP (%)',

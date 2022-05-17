@@ -31,52 +31,41 @@ let errorMsg="Tiene que cargar los datos para visualizar las analíticas.";
         }
 
     
-    log.console("E-waste Chart data:" + ewasteStats);
+    console.log("E-waste Chart data:" + ewasteStats);
 
 Highcharts.chart('container', {
     chart: {
-        type: 'area'
+        type: 'column'
     },
     title: {
         text: 'E-waste Growth over the years'
     },
-    subtitle: {
-        text: 'Source: reBuy.es'
-    },
     xAxis: {
-        categories: ['1990', '2000', '2010', '2019', '2022', '2030'],
-        tickmarkPlacement: 'on',
-        title: {
-            enabled: false
-        }
+        categories: ewasteChartCountryYear,
+        crosshair: true
     },
     yAxis: {
+        min: 0,
         title: {
             text: 'Ton/Ud/%'
-        },
-        labels: {
-            formatter: function () {
-                return this.value / 1000;
-            }
         }
     },
     tooltip: {
-        split: true,
-        valueSuffix: ' millions'
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
     },
     plotOptions: {
-        area: {
-            stacking: 'normal',
-            lineColor: '#666666',
-            lineWidth: 1,
-            marker: {
-                lineWidth: 1,
-                lineColor: '#666666'
-            }
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
         }
     },
     series: [{
-                name: 'E-waste',
+        name: 'E-waste',
                 data: ewasteChartTdwasted
                 },
                 {
@@ -88,24 +77,22 @@ Highcharts.chart('container', {
                 data: ewasteChartMpreused
                 }]
 });
-}
+  }
 
-    onMount(loadChart);
-    
+ 
+
+
+
 </script>
 
 <svelte:head>
 <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/series-label.js"></script>
 <script
-    src="https://code.highcharts.com/modules/accessibility.js" on:load={loadChart}></script>
-
-<figure class="highcharts-figure">
-    <div id="container"></div>
-    
-</figure>
+  src="https://code.highcharts.com/modules/accessibility.js"
+  on:load={loadChart}></script>
 </svelte:head>
 
 <main>
@@ -114,7 +101,7 @@ Highcharts.chart('container', {
           <NavLink href="#/info">Main Page</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="#/tdTable/ewasteChart">Chart</NavLink>
+          <NavLink href="#/tdTable/ewasteChart">Area</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="#/tdTable">Data</NavLink>
@@ -126,35 +113,35 @@ Highcharts.chart('container', {
           E-waste Analytics
         </h2>
       </div>
+
+  <div>
+      <figure class="highcharts-figure">
+        <div id="container" />
+        <p class="highcharts-description">
+          .
+        </p>
+      </figure>
+  </div>
   
-    <div>
-        <figure class="highcharts-figure">
-          <div id="container" />
-          <p class="highcharts-description">
-            .
-          </p>
-        </figure>
-    </div>
-    
+
+  <div>
+    {#if !cargados}
+      <p class="error">{errorMsg}</p>
+    {/if}
+  </div>
+</main>
+
+<style>
+  main {
+      text-align: center;
+      padding: 30px;       
+  }
+  p.error{
+    color: red; 
+    text-align:center;
+    font-size: 20px;
+    margin-top:80px;
+  }
   
-    <div>
-      {#if !cargados}
-        <p class="error">{errorMsg}</p>
-      {/if}
-    </div>
-  </main>
-  
-  <style>
-    main {
-        text-align: center;
-        padding: 30px;       
-    }
-    p.error{
-      color: red; 
-      text-align:center;
-      font-size: 20px;
-      margin-top:80px;
-    }
-    
-   
-  </style>
+ 
+</style>
