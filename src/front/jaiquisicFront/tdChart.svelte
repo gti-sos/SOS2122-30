@@ -9,25 +9,15 @@
      
       var options = {
   chart: {
+      height: 350,
     type: 'area'
   },
   series: [
                 {
-                name: 'E-waste (Ton)',
-                data: ewasteChartTdwasted
-                },
-                {
-                name: 'Mobile phones in disuse amount',
-                data: ewasteChartMpdisused,
-                },
-                {
                 name: 'Recycled and reused MP (%)',
                 data: ewasteChartMpreused
                 }
-  ],
-  xaxis: {
-    categories: [1990, 2000, 2010, 2019, 2022, 2050]
-  }
+  ]
 }
 
 var chart = new ApexCharts(document.querySelector('#chart'), options)
