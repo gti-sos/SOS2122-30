@@ -105,7 +105,7 @@
                     text: "Country-Year",
                 },
                 // Listado del eje X de Sergio
-                categories: cryptoCoinChartCountryYear,
+                categories: cryptoCoinChartCountryYear
                 
             },
             legend: {
