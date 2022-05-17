@@ -41,6 +41,9 @@ import {
           <a href="/#/cryptocoin-stats/cryptoChart">
             <Button color="primary">Gráfica Cryptocoin</Button>
           </a>
+          <a href="/#/tdTable/tdChart">
+            <Button color="primary">Gráfica E-waste</Button>
+          </a>
 
           <h2>
             Frontend:

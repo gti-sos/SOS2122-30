@@ -101,7 +101,7 @@ Highcharts.chart('container', {
           <NavLink href="#/info">Main Page</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="#/tdTable/ewasteChart">Area</NavLink>
+          <NavLink href="/#/tdTable/tdChart">Area chart</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="#/tdTable">Data</NavLink>
