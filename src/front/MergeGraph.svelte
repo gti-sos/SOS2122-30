@@ -190,7 +190,7 @@
           <NavLink href="#/info">Main Page</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="#/ccTable">Cryptocoin Data</NavLink>
+          <NavLink href="#/cryptocoin-stats">Cryptocoin Data</NavLink>
         </NavItem>
         <NavItem>
             <NavLink href="#/stTable">StarLink Satellites Data</NavLink>

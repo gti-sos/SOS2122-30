@@ -35,10 +35,10 @@ import {
           <a href="/#/analytics">
             <Button color="primary">Gráfica Conjunta</Button>
           </a>
-          <a href="/#/integrations">
-            <Button color="primary">Integraciones</Button>
+          <a href="/#/cryptoIntegration">
+            <Button color="primary">Cryptocoin Integrations</Button>
           </a>
-          <a href="/#/ccTable/cryptoChart">
+          <a href="/#/cryptocoin-stats/cryptoChart">
             <Button color="primary">Gráfica Cryptocoin</Button>
           </a>
 
@@ -47,7 +47,7 @@ import {
           </h2>
           <br>
 
-          <a href="/#/ccTable">
+          <a href="/#/cryptocoin-stats">
             <Button color="primary">cryptocoin-stats Frontend</Button>
           </a>
       
@@ -65,14 +65,14 @@ import {
             <br>
             <a href= "https://sos2122-30.herokuapp.com/#/Analytics">Analytics</a>
             <br>
-            <a href= "https://sos2122-30.herokuapp.com/#/ccTable/cryptoChart">Cryptocoin chart</a>
+            <a href= "https://sos2122-30.herokuapp.com/#/cryptocoin-stats/cryptoChart">Cryptocoin chart</a>
             <br>
             <a href= "https://sos2122-30.herokuapp.com/#/tdTable/tdChart">E-waste chart</a>
         </h2>
         <h2>
             Tablas:
         </h2>
-        <a href="https://sos2122-30.herokuapp.com/#/ccTable">cryptocoin-stats tabla</a>
+        <a href="https://sos2122-30.herokuapp.com/#/cryptocoin-stats">cryptocoin-stats tabla</a>
         <br>
         <a href="https://sos2122-30.herokuapp.com/#/tdTable">ewaste-stats tabla</a>
         <br>

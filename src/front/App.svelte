@@ -12,11 +12,14 @@
 	import cryptoHighChart from "./servelgar1Front/cryptoHighChart.svelte"
 	import cryptoChart from "./servelgar1Front/cryptoChart.svelte";
 	import MergeGraph from "./MergeGraph.svelte";
+	import cryptoIntegration from "./servelgar1Front/cryptoIntegrations.svelte";
+	import CO2Integracion from "./servelgar1Front/CO2Integration.svelte";
 
 	console.log("Funcionas");
 	const routes = {
 		'/': Home,
 		'/info': Home,
+		'/cryptoIntegration': cryptoIntegration,
 
 		"/tdTable": TdTable,
 		"/tdTable/:country/:year": TdEdit,
@@ -24,10 +27,11 @@
 		"/tdTable/tdChart": tdChart,
 
 
-		"/ccTable": cryptocoinTable,
-		"/ccTable/:country/:year": cryptocoinEdit,
-		"/ccTable/cryptoHighChart": cryptoHighChart,
-		"/ccTable/cryptoChart" : cryptoChart,
+		"/cryptocoin-stats": cryptocoinTable,
+		"/cryptocoin-stats/:country/:year": cryptocoinEdit,
+		"/cryptocoin-stats/cryptoHighChart": cryptoHighChart,
+		"/cryptocoin-stats/cryptoChart" : cryptoChart,
+		"/cryptocoin-stats/CO2Integracion" : CO2Integracion,
 
 
 		"/stTable": satelliteTable,

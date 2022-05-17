@@ -95,10 +95,10 @@
           <NavLink href="#/info">Main Page</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="#/ccTable/cryptoChart">Chart.js</NavLink>
+          <NavLink href="#/cryptocoin-stats/cryptoChart">Chart.js</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="#/ccTable">Data</NavLink>
+          <NavLink href="#/cryptocoin-stats">Data</NavLink>
         </NavItem>
     </Nav>
   

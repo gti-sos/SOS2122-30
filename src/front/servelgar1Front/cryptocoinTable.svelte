@@ -330,7 +330,7 @@
 				<td>{cc.ccdemand}</td>
 				<td>{cc.ccmining}</td>
 				<td><Button outline color="warning" on:click={function (){
-					window.location.href = `/#/ccTable/${cc.country}/${cc.year}`
+					window.location.href = `/#/cryptocoin-stats/${cc.country}/${cc.year}`
 				}}>Editar</Button>
 				<td><Button outline color="danger" on:click={delCryptoUnico(cc.country,cc.year)}>
 					Borrar
@@ -344,17 +344,17 @@
 		<div>
 			<Pagination ariaLabel="Web pagination">
 				<PaginationItem class = {c_page === 1 ? "enable" : ""}>
-					  <PaginationLink previous href="#/ccTable" on:click={() => cambiapag(c_page - 1, c_offset - 10)}/>
+					  <PaginationLink previous href="#/cryptocoin-stats" on:click={() => cambiapag(c_page - 1, c_offset - 10)}/>
 				</PaginationItem>
 				{#each range(lastPage, 1) as page}
 					  <PaginationItem class = {c_page === page ? "active" : ""}>
-						<PaginationLink previous href="#/ccTable" on:click={() => cambiapag(page, (page - 1) * 10)}>
+						<PaginationLink previous href="#/cryptocoin-stats" on:click={() => cambiapag(page, (page - 1) * 10)}>
 							{page}
 						</PaginationLink>
 					  </PaginationItem>
 				{/each}
 				<PaginationItem class = {c_page === lastPage ? "disabled" : ""}>
-					  <PaginationLink next href="#/ccTable" on:click={() => cambiapag(c_page + 1, c_offset + 10)}/>
+					  <PaginationLink next href="#/cryptocoin-stats" on:click={() => cambiapag(c_page + 1, c_offset + 10)}/>
 				</PaginationItem>
 				</Pagination>
 		</div>
