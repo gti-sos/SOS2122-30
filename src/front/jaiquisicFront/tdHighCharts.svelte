@@ -117,9 +117,7 @@ Highcharts.chart('container', {
   <div>
       <figure class="highcharts-figure">
         <div id="container" />
-        <p class="highcharts-description">
-          .
-        </p>
+        <p class="highcharts-description"> . </p>
       </figure>
   </div>
   

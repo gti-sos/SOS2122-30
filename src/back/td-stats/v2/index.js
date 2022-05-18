@@ -10,9 +10,6 @@ var paths = '/api';
 var apiServerHost = 'http://echo.httpkit.com';
 */
 
-
-app.use(cors())
-
 const BASE_API_URL= "/api/v2";
 const url_jaime = "/technology_devices_stats";
 const jaime_URL_API = "https://documenter.getpostman.com/view/19584746/UyrBjbck";
@@ -20,7 +17,7 @@ const jaime_URL_API = "https://documenter.getpostman.com/view/19584746/UyrBjbck"
 module.exports = (app) => {
     console.log("Exporting E-waste Stats");
 
-
+    app.use(cors());
     app.use(bodyParser.json());
     
 
