@@ -189,13 +189,13 @@
         e_page = 1;
         totalObj = jsonElements.length;
         console.log("ELEMENTOS: "+ totalObj);
-        const res = await fetch("/api/v2/technology_devices_stats?limit=10&offset=1"); //datos mostrados
+        const res = await fetch("/api/v2/technology_devices_stats?limit=10&offset=1");
         if (res.ok) {
             console.log("Ok: ");
             const json = await res.json();
             ewaste = json;
             console.log("Loading "+ ewaste.length+" objects");
-            console.log("Received " + ewaste.length + " e-waste stat.");
+            console.log("Received " + ewaste.length + " e-waste stats");
         } else {
             console.log("ERROR!");
         }
@@ -238,7 +238,7 @@
 </script>
 
 <main>
-	<h1>Estadísticas de E-waste</h1>
+	<h1>Estadísticas E-waste</h1>
 
 	<p><strong>Filtrado de datos</strong></p>
 	<Table borderless responsive>
@@ -285,10 +285,10 @@
 				<td>{ewaste.tdwasted}</td>
 				<td>{ewaste.mpdisuse}</td>
 				<td>{ewaste.mpreused}</td>
-				<td>
-					<a href = "/#/tdTable/{ewaste.country}/{ewaste.year}">
-						<Button outline color="primary">Editar</Button> 
-					</a>
+				<td><Button outline color="warning" on:click={function (){
+					window.location.href = `/#/tdTable/${ewaste.country}/${ewaste.year}`
+				}}>Editar</Button> 
+					
 				</td>
 				<td>
 					<Button outline color="primary" on:click = {deleteTD(ewaste.country,ewaste.year)}>Borrar</Button>

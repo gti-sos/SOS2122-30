@@ -38,7 +38,7 @@ Highcharts.chart('container', {
         type: 'column'
     },
     title: {
-        text: 'E-waste Growth over the years'
+        text: 'E-waste growth over the years'
     },
     xAxis: {
         categories: ewasteChartCountryYear,
@@ -47,7 +47,7 @@ Highcharts.chart('container', {
     yAxis: {
         min: 0,
         title: {
-            text: 'Ton/Ud/%'
+            text: 'Ton/Ud(mill)/%'
         }
     },
     tooltip: {

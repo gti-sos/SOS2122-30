@@ -1,7 +1,17 @@
 const req = require("express/lib/request");
 const DataStore = require("nedb");
 const bodyParser = require("body-parser");
+const cors = require('cors');
+
 var db = new DataStore();
+
+/** PROXY
+var paths = '/api';
+var apiServerHost = 'http://echo.httpkit.com';
+*/
+
+
+app.use(cors())
 
 const BASE_API_URL= "/api/v2";
 const url_jaime = "/technology_devices_stats";
@@ -9,6 +19,7 @@ const jaime_URL_API = "https://documenter.getpostman.com/view/19584746/UyrBjbck"
 
 module.exports = (app) => {
     console.log("Exporting E-waste Stats");
+
 
     app.use(bodyParser.json());
     

@@ -6,22 +6,41 @@
 
       const BASE_API_PATH = "/api/v2/technology_devices_stats/";
 
+      async function loadChart() {
+        console.log("Fetching data...");
+        const res = await fetch(BASE_API_PATH);
+        ewasteStats = await res.json();
+        if (res.ok) {
+            ewasteStats.forEach(stat => {
+            ewasteChartMpreused.push(parseFloat(stat.mpreused));
+            });
+            cargados=true;
+        }
+
      
       var options = {
-  chart: {
-      height: 350,
-    type: 'area'
-  },
-  series: [
-                {
-                name: 'Recycled and reused MP (%)',
-                data: ewasteChartMpreused
-                }
+    chart: {
+          height: 350,
+          type: 'area'
+    }, 
+    stroke: {
+          curve: 'smooth'
+    },
+    xaxis: {
+          categories: [ewasteChartMpreused]
+    }, 
+    series: [
+            {
+              name: 'Recycled and reused MP (%)',
+              data: ewasteChartMpreused
+            }
   ]
 }
 
 var chart = new ApexCharts(document.querySelector('#chart'), options)
 chart.render()
+}
+
   
   </script>
   <main>
