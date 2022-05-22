@@ -3,9 +3,9 @@
 	import Button from "sveltestrap/src/Button.svelte";
 	import { pop } from "svelte-spa-router";
 	import {Pagination, PaginationItem, PaginationLink} from "sveltestrap";
+	import Table from "sveltestrap/src/Table.svelte";
 
 	let sat = [];
-	let initialSat = [];
 	let newSat = {
 		country: "",
 		year: "",
@@ -18,8 +18,6 @@
 
 	let errorM = "";
 	let okM = "";
-	let visible = false;
-	let visibleOk = false;
 
 
 	
@@ -33,7 +31,6 @@
 	//---------------------------------------------------------------------
 	// Variables para la paginación
 	let s_offset = 0;
-    let offset = 0;
     let limit = 10;
     let s_page = 1;
     let lastPage = 1;
@@ -242,7 +239,7 @@
 	<h1>Satellite stats</h1>
 
 	<p><strong>Filtrado de datos</strong></p>
-	<table>
+	<Table borderless responsive>
 		<tr>
 			<td><strong><label>Pais: <input id="filterpais"  bind:value="{searchC}"></label></strong></td>
 			<td><strong><label>Año: <input  id="campoaño" bind:value="{searchY}"></label></strong></td>
@@ -252,7 +249,7 @@
 			<td><strong><label>Año(Desde): <input bind:value="{searchFrom}"></label></strong></td>
 			<td><strong><label>Año(Hasta): <input bind:value="{searchTo}"></label></strong></td>
 		</tr>
-	</table>
+	</Table>
 	<div style="text-align:center;padding-bottom: 1%">
 		<Button outline color="primary" on:click="{busqueda(searchC,searchY,searchQ,searchFrom,searchTo)}">Buscar</Button>
 	</div>
@@ -262,7 +259,7 @@
     {#await sat}
 	loading	
 	{:then sat} 
-	<table>
+	<Table bordered>
 		<thead>
 			<tr>
 				<th>Country</th>
@@ -321,7 +318,7 @@
 			<br>
 			<Button outline color = "secondary" on:click = "{pop}">Volver</Button>
 		</tbody>
-	</table>
+	</Table>
 	<div>
 		<Pagination ariaLabel="Web pagination">
 			<PaginationItem class = {s_page === 1 ? "enable" : ""}>
