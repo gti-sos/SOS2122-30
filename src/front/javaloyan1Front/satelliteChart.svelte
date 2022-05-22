@@ -10,12 +10,25 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 </svelte:head>
 <main>
+    <Nav>
+        <NavItem>
+          <NavLink href="#/info">Main Page</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="#/satellites/stHighChart">Highcharts</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="#/satellites-stats">Data</NavLink>
+        </NavItem>
+    </Nav>
+
+    <h1>Satellites</h1>
     <body>
         <div id= "firstChart" style = "height: 250px;"></div>
         <script>
             new Morris.Line({
                 // ID of the element in which to draw the chart.
-                element: 'myfirstchart',
+                element: 'firstChart',
                 // Chart data records -- each entry in this array corresponds to a point on
                 // the chart.
                 data: [
