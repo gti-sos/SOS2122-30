@@ -9,6 +9,7 @@
 	import tdHighCharts from "./jaiquisicFront/tdHighCharts.svelte"
 	import satelliteTable from "./javaloyan1Front/satelliteTable.svelte"
 	import EditSatellite from "./javaloyan1Front/editSatellite.svelte";
+	import SatelliteChart from "./javaloyan1Front/satelliteChart.svelte";
 	import cryptoHighChart from "./servelgar1Front/cryptoHighChart.svelte"
 	import cryptoChart from "./servelgar1Front/cryptoChart.svelte";
 	import MergeGraph from "./MergeGraph.svelte";
@@ -34,8 +35,9 @@
 		"/cryptocoin-stats/CO2Integracion" : CO2Integracion,
 
 
-		"/stTable": satelliteTable,
-		"/stTable/:country/:year/:quarter": EditSatellite,
+		"/satellites-stats": satelliteTable,
+		"/satellites-stats/:country/:year/:quarter": EditSatellite,
+		"/satellites-stats/satelliteChart": SatelliteChart,
 
 		"/analytics": MergeGraph
 	};

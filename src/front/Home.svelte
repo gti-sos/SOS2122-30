@@ -44,6 +44,9 @@ import {
           <a href="/#/tdTable/tdChart">
             <Button color="primary">Gráfica E-waste</Button>
           </a>
+          <a href ="/#/satellites-stats/satelliteChart">
+            <Button color = "primary">Gráfica Satellite</Button>
+          </a>
 
           <h2>
             Frontend:

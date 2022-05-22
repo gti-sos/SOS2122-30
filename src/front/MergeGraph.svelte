@@ -141,15 +141,15 @@
                 },
                 // ST STATS
                 {
-                name: '...',
+                name: 'Satellites destroyed',
                 data: st_destroyed
                 },
                 {
-                name: '...',
+                name: 'Satellites launched',
                 data: st_launched,
                 },
                 {
-                name: '...',
+                name: 'Satellites on orbit',
                 data: st_storbit
                 }
             ],
@@ -193,7 +193,7 @@
           <NavLink href="#/cryptocoin-stats">Cryptocoin Data</NavLink>
         </NavItem>
         <NavItem>
-            <NavLink href="#/stTable">StarLink Satellites Data</NavLink>
+            <NavLink href="#/satellites-stats">StarLink Satellites Data</NavLink>
           </NavItem>
           <NavItem>
             <NavLink href="#/tdTable">E-waste Data</NavLink>
