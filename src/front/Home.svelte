@@ -57,7 +57,7 @@ import {
             <Button color="primary">cryptocoin-stats Frontend</Button>
           </a>
       
-          <a href="/#/stTable">
+          <a href="/#/satellites-stats">
             <Button color="primary">stsatellites-stats Frontend</Button>
           </a>
           <a href="/#/tdTable">
