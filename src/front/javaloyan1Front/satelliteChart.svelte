@@ -1,7 +1,7 @@
 <script>
     import{Nav, NavItem, NavLink } from "sveltestrap";
     
-    const BASE_API_PATH = "/api/v2/cryptocoin-stats/";
+    const BASE_API_PATH = "/api/v2/satellites-stats/";
 </script>
 <svelte:head>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
@@ -23,10 +23,9 @@
     </Nav>
 
     <h1>Satellites</h1>
-    <body>
         <div id= "firstChart" style = "height: 250px;"></div>
         <script>
-            new Morris.Line({
+            let morris = new Morris.Line({
                 // ID of the element in which to draw the chart.
                 element: 'firstChart',
                 // Chart data records -- each entry in this array corresponds to a point on
@@ -47,5 +46,4 @@
                 labels: ['Value']
             });
         </script>
-    </body>
 </main>
