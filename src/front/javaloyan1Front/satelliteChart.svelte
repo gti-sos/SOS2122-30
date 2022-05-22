@@ -25,7 +25,7 @@
     <h1>Satellites</h1>
         <div id= "firstChart" style = "height: 250px;"></div>
         <script>
-            let morris = new Morris.Line({
+            new Morris.Line({
                 // ID of the element in which to draw the chart.
                 element: 'firstChart',
                 // Chart data records -- each entry in this array corresponds to a point on
