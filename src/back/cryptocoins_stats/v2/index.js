@@ -34,28 +34,28 @@ module.exports = (app) => {
             "ccmining": 10.41
         },
         {
-            "country": "Rusia",
+            "country": "rusia",
             "year": 2021,
             "ccelectr": 943.075,
             "ccdemand": 14.92,
             "ccmining": 11.23
         },
         {
-            "country": "Rusia",
+            "country": "rusia",
             "year": 2020,
             "ccelectr": 943.1,
             "ccdemand": 8.68,
             "ccmining": 7.16
         },
         {
-            "country": "China",
+            "country": "china",
             "year": 2021,
             "ccelectr": 6875.09,
             "ccdemand": 14.92,
             "ccmining": 43.98
         },
         {
-            "country": "China",
+            "country": "china",
             "year": 2020,
             "ccelectr": 6875.1,
             "ccdemand": 8.68,
@@ -94,28 +94,28 @@ module.exports = (app) => {
                 "ccmining": 10.41
             },
             {
-                "country": "Rusia",
+                "country": "rusia",
                 "year": 2021,
                 "ccelectr": 943.075,
                 "ccdemand": 14.92,
                 "ccmining": 11.23
             },
             {
-                "country": "Rusia",
+                "country": "rusia",
                 "year": 2020,
                 "ccelectr": 943.1,
                 "ccdemand": 8.68,
                 "ccmining": 7.16
             },
             {
-                "country": "China",
+                "country": "china",
                 "year": 2021,
                 "ccelectr": 6875.09,
                 "ccdemand": 14.92,
                 "ccmining": 43.98
             },
             {
-                "country": "China",
+                "country": "china",
                 "year": 2020,
                 "ccelectr": 6875.1,
                 "ccdemand": 8.68,

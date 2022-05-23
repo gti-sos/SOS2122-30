@@ -35,7 +35,7 @@ import {
           <a href="/#/analytics">
             <Button color="primary">Gráfica Conjunta</Button>
           </a>
-          <a href="/#/cryptoIntegration">
+          <a href="/#/cryptocoin-stats/Integrations">
             <Button color="primary">Cryptocoin Integrations</Button>
           </a>
           <a href="/#/cryptocoin-stats/cryptoChart">
