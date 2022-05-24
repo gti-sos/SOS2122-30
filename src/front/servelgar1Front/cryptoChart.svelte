@@ -146,7 +146,7 @@
           <NavLink href="#/info">Main Page</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="#/ccTable/cryptoHighChart">Highcharts</NavLink>
+          <NavLink href="#/cryptocoin-stats/cryptoHighChart">Highcharts</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="#/ccTable">Data</NavLink>

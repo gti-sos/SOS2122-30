@@ -1,6 +1,7 @@
 <script>
 import {
       Button,
+      Table,
       Card,
       CardBody,
       CardFooter,
@@ -11,130 +12,154 @@ import {
       Col,
       Container,
       Row,
+      Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    Nav,
+    NavItem,
+    NavLink,
+    Navbar
     } from "sveltestrap"
 </script>
 
 
 <main>
+
     <body>
-        <h1>
+
+        <Card>
+          <CardBody><h1>
             SOS2122-30
-        </h1>
+          </h1></CardBody>
+        </Card>
 
-
-        <h2>
+        <CardBody>
+        <h3>
             Project description:
-        </h2>
+        </h3>
         Analysis of the relation that exists between the sources of pollution of different new-age Technology 
+      </CardBody>
+
+
         <br>
         
-        <a href="/#/info">
-            <Button color="primary">Info</Button>
-          </a>
-      
-          <a href="/#/analytics">
-            <Button color="primary">Gráfica Conjunta</Button>
-          </a>
-          <a href="/#/cryptocoin-stats/Integrations">
-            <Button color="primary">Cryptocoin Integrations</Button>
-          </a>
-          <a href="/#/cryptocoin-stats/cryptoChart">
-            <Button color="primary">Gráfica Cryptocoin</Button>
-          </a>
-          <a href="/#/tdTable/tdChart">
-            <Button color="primary">Gráfica E-waste</Button>
-          </a>
-          <a href ="/#/satellites-stats/satelliteChart">
-            <Button color = "primary">Gráfica Satellite</Button>
-          </a>
 
-          <h2>
-            Frontend:
-          </h2>
+        <Card class="mb-3">
+          <CardHeader>
+            <CardTitle>
+              <a href="https://github.com/gti-sos/SOS2122-30">
+              Repository
+            </a>
+            </CardTitle>
+          </CardHeader>
+          <CardBody>
+            <CardSubtitle><a href="https://github.com/Servelgar">
+              Sergio Velázquez García
+            </a></CardSubtitle>
+            <br>
+            <CardSubtitle>
+              <a href="https://github.com/alonyanez">
+                Javier Alonso Yáñez
+              </a></CardSubtitle>
+            <br>
+            <CardSubtitle>
+              <a href="https://github.com/Jaiquisic23">
+                Jaime Quintero Sicre
+              </a></CardSubtitle>
+          </CardBody>
+          <CardFooter>
+            <h4>Universidad de Sevilla - Ingeniería Informática: Tecnologías Informáticas</h4>
+          </CardFooter>
+        </Card>
+
+
+        <div class="mb-3">
+         <Nav tabs>
+          <Dropdown group size="lg">
+            <DropdownToggle nav caret>Postman v2</DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem><a href="/api/v2/cryptocoin-stats/docs">
+              Cryptocoin-stats</a></DropdownItem>
+              <DropdownItem>
+                <a href="/api/v2/technology_devices_stats/docs">
+                  Ewaste-stats</a></DropdownItem>
+              <DropdownItem><a href="/api/v2/stsatellites-stats/docs">
+                Stsatellites-stats</a></DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
           <br>
 
-          <a href="/#/cryptocoin-stats">
-            <Button color="primary">cryptocoin-stats Frontend</Button>
+          <Dropdown group size="lg" nav setActiveFromChild>
+            <DropdownToggle nav caret>API V1</DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem><a href="/api/v1/cryptocoin-stats">
+              Cryptocoin-stats</a></DropdownItem>
+              <DropdownItem>
+                <a href="/api/v1/technology_devices_stats">
+                  Ewaste-stats</a></DropdownItem>
+              <DropdownItem><a href="/api/v1/stsatellites-stats">
+                Stsatellites-stats</a></DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+
+          <Dropdown group size="lg" nav setActiveFromChild>
+            <DropdownToggle nav caret>API V2</DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem><a href="/api/v2/cryptocoin-stats">
+              Cryptocoin-stats</a></DropdownItem>
+              <DropdownItem>
+                <a href="/api/v2/technology_devices_stats">
+                  Ewaste-stats</a></DropdownItem>
+              <DropdownItem><a href="/api/v2/stsatellites-stats">
+                Stsatellites-stats</a></DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+
+          <Dropdown group size="lg" nav setActiveFromChild>
+            <DropdownToggle nav caret>FRONTEND</DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem><a href="/#/cryptocoin-stats">
+              Cryptocoin-stats</a></DropdownItem>
+              <DropdownItem>
+                <a href="/#/tdTable">
+                  Ewaste-stats</a></DropdownItem>
+              <DropdownItem>
+                <a href="/#/satellites-stats">
+                Stsatellites-stats</a></DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+
+          <Dropdown group size="md" nav setActiveFromChild>
+            <DropdownToggle nav caret>VIEWS AND INTREGRATIONS - CRYPTOCOIN-STATS</DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem><a href="/#/cryptocoin-stats/Integrations">
+              Integrations</a></DropdownItem>
+              <DropdownItem>
+                <a href="/#/cryptocoin-stats/cryptoChart">
+                  Chart.js</a></DropdownItem>
+              <DropdownItem>
+                <a href="/#/cryptocoin-stats/cryptoHighChart">
+                Highchart</a></DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+
+          <Dropdown group size="md" nav setActiveFromChild>
+            <DropdownToggle nav caret>GRUPAL ANALYTICS</DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem><a href="/#/analytics">
+              Highchart</a></DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+          </Nav>
+        </div>
+
+          <a href="/#/tdTable/tdChart">
+            <Button color="info">Gráfica E-waste</Button>
           </a>
-      
-          <a href="/#/satellites-stats">
-            <Button color="primary">stsatellites-stats Frontend</Button>
-          </a>
-          <a href="/#/tdTable">
-            <Button color="primary">ewaste-stats Frontend</Button>
-          </a>
-
-
-<!--
-        <h2>
-            Gráficos:
-            <br>
-            <a href= "https://sos2122-30.herokuapp.com/#/Analytics">Analytics</a>
-            <br>
-            <a href= "https://sos2122-30.herokuapp.com/#/cryptocoin-stats/cryptoChart">Cryptocoin chart</a>
-            <br>
-            <a href= "https://sos2122-30.herokuapp.com/#/tdTable/tdChart">E-waste chart</a>
-        </h2>
-        <h2>
-            Tablas:
-        </h2>
-        <a href="https://sos2122-30.herokuapp.com/#/cryptocoin-stats">cryptocoin-stats tabla</a>
-        <br>
-        <a href="https://sos2122-30.herokuapp.com/#/tdTable">ewaste-stats tabla</a>
-        <br>
-        <a href="https://sos2122-30.herokuapp.com/#/stTable">stsatellites-stats tabla</a>
-        <h2>
-            Team:
-        </h2>
-        <a href="https://github.com/Servelgar">Sergio Velázquez García</a> - cryptocoin-stats
-        <br> 
-        <a href="https://github.com/alonyanez">Javier Alonso Yáñez </a> - stsatellites-stats
-        <br> 
-        <a href="https://github.com/Jaiquisic23">Jaime Quintero Sicre </a> - ewaste-stats
-
-        -->
-        <br>
-        <h2>
-            Repository:
-
-        </h2>
-        
-        <a href="https://github.com/gti-sos/SOS2122-30">gti-sos/SOS2122-30</a>
-        <h2>
-            URL:
-        </h2>
-        <a href="http://sos2122-30.herokuapp.com/">http://sos2122-30.herokuapp.com/</a>
-        <h2>
-            DOCS:
-        </h2>
-        <a href="http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats/docs">Javier docs</a>
-        <br>
-        <a href="http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats/docs">Jaime docs</a>
-        <br>
-        <a href="http://sos2122-30.herokuapp.com/api/v2/cryptocoin-stats/docs">Sergio docs</a>
-        <br>
-        <h2>
-            API-V2:
-        </h2>
-        <a href="http://sos2122-30.herokuapp.com/api/v2/stsatellites-stats">Javier API</a>
-        <br>
-        <a href="http://sos2122-30.herokuapp.com/api/v2/technology_devices_stats">Jaime API</a>
-        <br>
-        <a href="http://sos2122-30.herokuapp.com/api/v2/cryptocoin-stats/">Sergio API</a>
-        <br>
-<!--
-        <h2>
-            API-V1:
-        </h2>
-        <a href="http://sos2122-30.herokuapp.com/api/v1/stsatellites-stats">Javier API</a>
-        <br>
-        <a href="http://sos2122-30.herokuapp.com/api/v1/technology_devices_stats">Jaime API</a>
-        <br>
-        <a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/">Sergio API</a>
-        <br>
-    -->    
-        <!--<a href="http://sos2122-30.herokuapp.com/api/v1/cryptocoin-stats/docs">Sergio docs v1</a>-->
-        
+          <a href ="/#/satellites-stats/satelliteChart">
+            <Button color = "info">Gráfica Satellite</Button>
+          </a>  
 
     </body>
 </main>
@@ -149,8 +174,20 @@ import {
     h1 {
       color: #ff3e00;
       text-transform: uppercase;
-      font-size: 4em;
-      font-weight: 100;
+      font-size: 5em;
+      font-weight: 110;
+    }
+    h3{
+      color: #ff3e00;
+      text-transform: uppercase;
+      font-size: 2em;
+      font-weight: 60;
+    }
+    h4{
+      color: #ff3e00;
+      text-transform: uppercase;
+      font-size: 1em;
+      font-weight: 60;
     }
     @media (min-width: 640px) {
       main {
