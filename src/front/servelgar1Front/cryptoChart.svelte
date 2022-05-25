@@ -149,7 +149,7 @@
           <NavLink href="#/cryptocoin-stats/cryptoHighChart">Highcharts</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="#/ccTable">Data</NavLink>
+          <NavLink href="#/cryptocoins-stats">Data</NavLink>
         </NavItem>
     </Nav>
 

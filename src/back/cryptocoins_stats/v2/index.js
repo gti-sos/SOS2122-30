@@ -1,6 +1,14 @@
 const req = require("express/lib/request");
 const DataStore = require("nedb");
 const bodyParser = require("body-parser");
+const request = require("request");
+const cors = require('cors');
+const express = require("express");
+
+const app = express();
+
+app.use(cors());
+
 var db = new DataStore();
 
     //URL 
@@ -9,10 +17,18 @@ const url_sergio = "/cryptocoin-stats";
 const API_DOC_CC = "https://documenter.getpostman.com/view/19481690/UVyn1ycR";
 
 
-module.exports = (app) => {
+// PROXY  SOS-27
+var paths='/remoteAPI';
+var apiServerHost = 'https://sos2122-27.herokuapp.com/api/v2/public-expenditure-stats';
+
+app.use(paths, function(req, res) {
+    var url = apiServerHost + req.url;
+    console.log('piped: ' + req.url);
+    req.pipe(request(url)).pipe(res);
+  });
+
+module.exports= (app) => {
     console.log("Exporting Cryptocoin Stats API");
-    
-    
     
 
     app.use(bodyParser.json());
@@ -126,6 +142,11 @@ module.exports = (app) => {
             db.insert(cryptocoIni);
             res.send(JSON.stringify(cryptocoIni,null,2));
     });
+
+// USO DEL PROXY
+
+
+      
 /*
     // GET - RESOURCE
     app.get(BASE_API_URL + url_sergio,(req,res)=>{

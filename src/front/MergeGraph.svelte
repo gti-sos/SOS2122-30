@@ -87,7 +87,7 @@
     async function loadGraph(){
         Highcharts.chart('container', {
             chart: {
-                type: 'line'
+                type: 'column'
             },
             title: {
                 text: 'Public expenditure stats by country and year'
