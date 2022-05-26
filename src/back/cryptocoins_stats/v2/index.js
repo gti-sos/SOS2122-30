@@ -76,6 +76,20 @@ module.exports= (app) => {
             "ccelectr": 6875.1,
             "ccdemand": 8.68,
             "ccmining": 53.27
+        },
+        {
+            "country": "españa",
+            "year": 2020,
+            "ccelectr": 413.6,
+            "ccdemand": 5.68,
+            "ccmining": 10.27
+        },
+        {
+            "country": "españa",
+            "year": 2021,
+            "ccelectr": 643.1,
+            "ccdemand": 5.69,
+            "ccmining": 24.99
         }
 
     ];
@@ -136,6 +150,20 @@ module.exports= (app) => {
                 "ccelectr": 6875.1,
                 "ccdemand": 8.68,
                 "ccmining": 53.27
+            },
+            {
+                "country": "españa",
+                "year": 2020,
+                "ccelectr": 413.6,
+                "ccdemand": 5.68,
+                "ccmining": 10.27
+            },
+            {
+                "country": "españa",
+                "year": 2021,
+                "ccelectr": 643.1,
+                "ccdemand": 5.69,
+                "ccmining": 24.99
             }
     
         ];
