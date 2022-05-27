@@ -120,6 +120,7 @@
           chart: {
           type: 'polarArea',
         },
+        labels:ewasteChartCountry,
         stroke: {
           colors: ['#fff']
         },
