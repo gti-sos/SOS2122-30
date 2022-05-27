@@ -1,0 +1,479 @@
+{
+	"info": {
+		"_postman_id": "617889ef-7af1-457e-a602-3b1d540ff3d9",
+		"name": "td-stats-v3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Conjunto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Local}}/api/v3/technology_devices_stats",
+					"host": [
+						"{{Local}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"technology_devices_stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ELEMENTO",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Local}}/api/v3/technology_devices_stats/China/2020",
+					"host": [
+						"{{Local}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"technology_devices_stats",
+						"China",
+						"2020"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"DATA NOT FOUND 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Local}}/api/v3/technology_devices_stats/Bulgary/2019",
+					"host": [
+						"{{Local}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"technology_devices_stats",
+						"Bulgary",
+						"2019"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"CREATED 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"country\": \"Bulgary\",\r\n\"year\": 2019,\r\n\"tdwasted\": 2065,\r\n\"mpdisuse\": 220,\r\n\"mpreused\": 79\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Local}}/api/v3/technology_devices_stats",
+					"host": [
+						"{{Local}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"technology_devices_stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST EEUU 409",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"DATA ALREADY EXISTS 409\", function () {\r",
+							"    pm.response.to.have.status(409);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"country\": \"EEUU\",\r\n\"year\": 2019,\r\n\"tdwasted\": 6918,\r\n\"mpdisuse\": 220,\r\n\"mpreused\": 74\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Local}}/api/v3/technology_devices_stats",
+					"host": [
+						"{{Local}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"technology_devices_stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Elemento 405",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"METHOD NOT ALLOWED 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"country\": \"EEUU\",\r\n\"year\": 2019,\r\n\"tdwasted\": 6918,\r\n\"mpdisuse\": 220,\r\n\"mpreused\": 74\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Local}}/api/v3/technology_devices_stats/EEUU/2019",
+					"host": [
+						"{{Local}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"technology_devices_stats",
+						"EEUU",
+						"2019"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Conjunto 405",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"METHOD NOT ALLOWED 405\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Local}}/api/v3/technology_devices_stats",
+					"host": [
+						"{{Local}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"technology_devices_stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Elemento",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"country\": \"Spain\",\r\n\"year\": 2019,\r\n\"tdwasted\": 1450,\r\n\"mpdisuse\": 45.4,\r\n\"mpreused\": 89\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Local}}/api/v3/technology_devices_stats/Spain/2019",
+					"host": [
+						"{{Local}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"technology_devices_stats",
+						"Spain",
+						"2019"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Elemento 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"DATA NOT FOUND 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Local}}/api/v3/technology_devices_stats/Moroco/2019",
+					"host": [
+						"{{Local}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"technology_devices_stats",
+						"Moroco",
+						"2019"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Netherland",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"DELETED DATA\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Local}}/api/v3/technology_devices_stats/Netherland/2019",
+					"host": [
+						"{{Local}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"technology_devices_stats",
+						"Netherland",
+						"2019"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete All",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"DELETED DATA\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Local}}/api/v3/technology_devices_stats",
+					"host": [
+						"{{Local}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"technology_devices_stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET LoadInitialData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Local}}/api/v3/technology_devices_stats/LoadInitialData",
+					"host": [
+						"{{Local}}"
+					],
+					"path": [
+						"api",
+						"v3",
+						"technology_devices_stats",
+						"LoadInitialData"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SERVER",
+			"value": "https://sos2122-30.herokuapp.com",
+			"type": "string"
+		},
+		{
+			"key": "Local",
+			"value": "https://localhost:8080",
+			"type": "string"
+		}
+	]
+}

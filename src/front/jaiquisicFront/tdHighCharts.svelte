@@ -4,17 +4,14 @@ import { onMount } from "svelte";
 import{Nav, NavItem, NavLink } from "sveltestrap";
 const BASE_API_PATH = "/api/v2/technology_devices_stats/";
 let ewasteStats=[];
-let ewasteChartCountryYear = [];
+let ewasteChartCountry = [];
 let ewasteChartTdwasted = [];
 let ewasteChartMpdisused = [];
 let ewasteChartMpreused = [];
 
 
-let errorMsg="Tiene que cargar los datos para visualizar las analíticas.";
+    let errorMsg="Tiene que cargar los datos para visualizar las analíticas.";
     let cargados = false;
-
-
-
 
     async function loadChart() {
         console.log("Fetching data...");
@@ -22,7 +19,7 @@ let errorMsg="Tiene que cargar los datos para visualizar las analíticas.";
         ewasteStats = await res.json();
         if (res.ok) {
             ewasteStats.forEach(stat => {
-            ewasteChartCountryYear.push(stat.country+"-"+stat.year);
+            ewasteChartCountry.push(stat.country);
             ewasteChartTdwasted.push(parseFloat(stat.tdwasted));
             ewasteChartMpdisused.push(parseFloat(stat.mpdisuse));
             ewasteChartMpreused.push(parseFloat(stat.mpreused));
@@ -41,7 +38,7 @@ Highcharts.chart('container', {
         text: 'E-waste growth over the years'
     },
     xAxis: {
-        categories: ewasteChartCountryYear,
+        categories: ewasteChartCountry,
         crosshair: true
     },
     yAxis: {
@@ -65,12 +62,12 @@ Highcharts.chart('container', {
         }
     },
     series: [{
-        name: 'E-waste',
+                 name: 'E-waste',
                 data: ewasteChartTdwasted
                 },
                 {
                 name: 'Mobile phones in disuse amount',
-                data: ewasteChartMpdisused,
+                data: ewasteChartMpdisused
                 },
                 {
                 name: 'Recycled and reused MP(%)',
@@ -101,7 +98,7 @@ Highcharts.chart('container', {
           <NavLink href="#/info">Main Page</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="/#/tdTable/tdChart">Area chart</NavLink>
+          <NavLink href="/#/tdTable/tdChart">ApexChart</NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="#/tdTable">Data</NavLink>

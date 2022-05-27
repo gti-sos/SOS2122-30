@@ -145,6 +145,29 @@ import {
           </Dropdown>
 
           <Dropdown group size="md" nav setActiveFromChild>
+            <DropdownToggle nav caret>VIEWS AND INTREGRATIONS - EWASTE-STATS</DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem><a href="/#/tdTable/Integrations">
+              Integrations</a></DropdownItem>
+              <DropdownItem>
+                <a href="/#/tdTable/tdChart">
+                  ApexCharts.js</a></DropdownItem>
+              <DropdownItem>
+                <a href="#/tdTable/tdHighCharts">
+                Highchart</a></DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+
+          <Dropdown group size="md" nav setActiveFromChild>
+            <DropdownToggle nav caret>VIEWS AND INTREGRATIONS - SATELLITE-STATS</DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem>
+                <a href="/#/satellites-stats/satelliteChart">
+                  Morris.js</a></DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+
+          <Dropdown group size="md" nav setActiveFromChild>
             <DropdownToggle nav caret>GRUPAL ANALYTICS</DropdownToggle>
             <DropdownMenu>
               <DropdownItem><a href="/#/analytics">
@@ -153,13 +176,6 @@ import {
           </Dropdown>
           </Nav>
         </div>
-
-          <a href="/#/tdTable/tdChart">
-            <Button color="info">Gráfica E-waste</Button>
-          </a>
-          <a href ="/#/satellites-stats/satelliteChart">
-            <Button color = "info">Gráfica Satellite</Button>
-          </a>  
 
     </body>
 </main>
