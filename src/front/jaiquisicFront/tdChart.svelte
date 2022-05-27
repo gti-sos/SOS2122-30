@@ -62,7 +62,7 @@
 
     
       console.log("E-waste Chart data:" + ewasteStats);
-
+/*
       //bar option
       var options = {
           series: [{
@@ -113,7 +113,7 @@
 
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render(); }
-/*
+*/
         //PolarArea
       var options = {
           series: ewasteChartMpreused,
@@ -140,8 +140,8 @@
         };
 
         var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-*/
+        chart.render();}
+
 /*
         //Area option
       var options = {
