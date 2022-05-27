@@ -266,7 +266,7 @@
         }],
             chart: {
             height: 350,
-            type: 'line',
+            type: 'area',
           },
           stroke: {
             curve: 'smooth'
@@ -422,7 +422,7 @@
                 }
               ],
                 chart: {
-                  type: 'area'
+                  type: 'histogram'
               },
               colors: ['#77B6EA', '#545454'],
               dataLabels: {
@@ -475,6 +475,131 @@
         }
     }
 
+    async function apiPrecios(){
+      var data = [];
+      var nombres = [];
+      var precioMinimo = [];
+      var precioMaximo = [];
+
+      const res = await fetch ("https://cex.io/api/currency_limits");
+
+      if(!res.ok){
+          window.alert("Ha habido un error en recoger los datos de la API PRECIOS CRIPTOMONEDAS");
+          console.log("Error precios API");
+          window.location.href = `https://cex.io/api/currency_limits`;
+      } else {
+          data = await res.json();
+          
+          nombres = data["data"]["pairs"].map((m)=>{
+              return m.symbol1;
+          }); 
+
+          nombres = nombres.slice(0,10);
+
+          console.log("DEPURAR NOMBRES "+nombres);
+          console.log("DEPURAR NOMBRES "+nombres.length);
+
+          precioMinimo = data["data"]["pairs"].map((m)=>{
+            return redondeoADos(parseFloat(m.minPrice));
+          });
+
+          precioMinimo = precioMinimo.slice(0,10);
+
+          console.log("DEPURAR PRECIO MINIMO: "+ precioMinimo);
+          console.log("DEPURAR PRECIO MINIMO: "+ precioMinimo.length);
+
+          precioMaximo = data["data"]["pairs"].map((m)=>{
+            return redondeoADos(parseFloat(m.maxPrice));
+          });
+
+          precioMaximo = precioMaximo.slice(0,10);
+
+          console.log("DEPURAR PRECIO MAXIMO "+ precioMaximo);
+          console.log("DEPURAR PRECIO MAXIMO "+ precioMaximo.length);
+
+          var trace1 = {
+              type: 'scatter',
+              x: precioMinimo,
+              y: nombres,
+              mode: 'markers',
+              name: 'Precio mínimo histórico (USD)',
+              marker: {
+                color: 'rgba(156, 255, 196, 0.95)',
+                line: {
+                  color: 'rgba(156, 165, 196, 1.0)',
+                  width: 1,
+                },
+                symbol: 'circle',
+                size: 16
+              }
+          };
+
+          var trace2 = {
+            x: precioMaximo,
+            y: nombres,
+            mode: 'markers',
+            name: 'Precio máximo histórico (USD)',
+            marker: {
+              color: 'rgba(204, 0, 204, 0.95)',
+              line: {
+                color: 'rgba(217, 217, 217, 1.0)',
+                width: 1,
+              },
+              symbol: 'circle',
+              size: 16
+            }
+          };
+
+        
+        var data = [trace1, trace2];
+
+        var layout = {
+            title: 'Precios mínimos y máximos históricos de diferentes criptomonedas',
+            xaxis: {
+              showgrid: false,
+              showline: true,
+              linecolor: 'rgb(102, 102, 102)',
+              titlefont: {
+                font: {
+                  color: 'rgb(204, 204, 204)'
+                }
+              },
+              tickfont: {
+                font: {
+                  color: 'rgb(102, 102, 102)'
+                }
+              },
+              autotick: false,
+              dtick: 100000,
+              ticks: 'outside',
+              tickcolor: 'rgb(102, 102, 102)'
+            },
+            margin: {
+              l: 140,
+              r: 40,
+              b: 50,
+              t: 80
+            },
+            legend: {
+              font: {
+                size: 10,
+              },
+              yanchor: 'middle',
+              xanchor: 'right'
+            },
+            width: 600,
+            height: 600,
+            paper_bgcolor: 'rgb(254, 247, 234)',
+            plot_bgcolor: 'rgb(254, 247, 234)',
+            hovermode: 'closest'
+        };
+  
+        Plotly.newPlot('myDiv', data, layout);
+
+      }
+
+    }
+
 </script>
 
 <svelte:head>
@@ -486,6 +611,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts" on:load="{apiMagic}"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts" on:load="{apiGasto}"></script>
+    <script src='https://cdn.plot.ly/plotly-1.58.4.min.js' on:load={apiPrecios}></script>
 
 </svelte:head>
 
@@ -520,6 +646,12 @@
         <h3>API MAGIC: THE GATHERING</h3>
             <div id="chartex2"></div>
             <div style="text-align: center">fuente: <a href="https://api.magicthegathering.io/v1/cards" target="_blank">aqui</a></div>
+    </div>
+
+    <div id='caja'>
+      <h3>API PRECIOS CRIPTOMONEDAS</h3>
+          <div id="myDiv"></div>
+          <div style="text-align: center">fuente: <a href="https://cex.io/api/currency_limits" target="_blank">aqui</a></div>
     </div>
 
     

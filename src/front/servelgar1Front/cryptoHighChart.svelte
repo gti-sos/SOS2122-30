@@ -29,7 +29,7 @@
             
     Highcharts.chart('container', {
       chart: {
-          type: 'column'
+          type: 'area'
       },
       title: {
           text: 'Data recolected by the Cambridge Bitcoin Electricity Consumption Index'

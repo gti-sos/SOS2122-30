@@ -25,6 +25,28 @@
     let st_destroyed = [];
 
 
+    let yearC = [];
+    let yearS = [];
+    let yearE = [];
+
+
+
+    function ordenarAsc(array, key) {
+         var arrayAux=[];
+          for(var i=0; i < array.length-1;i++){
+              for (let j = i+1; j < array.length; j++) {
+                  if(array[i][key] > array[j][key]){
+                      arrayAux = array[i];
+                      array[i]=array[j];
+                      array[j]=arrayAux;
+                  }
+              }
+          }
+          return array;
+      }
+
+
+
     async function getcryptoCoinData(){
         console.log("Fetching stats....");
         const res = await fetch("/api/v2/cryptocoin-stats");
@@ -40,6 +62,25 @@
                 cryptoCoinChartDemand.push(parseFloat(stat.ccdemand));            
             });
             await delay(500);
+            
+            ordenarAsc(data,'year');
+
+            data.forEach((d)=>{
+                yearC.push(parseInt(d.year));
+            });
+
+            // Quitamos duplicados
+            yearC = yearC.filter(function(valor,indiceActual,arreglo){
+                let indiceAlBuscar = arreglo.indexOf(valor);
+                if (indiceActual == indiceAlBuscar){
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+
+
+
         }else{
             console.log("Error cargando los datos");
 		}
@@ -59,6 +100,24 @@
                 ewasteChartMpreused.push(parseFloat(stat.mpreused));            
             });
             await delay(500);
+
+
+            ordenarAsc(data,'year');
+
+            data.forEach((d)=>{
+                yearE.push(parseInt(d.year));
+            });
+
+            // Quitamos duplicados
+            yearE = yearE.filter(function(valor,indiceActual,arreglo){
+                let indiceAlBuscar = arreglo.indexOf(valor);
+                if (indiceActual == indiceAlBuscar){
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+
         }else{
             console.log("Error cargando los datos");
         }
@@ -79,12 +138,35 @@
                 st_destroyed.push(parseFloat(stat.stdestroyed));            
             });
             await delay(500);
+
+            ordenarAsc(data,'year');
+
+            data.forEach((d)=>{
+                yearS.push(parseInt(d.year));
+            });
+
+            // Quitamos duplicados
+            yearS = yearS.filter(function(valor,indiceActual,arreglo){
+                let indiceAlBuscar = arreglo.indexOf(valor);
+                if (indiceActual == indiceAlBuscar){
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+
         }else{
             console.log("Error cargando los datos");
         }
     }
 
     async function loadGraph(){
+
+        
+        console.log("AÑOS: "+ yearC);
+        console.log("AÑOS: "+ yearS);
+        console.log("AÑOS: "+ yearE);
+
         Highcharts.chart('container', {
             chart: {
                 type: 'column'
