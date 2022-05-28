@@ -59,16 +59,20 @@
             ordenarAsc(CO2, 'year');
 
           var year = [];
-
+          var year2 = [];
 
             CO2.forEach((dato)=>{
                 year.push(parseInt(dato.year));
             });
 
-            year.push(2021);
+            crypto.forEach((dato)=>{
+                year2.push(parseInt(dato.year));
+            });
+
+            var cat = year.concat(year2);
 
             // Quitamos duplicados
-            year = year.filter(function(valor,indiceActual,arreglo){
+            cat = cat.filter(function(valor,indiceActual,arreglo){
                 let indiceAlBuscar = arreglo.indexOf(valor);
                 if (indiceActual == indiceAlBuscar){
                     return true;
@@ -77,7 +81,7 @@
                 }
             });
 
-            var yearAux= year;
+            var yearAux= cat;
 
             var resultadoYear=[];
             for(var i=0;i<CO2.length;i++){
@@ -92,9 +96,9 @@
 
             // CALCULAR LA MEDIA DE C02 POR AÑO
 
-             for (var i = 0; i < year.length; i++){
+             for (var i = 0; i < cat.length; i++){
                 var x = CO2.filter((e)=>{
-                    return e.year == year[i];
+                    return e.year == cat[i];
                 }).map((el)=>{
                   return parseFloat(el.co2_tot);
                 });
@@ -114,9 +118,9 @@
 
              // CALCULAR LA MEDIA DE CONSUMO ELECTRICO POR AÑO
 
-             for (var i = 0; i < year.length;i++){
+             for (var i = 0; i < cat.length;i++){
                var x = crypto.filter((e)=>{
-                 return e.year == year[i];
+                 return e.year == cat[i];
                }).map((el)=>{
                  return redondeoADos(parseFloat(el.ccelectr));
                });
@@ -148,7 +152,7 @@
                 text: 'Relación entre las emisiones totales de CO2 y la electricidad consumida por las criptomonedas'
             },
             xAxis: {
-                categories: year,
+                categories: cat,
                 title: {
                     text: 'Año'
                 },
@@ -337,15 +341,20 @@
             ordenarAsc(gasto,'year');
 
             var year = [];
+            var year2 = [];
             
             gasto.forEach((dato)=>{
                 year.push(parseInt(dato.year));
             });
 
-            year.push(2021);
+            crypto.forEach((dato)=>{
+                year2.push(parseInt(dato.year));
+            });
+
+            var cat = year.concat(year2);
 
             // Quitamos duplicados
-            year = year.filter(function(valor,indiceActual,arreglo){
+            cat = cat.filter(function(valor,indiceActual,arreglo){
                 let indiceAlBuscar = arreglo.indexOf(valor);
                 if (indiceActual == indiceAlBuscar){
                     return true;
@@ -354,7 +363,7 @@
                 }
             });
 
-            var yearAux= year;
+            var yearAux= cat;
 
             var resultadoYear=[];
             for(var i=0;i<gasto.length;i++){
@@ -413,15 +422,15 @@
                     crypto.unshift(0);
                 }
  */
-                for (var i = 0; i < year.length; i++){
+                for (var i = 0; i < cat.length; i++){
                   var x = gasto.filter((f)=>{
-                        return f.year == year[i] && f.country == "españa";
+                        return f.year == cat[i] && f.country == "españa";
                   }).map((m)=>{
                           return redondeoADos(m.pe_to_gdp*0.01);
                   });
 
                   var y = crypto.filter((f)=>{
-                          return f.year == year[i] && f.country == "españa";
+                          return f.year == cat[i] && f.country == "españa";
                   }).map((m)=>{
                             return redondeoADos(m.ccmining*0.01);
                   });
@@ -456,7 +465,7 @@
                 text: 'Relación entre minería y gasto público en España'
             },
             xAxis: {
-                categories: year,
+                categories: cat,
                 title: {
                     text: 'Año'
                 },

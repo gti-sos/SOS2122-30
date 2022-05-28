@@ -254,7 +254,7 @@
 		if(res.status == 200 || res.status == 201){
 			const data = await res.json();
 			cc = data;
-			if(cc.length == 1){
+			if(!cc.length == 0){
 				errorMsg = "Se ha encontrado "+ cc.length + " dato"
 			} else {
 				errorMsg = "No se ha encontrado el dato con país: "+ searchCountry
