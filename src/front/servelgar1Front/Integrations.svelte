@@ -94,6 +94,9 @@
              };
 
 
+             cat = cat.sort();
+
+
             // CALCULAR LA MEDIA DE C02 POR AÑO
 
              for (var i = 0; i < cat.length; i++){
@@ -421,7 +424,9 @@
               for(var i = 0; i < diferencia; i++){
                     crypto.unshift(0);
                 }
- */
+ */ 
+                cat = cat.sort();
+
                 for (var i = 0; i < cat.length; i++){
                   var x = gasto.filter((f)=>{
                         return f.year == cat[i] && f.country == "españa";

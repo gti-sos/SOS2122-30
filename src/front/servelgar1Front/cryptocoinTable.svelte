@@ -250,10 +250,12 @@
 		}
 
 		const res = await fetch("/api/v2/cryptocoin-stats?country="+searchCountry+"&year="+searchYear+"&from="+searchFrom+"&to="+searchTo);
+		
 
 		if(res.status == 200 || res.status == 201){
 			const data = await res.json();
 			cc = data;
+			
 			if(!cc.length == 0){
 				errorMsg = "Se ha encontrado "+ cc.length + " dato"
 			} else {
