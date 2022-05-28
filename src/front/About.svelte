@@ -33,13 +33,13 @@ import {
             </h3></CardBody>
             <Nav tabs>
                 <NavItem>
-                    <NavLink href="#/Analytics">SERGIO</NavLink>
+                    <NavLink href="https://www.youtube.com/watch?v=LydDOzoq20Y">SERGIO</NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink href="#/Analytics">JAIME</NavLink>
+                    <NavLink href="#/info">JAIME</NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink href="#/Analytics">JAVIER</NavLink>
+                    <NavLink href="#/info">JAVIER</NavLink>
                   </NavItem>
             </Nav>
         </Card>
