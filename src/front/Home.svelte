@@ -45,37 +45,26 @@ import {
         <br>
         
 
-        <Card class="mb-3">
-          <CardHeader>
-            <CardTitle>
-              <a href="https://github.com/gti-sos/SOS2122-30">
-              Repository
-            </a>
-            </CardTitle>
-          </CardHeader>
-          <CardBody>
-            <CardSubtitle><a href="https://github.com/Servelgar">
-              Sergio Velázquez García
-            </a></CardSubtitle>
-            <br>
-            <CardSubtitle>
-              <a href="https://github.com/alonyanez">
-                Javier Alonso Yáñez
-              </a></CardSubtitle>
-            <br>
-            <CardSubtitle>
-              <a href="https://github.com/Jaiquisic23">
-                Jaime Quintero Sicre
-              </a></CardSubtitle>
-          </CardBody>
-          <CardFooter>
-            <h4>Universidad de Sevilla - Ingeniería Informática: Tecnologías Informáticas</h4>
-          </CardFooter>
-        </Card>
+        
 
 
         <div class="mb-3">
          <Nav tabs>
+
+          <Dropdown group size="lg">
+            <DropdownToggle nav caret>Postman v1</DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem><a href="/api/v1/cryptocoin-stats/docs">
+              Cryptocoin-stats</a></DropdownItem>
+              <DropdownItem>
+                <a href="/api/v1/technology_devices_stats/docs">
+                  Ewaste-stats</a></DropdownItem>
+              <DropdownItem><a href="/api/v1/stsatellites-stats/docs">
+                Stsatellites-stats</a></DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+
+
           <Dropdown group size="lg">
             <DropdownToggle nav caret>Postman v2</DropdownToggle>
             <DropdownMenu>
@@ -89,6 +78,8 @@ import {
             </DropdownMenu>
           </Dropdown>
           <br>
+
+         
 
           <Dropdown group size="lg" nav setActiveFromChild>
             <DropdownToggle nav caret>API V1</DropdownToggle>
@@ -129,7 +120,19 @@ import {
                 Stsatellites-stats</a></DropdownItem>
             </DropdownMenu>
           </Dropdown>
+          <NavItem>
+            <NavLink href="#/Analytics">GRUPAL ANALYTICS</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="#/About">VIDEOS</NavLink>
+          </NavItem>
+          </Nav>
+        </div>
 
+        
+
+
+        <div class="mb-3">
           <Dropdown group size="md" nav setActiveFromChild>
             <DropdownToggle nav caret>VIEWS AND INTREGRATIONS - CRYPTOCOIN-STATS</DropdownToggle>
             <DropdownMenu>
@@ -166,16 +169,36 @@ import {
                   Morris.js</a></DropdownItem>
             </DropdownMenu>
           </Dropdown>
-
-          <Dropdown group size="md" nav setActiveFromChild>
-            <DropdownToggle nav caret>GRUPAL ANALYTICS</DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem><a href="/#/analytics">
-              Highchart</a></DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-          </Nav>
         </div>
+
+
+        <Card class="mb-3">
+          <CardHeader>
+            <CardTitle>
+              <a href="https://github.com/gti-sos/SOS2122-30">
+              Repository
+            </a>
+            </CardTitle>
+          </CardHeader>
+          <CardBody>
+            <CardSubtitle><a href="https://github.com/Servelgar">
+              Sergio Velázquez García
+            </a></CardSubtitle>
+            <br>
+            <CardSubtitle>
+              <a href="https://github.com/alonyanez">
+                Javier Alonso Yáñez
+              </a></CardSubtitle>
+            <br>
+            <CardSubtitle>
+              <a href="https://github.com/Jaiquisic23">
+                Jaime Quintero Sicre
+              </a></CardSubtitle>
+          </CardBody>
+          <CardFooter>
+            <h4>Universidad de Sevilla - Ingeniería Informática: Tecnologías Informáticas</h4>
+          </CardFooter>
+        </Card>
 
     </body>
 </main>

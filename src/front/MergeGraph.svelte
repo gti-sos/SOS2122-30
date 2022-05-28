@@ -2,6 +2,8 @@
     import {onMount} from 'svelte';    
     import {Button} from 'sveltestrap';
     import{Nav, NavItem, NavLink } from "sveltestrap";
+    import Highcharts from "highcharts";
+
     const delay = ms => new Promise(res => setTimeout(res,ms));
     //CC STATS
     let cryptoCoinData = [];
@@ -46,126 +48,200 @@
       }
 
 
-
-    async function getcryptoCoinData(){
-        console.log("Fetching stats....");
-        const res = await fetch("/api/v2/cryptocoin-stats");
-        if(res.ok){
-            const data = await res.json();
-            cryptoCoinData = data;
-            console.log("Estadísticas recibidas: "+cryptoCoinData.length);
-            //inicializamos los arrays para mostrar los datos
-            cryptoCoinData.forEach(stat => {
-                cryptoCoinChartCountryYear.push(stat.country+"-"+stat.year);
-                cryptoCoinChartElectr.push(parseFloat(stat.ccelectr));
-                cryptoCoinChartMining.push(parseFloat(stat.ccmining));
-                cryptoCoinChartDemand.push(parseFloat(stat.ccdemand));            
-            });
-            await delay(500);
-            
-            ordenarAsc(data,'year');
-
-            data.forEach((d)=>{
-                yearC.push(parseInt(d.year));
-            });
-
-            // Quitamos duplicados
-            yearC = yearC.filter(function(valor,indiceActual,arreglo){
-                let indiceAlBuscar = arreglo.indexOf(valor);
-                if (indiceActual == indiceAlBuscar){
-                    return true;
-                } else {
-                    return false;
-                }
-            });
+      function redondeoADos(num) {
+          return +(Math.round(num + "e+2")  + "e-2");
+      }
 
 
 
-        }else{
-            console.log("Error cargando los datos");
-		}
-    }
-    async function getEwasteStats(){
-        console.log("Fetching stats....");
-        const res = await fetch("/api/v2/technology_devices_stats");
-        if(res.ok){
-            const data = await res.json();
-            ewasteStats = data;
-            console.log("Estadísticas recibidas: "+ ewasteStats.length);
-            //inicializamos los arrays para mostrar los datos
-            ewasteStats.forEach(stat => {
-                ewasteChartCountryYear.push(stat.country + "-" + stat.year);
-                ewasteChartTdwasted.push(parseFloat(stat.tdwasted));
-                ewasteChartMpdisused.push(parseFloat(stat.mpdisuse));
-                ewasteChartMpreused.push(parseFloat(stat.mpreused));            
-            });
-            await delay(500);
+      // Coger categoría por años.
+      // Hacer la media de cada propiedad entre todos los paises que engloben cada año
+      // Rellenar con 0s los que falten
 
-
-            ordenarAsc(data,'year');
-
-            data.forEach((d)=>{
-                yearE.push(parseInt(d.year));
-            });
-
-            // Quitamos duplicados
-            yearE = yearE.filter(function(valor,indiceActual,arreglo){
-                let indiceAlBuscar = arreglo.indexOf(valor);
-                if (indiceActual == indiceAlBuscar){
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-
-        }else{
-            console.log("Error cargando los datos");
-        }
-    }
-
-    async function getSTStats(){
-        console.log("Fetching stats....");
-        const res = await fetch("/api/v2/stsatellites-stats");
-        if(res.ok){
-            const data = await res.json();
-            stStats = data;
-            console.log("Estadísticas recibidas: "+stStats.length);
-            //inicializamos los arrays para mostrar los datos
-            stStats.forEach(stat => {
-                st_country_year.push(stat.country+"-"+stat.year);
-                st_launched.push(parseFloat(stat.stlaunched));
-                st_storbit.push(parseFloat(stat.storbit));
-                st_destroyed.push(parseFloat(stat.stdestroyed));            
-            });
-            await delay(500);
-
-            ordenarAsc(data,'year');
-
-            data.forEach((d)=>{
-                yearS.push(parseInt(d.year));
-            });
-
-            // Quitamos duplicados
-            yearS = yearS.filter(function(valor,indiceActual,arreglo){
-                let indiceAlBuscar = arreglo.indexOf(valor);
-                if (indiceActual == indiceAlBuscar){
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-
-        }else{
-            console.log("Error cargando los datos");
-        }
-    }
 
     async function loadGraph(){
 
+        const res = await fetch ("/api/v2/cryptocoin-stats");
+        const res2 = await fetch("/api/v2/technology_devices_stats");
+        const res3 = await fetch("/api/v2/stsatellites-stats");
+
+        if(!res.ok && !res2.ok && res3.ok){
+            console.log("ERROR");
+        } else {
+
+            var crypto = [];
+            var ewaste = [];
+            var st = [];
+
+            crypto = await res.json();
+            ewaste = await res2.json();
+            st = await res3.json();
+
+            ordenarAsc(crypto,'year');
+            ordenarAsc(ewaste,'year');
+            ordenarAsc(st,'year');
+
+
+
+            crypto.forEach((d)=>{
+                yearC.push(parseInt(d.year));
+            });
+
+            ewaste.forEach((d)=>{
+                yearE.push(parseInt(d.year));
+            });
+
+            st.forEach((d)=>{
+                yearS.push(parseInt(d.year));
+            });
+
+            var cat = yearC.concat(yearS);
+            cat = cat.concat(yearE);
+
+            // FILTRAMOS IGUALES
+            cat = cat.filter(function(valor,indiceActual,arreglo){
+                    let indiceAlBuscar = arreglo.indexOf(valor);
+                    if (indiceActual == indiceAlBuscar){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+            
+            cat = cat.sort();
+
+            for (var i = 0; i < cat.length; i++){
+                var x = crypto.filter((f)=>{
+                        return f.year == cat[i];
+                }).map((m)=>{
+                    return redondeoADos(parseFloat(m.ccelectr));
+                });
+                x = x.reduce(function(sum,value){
+                 return sum+value;
+               },0) / x.length;
+
+               var y = crypto.filter((f)=>{
+                        return f.year == cat[i];
+                }).map((m)=>{
+                    return redondeoADos(parseFloat(m.ccdemand));
+                });
+                y = y.reduce(function(sum,value){
+                 return sum+value;
+               },0) / y.length;
+
+
+               var z = crypto.filter((f)=>{
+                        return f.year == cat[i];
+                }).map((m)=>{
+                    return redondeoADos(parseFloat(m.ccmining));
+                });
+                z = z.reduce(function(sum,value){
+                 return sum+value;
+               },0) / z.length;
+
+               if(Number.isNaN(x)){
+                cryptoCoinChartElectr.push(0);
+                cryptoCoinChartDemand.push(0);
+                cryptoCoinChartMining.push(0);
+               } else {
+                cryptoCoinChartElectr.push(x);
+                cryptoCoinChartDemand.push(y);
+                cryptoCoinChartMining.push(z);
+               }
+
+               
+            }
+
+            for (var i = 0 ; i < cat.length; i++){
+                var x = ewaste.filter((f)=>{
+                        return f.year == cat[i];
+                }).map((m)=>{
+                    return redondeoADos(parseFloat(m.tdwasted));
+                });
+                x = x.reduce(function(sum,value){
+                 return sum+value;
+               },0) / x.length;
+
+               var y = ewaste.filter((f)=>{
+                        return f.year == cat[i];
+                }).map((m)=>{
+                    return redondeoADos(parseFloat(m.mpdisuse));
+                });
+                y = y.reduce(function(sum,value){
+                 return sum+value;
+               },0) / y.length;
+
+
+               var z = ewaste.filter((f)=>{
+                        return f.year == cat[i];
+                }).map((m)=>{
+                    return parseInt(m.mpreused);
+                });
+                z = z.reduce(function(sum,value){
+                 return sum+value;
+               },0) / z.length;
+
+               if (Number.isNaN(x)){
+                ewasteChartTdwasted.push(0);
+                ewasteChartMpdisused.push(0);
+                ewasteChartMpreused.push(0);
+               } else{
+                ewasteChartTdwasted.push(x);
+                ewasteChartMpdisused.push(y);
+                ewasteChartMpreused.push(z);
+               }
+               
+            }
+
+            for (var i = 0 ; i < cat.length; i++){
+                var x = st.filter((f)=>{
+                        return f.year == cat[i];
+                }).map((m)=>{
+                    return parseInt(m.stlaunched);
+                });
+                x = x.reduce(function(sum,value){
+                 return sum+value;
+               },0) / x.length;
+
+               var y = st.filter((f)=>{
+                        return f.year == cat[i];
+                }).map((m)=>{
+                    return parseInt(m.storbit);
+                });
+                y = y.reduce(function(sum,value){
+                 return sum+value;
+               },0) / y.length;
+
+
+               var z = st.filter((f)=>{
+                        return f.year == cat[i];
+                }).map((m)=>{
+                    return parseInt(m.stdestroyed);
+                });
+                z = z.reduce(function(sum,value){
+                 return sum+value;
+               },0) / z.length;
+
+               if(Number.isNaN(x)){
+                st_launched.push(0);
+               st_storbit.push(0);
+               st_destroyed.push(0);
+               } else {
+                st_launched.push(x);
+               st_storbit.push(y);
+               st_destroyed.push(z);
+               }
+
+            }
+
+            console.log("AÑOS: "+ cat);
+            console.log("DEPURAR CRIPTO : "+ cryptoCoinChartDemand);
+            console.log("DEPURAR ST: "+ st_launched);
+            console.log("DEPURAR EWASTE: "+ ewasteChartTdwasted);
+        }
+
         
-        console.log("AÑOS: "+ yearC);
-        console.log("AÑOS: "+ yearS);
-        console.log("AÑOS: "+ yearE);
+        
 
         Highcharts.chart('container', {
             chart: {
@@ -175,7 +251,7 @@
                 text: 'Public expenditure stats by country and year'
             },
             subtitle: {
-                text: 'Source: https://datosmacro.expansion.com'
+                text: 'Source: https://sos2122-30.herokuapp.com/'
             },
             yAxis: {
                 title: {
@@ -184,10 +260,9 @@
             },
             xAxis: {
                 title: {
-                    text: "Country-Year",
+                    text: "Año",
                 },
-                // Listado del eje X de Sergio
-                categories: cryptoCoinChartCountryYear
+                categories: cat
                 
             },
             legend: {
@@ -251,18 +326,21 @@
             }
         });
     }
+/*
     onMount(getcryptoCoinData);
     onMount(getEwasteStats);
     onMount(getSTStats);
-    
+    */
 </script>
 
 <svelte:head>
-    <script src="https://code.highcharts.com/highcharts.js" on:load="{loadGraph}"></script>
-    <script src="https://code.highcharts.com/modules/series-label.js" on:load="{loadGraph}"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js" on:load="{loadGraph}"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js" on:load="{loadGraph}"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js" on:load="{loadGraph}"></script>    
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/series-label.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script
+    src="https://code.highcharts.com/modules/accessibility.js"
+    on:load={loadGraph}></script>
 </svelte:head>
 
 <main>

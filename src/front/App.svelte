@@ -14,11 +14,13 @@
 	import cryptoChart from "./servelgar1Front/cryptoChart.svelte";
 	import MergeGraph from "./MergeGraph.svelte";
 	import cryptoIntegration from "./servelgar1Front/Integrations.svelte";
+	import About from "./About.svelte";
 
 	console.log("Funcionas");
 	const routes = {
 		'/': Home,
 		'/info': Home,
+		'/about': About,
 
 		"/tdTable": TdTable,
 		"/tdTable/:country/:year": TdEdit,

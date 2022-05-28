@@ -157,7 +157,7 @@
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Percentage',
+                    text: 'Índice',
                     align: 'high'
                 },
                 labels: {
@@ -318,6 +318,9 @@
 
         var crypto = [];
         var gasto = [];
+
+        var resCrypto = [];
+        var resGasto = [];
         
 
         const res = await fetch("/api/v2/cryptocoin-stats");
@@ -385,7 +388,7 @@
               });
 
 
-  
+  /*
 
               gasto = resultadoYear.filter((e)=>{
                     return e.country == "españa";
@@ -394,7 +397,7 @@
                       return redondeoADos(dato.pe_to_gdp*0.01);
               });
 
-  
+ 
 
               // Calculamos la diferencia entre los años disponibles entre APIs
 
@@ -409,68 +412,100 @@
               for(var i = 0; i < diferencia; i++){
                     crypto.unshift(0);
                 }
+ */
+                for (var i = 0; i < year.length; i++){
+                  var x = gasto.filter((f)=>{
+                        return f.year == year[i] && f.country == "españa";
+                  }).map((m)=>{
+                          return redondeoADos(m.pe_to_gdp*0.01);
+                  });
 
-            var options = {
-                series: [
-                {
-                  name: "Minería respecto al resto del mundo",
-                  data: crypto
-                },
-                {
-                  name: "Gasto público respecto a PIB",
-                  data: gasto
+                  var y = crypto.filter((f)=>{
+                          return f.year == year[i] && f.country == "españa";
+                  }).map((m)=>{
+                            return redondeoADos(m.ccmining*0.01);
+                  });
+
+
+                  if(y.length == 0){
+                    resCrypto.push(0);
+                  } else {
+                    resCrypto.push(y);
+                  }
+
+                  if(x.length == 0){
+                      resGasto.push(0);
+                  } else{
+                      resGasto.push(x);
+                  }
                 }
-              ],
-                chart: {
-                  type: 'histogram'
-              },
-              colors: ['#77B6EA', '#545454'],
-              dataLabels: {
-                enabled: true,
-              },
-              stroke: {
-                curve: 'smooth'
-              },
-              title: {
-                text: 'Relación entre minería y gasto público en España',
-                align: 'left'
-              },
-              grid: {
-                borderColor: '#e7e7e7',
-                row: {
-                  colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-                  opacity: 0.5
-                },
-              },
-              markers: {
-                size: 1
-              },
-              xaxis: {
+
+                var a = [0.11,0,0.22,0.33];
+                var b = [0.43,0.53,0.73];
+
+                console.log("DEPURAR GASTO "+resGasto);
+                console.log("DEPURAR CRYPTO "+resCrypto);
+                console.log("AÑOS "+year);
+
+
+                Highcharts.chart('gasto', {
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Relación entre minería y gasto público en España'
+            },
+            xAxis: {
                 categories: year,
                 title: {
-                  text: 'Año'
-                }
-              },
-              yaxis: {
-                categories: year,
-                title: {
-                  text: 'Indice'
+                    text: 'Año'
                 },
-                tickAmount: 2,
-                min: 0.0,
-                max: 1.0
-              },
-              legend: {
-                position: 'top',
-                horizontalAlign: 'right',
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Índice',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip:{
+                split: true,
+                valueSuffix: "",
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -20,
+                y: 40,
                 floating: true,
-                offsetY: -25,
-                offsetX: -5
-              }
-              };
-      
-              var chart = new ApexCharts(document.querySelector("#chartex1"), options);
-              chart.render();
+                borderWidth: 1,
+                baccoefficientsroundColor:
+                    Highcharts.defaultOptions.legend.baccoefficientsroundColor || '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'PIB',
+                data: resGasto,
+            },{
+                name: 'Índice minería global',
+                data: resCrypto,
+            }]
+            });
 
         }
     }
@@ -496,8 +531,8 @@
 
           nombres = nombres.slice(0,10);
 
-          console.log("DEPURAR NOMBRES "+nombres);
-          console.log("DEPURAR NOMBRES "+nombres.length);
+        //  console.log("DEPURAR NOMBRES "+nombres);
+        // console.log("DEPURAR NOMBRES "+nombres.length);
 
           precioMinimo = data["data"]["pairs"].map((m)=>{
             return redondeoADos(parseFloat(m.minPrice));
@@ -505,8 +540,8 @@
 
           precioMinimo = precioMinimo.slice(0,10);
 
-          console.log("DEPURAR PRECIO MINIMO: "+ precioMinimo);
-          console.log("DEPURAR PRECIO MINIMO: "+ precioMinimo.length);
+         // console.log("DEPURAR PRECIO MINIMO: "+ precioMinimo);
+         // console.log("DEPURAR PRECIO MINIMO: "+ precioMinimo.length);
 
           precioMaximo = data["data"]["pairs"].map((m)=>{
             return redondeoADos(parseFloat(m.maxPrice));
@@ -514,8 +549,8 @@
 
           precioMaximo = precioMaximo.slice(0,10);
 
-          console.log("DEPURAR PRECIO MAXIMO "+ precioMaximo);
-          console.log("DEPURAR PRECIO MAXIMO "+ precioMaximo.length);
+          // console.log("DEPURAR PRECIO MAXIMO "+ precioMaximo);
+          // console.log("DEPURAR PRECIO MAXIMO "+ precioMaximo.length);
 
           var trace1 = {
               type: 'scatter',
@@ -603,14 +638,13 @@
 </script>
 
 <svelte:head>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"  on:load="{apiCO2}"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"  on:load="{apiGasto}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts" on:load="{apiMagic}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts" on:load="{apiGasto}"></script>
     <script src='https://cdn.plot.ly/plotly-1.58.4.min.js' on:load={apiPrecios}></script>
 
 </svelte:head>
@@ -621,7 +655,7 @@
     <br>
 
     <div id='caja'>
-        <h3>API SOS2122-22</h3>
+        <h3>API SOS2122-22 -  Belén Rodríguez Salazar</h3>
         <div style="margin:auto;"> 
         <figure class="highcharts-figure">
             <div id="container"></div>
@@ -635,10 +669,16 @@
     <br> 
 
     <div id='caja'>
-        <h3>API SOS2122-27</h3>
-            <div id="chartex1"></div>
+        <h3>API SOS2122-27 - Roque Fernandez Iglesias</h3>
+        <div style="margin:auto;"> 
+          <figure class="highcharts-figure">
+              <div id="gasto"></div>
+              <p class="highcharts-description">
+                 
+              </p>
             <div style="text-align: center">fuente: <a href="https://sos2122-27.herokuapp.com/api/v2/public-expenditure-stats" target="_blank">aqui</a></div>
-    </div>
+          </figure>
+      </div>
 
     <br>
 

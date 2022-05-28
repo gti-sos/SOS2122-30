@@ -6,7 +6,7 @@ var db = new DataStore();
     //URL 
 const BASE_API_URL= "/api/v1";
 const url_sergio = "/cryptocoin-stats";
-const API_DOC_CC = "https://documenter.getpostman.com/view/19481690/UVyn1ycR";
+const API_DOC_CC = "https://documenter.getpostman.com/view/19481690/Uz5CKxD2";
 
 
 module.exports = (app) => {
